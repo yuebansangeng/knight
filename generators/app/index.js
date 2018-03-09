@@ -50,11 +50,20 @@ module.exports = class extends Generator {
   }
 
   writing () {
+  	// /Users/zhangyue/index.js
   	this.log(this.destinationPath('index.js'))
+  	// /Users/zhangyue/GithubApplications/generator-standard-cmp
   	this.log(this.contextRoot)
-
+  	// /Users/zhangyue/GithubApplications/generator-standard-cmp/generators/app/templates/index.js
   	this.log(this.templatePath('index.js'))
+  	// /Users/zhangyue/GithubApplications/generator-standard-cmp/generators/app/templates
   	this.log(this.sourceRoot())
+
+  	this.fs.copyTpl(
+      this.templatePath('index.html'),
+      this.destinationPath(`${this.contextRoot}/public/index.html`),
+      { title: 'Templating with Yeoman' }
+    );
   }
 
   conflicts () {
