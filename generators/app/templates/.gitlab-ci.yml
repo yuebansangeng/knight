@@ -1,13 +1,18 @@
+
 stages:
   - publish
 
 build_cmps:
+
   stage: publish
+
   variables:
     importName: 'PaasComponentsTemplate'
     importModule: '@beisen/paas-components-template'
+
   only: 
     - tags
+
   script:
     - /bin/bash ~/publish.sh
     - echo $importName $importModule
