@@ -1,0 +1,441 @@
+{
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        // 可选择支持的语言特性
+        "ecmaFeatures": {
+            "jsx": true,
+            "experimentalObjectRestSpread": true,
+            "arrowFunctions": true,
+            "blockBindings": true,
+            "defaultParams": true,
+            "destructuring": true,
+            "forOf": true,
+            "generators": true,
+            "objectLiteralComputedProperties": true,
+            "objectLiteralShorthandMethods": true,
+            "objectLiteralShorthandProperties": true,
+            "restParams": true,
+            "spread": true,
+            "templateStrings": true,
+            "modules": true,
+            "classes": true
+        }
+    },
+
+    "parser": "babel-eslint",
+
+    "plugins": [
+        "react"
+    ],
+
+    "env": {
+        "browser": true,
+        "amd": true,
+        "es6": true,
+        "node": true,
+        "mocha": true
+    },
+
+    "settings": {
+        "import/parser": "babel-eslint",
+        "import/resolve": {
+            "moduleDirectory": ["node_modules", "src"]
+        }
+    },
+
+    "globals": {
+        "document": true,
+        "navigator": true,
+        "window": true,
+        "BSGlobal": true,
+        "_":true
+    },
+
+    "rules": {
+    /* 规则等级设置:
+         *
+         * "off" or 0 - 关闭规则
+         * "warn" or 1 - 开启规则，使用警告级别的错误：warn(不会导致程序退出)
+         * "error" or 2 - 开启规则，使用错误级别的错误：error(当被触发的时候，程序会退出)
+         *
+         * */
+
+
+        "react/jsx-uses-react": [
+            "warn"
+        ],
+
+        "react/jsx-uses-vars": [
+            "warn"
+        ],
+
+        /* 格式 -- 空格 */
+
+        // 强制箭头函数的箭头之前或之后有空格 [AUTO]
+        "arrow-spacing": [
+            "error"
+        ],
+
+        // 强制 generator 函数中 * 号周围有空格 [AUTO]
+        "generator-star-spacing": [
+            "error",
+            {"before": true, "after": false}
+        ],
+
+        // 禁止属性前有空格
+        "no-whitespace-before-property": [
+            "warn"
+        ],
+
+        // 前缀一元运算符之后加空格 [AUTO]
+        "space-unary-ops": [
+            "error", {
+                "words": true
+            }
+        ],
+
+        // 禁止运算符的小括号(后,和)前加空格 [AUTO]
+        "space-in-parens": [
+            "warn",
+            "never"
+        ],
+
+        // 禁止函数声明小括号(前加空格 [AUTO]
+        "space-before-function-paren": [
+            "warn",
+            "never"
+        ],
+
+        // 禁止函数调用小括号(前加空格 [AUTO]
+        "no-spaced-func": [
+            "warn"
+        ],
+
+        // 禁止行尾加空格 [AUTO]
+        "no-trailing-spaces": [
+            "warn", {
+                "skipBlankLines": true
+            }
+        ],
+
+        // 禁止在字符串和注释之外不规则的空白
+        "no-irregular-whitespace": [
+            "warn", {
+                "skipComments": true
+            }
+        ],
+
+        // 强制对象属性冒号前无空格, 冒号后有空格
+        "key-spacing": [
+            "error", {
+                "beforeColon": false,
+                "afterColon": true,
+                "mode": "strict"
+            }
+        ],
+
+        // 强制代码块大括号{前有空格 [AUTO]
+        "space-before-blocks": [
+            "warn",
+            "always"
+        ],
+
+        /* 格式 -- 括号 */
+
+        // 强制为多行语句使用大括号
+        "curly": [
+            "error",
+            "multi-line"
+        ],
+
+        // 强制使用一种大括号风格
+        "brace-style": [
+            "error",
+            "1tbs"
+        ],
+
+        /* 格式 -- 逗号 */
+
+        // 禁止数组、对象最后的成员加逗号
+        "comma-dangle": [
+            "error",
+            "never"
+        ],
+        /*"indent": ["warn", "tab"],*/
+        /* 语法 -- 变量 */
+
+        // 不允许改变用const声明的变量
+        "no-const-assign": [
+            "error"
+        ],
+
+        // 禁止重复声明变量
+        "no-redeclare": [
+            "error"
+        ],
+
+        // 禁止声明了变量却不使用
+        "no-unused-vars": [
+            "warn",
+            { "args": "none" }
+        ],
+        
+        // 禁止先使用后声明变量
+        "no-use-before-define": [
+            "error"
+        ],
+
+        // 禁止自我赋值
+        "no-self-assign": [
+            "error"
+        ],
+
+        // 禁止删除变量
+        "no-delete-var": [
+            "error"
+        ],
+
+        // 不允许修改类声明的变量
+        "no-class-assign": [
+            "error"
+        ],
+
+        // 不允许类成员中有重复的名称
+        "no-dupe-class-members": [
+            "error"
+        ],
+
+        /* 语法 -- 函数 */
+
+        // 要求箭头函数的参数使用圆括号
+        "arrow-parens": [
+            "error",
+            "as-needed"
+        ],
+
+        // 立即执行函数外必须包一层小括弧
+        "wrap-iife": [
+            "error",
+            "outside"
+        ],
+
+        // 禁止使用new产生副作用 (非赋值或条件语句禁止使用new操作符)
+        "no-new": [
+            "warn"
+        ],
+
+        // 强制构造函数首字母大写
+        "new-cap": [
+            "error",
+            { "capIsNew": false }
+        ],
+
+        // 禁止省略调用无参构造函数的圆括号
+        "new-parens": [
+            "error"
+        ],
+
+        // 禁止函数中有重复参数
+        "no-dupe-args": [
+            "error"
+        ],
+
+        // 禁止函数重复声明
+        "no-func-assign": [
+            "error"
+        ],
+
+        // 禁止 return，throw，continue 或 break 语句之后的不可达语句
+        "no-unreachable": [
+            "error"
+        ],
+
+        /* 语法 -- 对象 */
+
+        // 创建对象字面量时，禁止重复的键
+        "no-dupe-keys": [
+            "error"
+        ],
+
+        /* 语法 -- 空值 */
+
+        // 禁止直接与NaN比较
+        "use-isnan": [
+            "error"
+        ],
+
+        /* 语法 -- 循环 */
+
+        // 禁止在循环中声明函数
+        "no-loop-func": [
+            "error"
+        ],
+
+        /* 语法 -- 分支 */
+
+        // 禁止重复的case标签
+        "no-duplicate-case": [
+            "error"
+        ],
+
+        // 禁止在条件中使用常量表达式
+        "no-constant-condition": [
+            "error"
+        ],
+
+        // 禁止in操作符的否定的左操作数
+        "no-negated-in-lhs": [
+            "error"
+        ],
+
+        // 要求 Switch 语句中有 Default 分支
+        "default-case": [
+            "error"
+        ],
+
+        // 禁用未使用过的标签
+        "no-unused-labels": [
+            "warn"
+        ],
+
+        /* 语法 -- 正则 */
+
+        // 禁止在正则表达式中使用空字符集
+        "no-empty-character-class": [
+            "error"
+        ],
+
+        // 禁止在正则表达式中使用控制字符
+        "no-control-regex": [
+            "error"
+        ],
+
+        /* 语法 -- 异常 */
+
+        // 禁止对 catch 块的异常进行赋值
+        "no-ex-assign": [
+            "error"
+        ],
+
+        /* 语法 -- 其他 */
+
+        // 禁止使用稀疏数组
+        "no-sparse-arrays": [
+            "error"
+        ],
+
+        // 禁止重复引入同一模块
+        "no-duplicate-imports": [
+            "error"
+        ],
+
+        // 禁止出现空白代码块 (除非空代码块中包含注释)
+        "no-empty": [
+            "error"
+        ],
+
+        //禁用with
+        "no-with": [
+          "error"
+        ],
+
+        // 禁止在应该比较的地方赋值（比如if的小括弧内）
+        "no-cond-assign": [
+            "error",
+            "except-parens"
+        ],
+
+        // 禁止全局对象(Math 和 JSON)当作函数使用
+        "no-obj-calls": [
+            "error"
+        ],
+
+        // 禁止代码看起来像两个表达式但实际上是一个
+        "no-unexpected-multiline": [
+            "error"
+        ],
+
+        // 确保 typeof 结果与一个有效的字符串相比较
+        "valid-typeof": [
+            "error"
+        ],
+
+        // 禁用八进制字面量
+        "no-octal": [
+            "error"
+        ],
+
+        /* React */
+
+        // 禁止通过 displayName 来命名组件
+        "react/display-name": [
+            "error"
+        ],
+
+        // 使用 ES6 类声明代替 React.createClass
+        "react/prefer-es6-class": [
+            "error",
+            "always"
+        ],
+
+        // 组件引用采用帕斯卡命名法，其实例采用驼峰式命名法
+        "react/jsx-pascal-case": [
+            "error", {
+                allowAllCaps: true,
+                ignore: [],
+            }
+        ],
+
+        // 结束标签与开始标签对齐 [AUTO]
+        "react/jsx-closing-bracket-location":  [
+            "warn"
+        ],
+
+        // 强制'{'后和'}'前有空格 [AUTO]
+        "react/jsx-curly-spacing": [
+            "warn",
+            "never",
+            { allowMultiline: true }
+        ],
+
+        // jsx中禁止出现重复属性
+        "react/jsx-no-duplicate-props": [
+            "error",
+            { ignoreCase: false }
+        ],
+
+        // jsx中禁止使用未声明的变量
+        "react/jsx-no-undef": [
+            "error"
+        ],
+
+        // 禁止在同一个文件下出现重复的组件
+        "react/no-multi-comp": [
+            "error",
+            { ignoreStateless: true }
+        ],
+
+        // 禁止使用未知的DOM属性 [AUTO]
+        "react/no-unknown-property": [
+            "error"
+        ],
+
+        // 强制 render() 方法中使用return
+        "react/require-render-return":  [
+            "error"
+        ],
+
+        // 强制结束标签前有空格
+        "react/jsx-space-before-closing": [
+            "error",
+            "always"
+        ],
+
+        // jsx中等号左右要有空格 [AUTO]
+        "react/jsx-equals-spacing": [
+            "error",
+            "never"
+        ]
+    }
+}

@@ -1,1 +1,6 @@
+
 node_modules
+
+generators/app/templates/node_moduels
+generators/app/templates/dist
+generators/app/templates/main.bundle.js
