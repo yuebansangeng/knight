@@ -1,44 +1,31 @@
 
-var Generator = require('yeoman-generator');
-var shelljs = require('shelljs')
+var Generator = require('yeoman-generator')
 
 module.exports = class extends Generator {
-
-  constructor(args, opts) {
-    super(args, opts);
-
-    // This makes `appname` a required argument.
-    this.argument('appname', {
-      type: String,
-      // required: true,
-      desc: 'this is a desc content',
-      default: 'default_value'
-    });
-
-    this.option('coffee');
-    this.scriptSuffix = (this.options.coffee ? ".coffee": ".js");
-    this.log(this.scriptSuffix)
-  }
 
   initializing () {
   	this.log('initializing')
   }
 
   prompting() {
-  	return this.prompt([{
-      type    : 'input',
-      name    : 'name',
-      message : 'Your project name',
-      default : this.appname, // Default to current folder name
-      store   : true
-    }, {
-      type    : 'confirm',
-      name    : 'cool',
-      message : 'Would you like to enable the Cool feature?',
-      store   : true
-    }]).then((answers) => {
-      this.log('app name', answers.name);
-      this.log('cool feature', answers.cool);
+  	return this.prompt([
+      {
+        type: 'input',
+        name: 'name',
+        message: 'This is your component name on flying.'
+      }, {
+        type: 'list',
+        name: 'type',
+        choices: [ 'Normal Component', 'Shared Component', 'Application Component' ],
+        message: 'This is your component type.'
+      }, {
+        type: 'input',
+        name: 'moduleName',
+        message: 'This is your component moudle name which use on dependencies manage.'
+      }
+    ]).then(promptes => {
+      this.promptes = promptes
+      console.log(this.promptes)
     });
   }
 
@@ -46,33 +33,42 @@ module.exports = class extends Generator {
 
   }
 
-  default () {
-  }
-
   writing () {
-  	// /Users/zhangyue/index.js
-  	this.log(this.destinationPath('index.js'))
-  	// /Users/zhangyue/GithubApplications/generator-standard-cmp
-  	this.log(this.contextRoot)
-  	// /Users/zhangyue/GithubApplications/generator-standard-cmp/generators/app/templates/index.js
-  	this.log(this.templatePath('index.js'))
-  	// /Users/zhangyue/GithubApplications/generator-standard-cmp/generators/app/templates
-  	this.log(this.sourceRoot())
+  	this._private_copies([
+      [ 'index.js', 'src/index.js' ],
+      [ 'package.json' ],
+      [ 'webpack.config.js' ],
+      [ '.gitignore' ]
+    ])
 
-  	this.fs.copyTpl(
-      this.templatePath('index.html'),
-      this.destinationPath(`${this.contextRoot}/public/index.html`),
-      { title: 'Templating with Yeoman' }
-    );
-  }
-
-  conflicts () {
+    if (this.promptes.type === 'Shared Component') {
+      this._private_copies([ '.gitlab-ci.yml' ])
+    }
   }
 
   install () {
-  	// this.npmInstall(['lodash'], { 'save-dev': true });
+  	// this.npmInstall([
+   //      'babel-loader',
+   //      'babel-core'
+   //    ],
+   //    { 'save-dev': true }
+   //  )
   }
 
   end () {
+
+  }
+
+  _private_copies (copyJobs = []) {
+    copyJobs.forEach(([ tplFilePath, destFilePath, tplData = {} ]) => {
+      if (!destFilePath) {
+        destFilePath = tplFilePath
+      }
+      this.fs.copyTpl(
+        this.templatePath(tplFilePath),
+        this.destinationPath(`${this.contextRoot}/${destFilePath}`),
+        this.promptes
+      )
+    })
   }
 }

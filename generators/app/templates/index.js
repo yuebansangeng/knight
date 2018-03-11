@@ -1,16 +1,11 @@
-import React, {Component} from 'react'
-import {render} from 'react-dom'
 
-import App from './src/index.js';
+import React, { Component } from 'react'
+//import {render} from 'react-dom';
 
-class Demo extends Component {
+export default class App extends Component {
   render() {
     return (
-      <div>
-      	  <App />
-      </div>
+      <h1>hello world</h1>
     )
   }
 }
-
-render(<Demo />, document.getElementById('content'))
