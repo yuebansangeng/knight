@@ -3,10 +3,6 @@ var Generator = require('yeoman-generator')
 
 module.exports = class extends Generator {
 
-  initializing () {
-  	this.log('initializing')
-  }
-
   prompting() {
   	return this.prompt([
       {
@@ -25,8 +21,7 @@ module.exports = class extends Generator {
       }
     ]).then(promptes => {
       this.promptes = promptes
-      console.log(this.promptes)
-    });
+    })
   }
 
   configuring () {
@@ -47,7 +42,6 @@ module.exports = class extends Generator {
   }
 
   install () {
-
     // 修改程序的执行路径到目标文件夹中
     process.chdir(`${this.contextRoot}`)
 
