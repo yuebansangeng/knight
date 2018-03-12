@@ -29,7 +29,8 @@ module.exports = class extends Generator {
       [ 'index.js', 'src/index.js' ],
       [ 'package.json' ],
       [ 'webpack.config.js' ],
-      [ '.gitignore' ]
+      [ '.gitignore' ],
+      [ '.babelrc' ]
     ])
     if (this.promptes.type === 'Shared Component') {
       this._private_copies([[ '.gitlab-ci.yml' ]])
@@ -41,9 +42,10 @@ module.exports = class extends Generator {
     process.chdir(`${this.contextRoot}`)
 
   	this.npmInstall([
-        'babel-loader', 'babel-core', // babel
+        'babel-cli', 'babel-loader', 'babel-core', 'babel-preset-env', // babel
+        'babel-plugin-transform-react-jsx', // react
         'sass-loader', 'less-loader', // css
-        'file-loader' // png gif ..files
+        'file-loader', // png gif ..files
       ],
       { 'save-dev': true }
     )
