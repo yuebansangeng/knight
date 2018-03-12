@@ -1,5 +1,5 @@
 {
-  "name": "generator-standard-cmp",
+  "name": "generator-develop-cli",
   "version": "0.0.1",
   "description": "cli：标准组件创建",
   "main": "generators/app/index.js",
