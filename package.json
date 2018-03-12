@@ -8,19 +8,8 @@
     "type": "git",
     "url": "git+https://github.com/BeisenUX/generator-standard-cmp.git"
   },
-  "keywords": [
-    "yeoman-generator",
-    "paas",
-    "react",
-    "component"
-  ],
-  "files": [
-    "app",
-    "components",
-    "publish-doc"
-  ],
   "bin": {
-    "bs-demo": "./bin/demo.js"
+    "bsdemo": "./bin/demo.js"
   },
   "author": {
     "email": "zhangyue@beisen.com",
@@ -34,6 +23,5 @@
   "dependencies": {
   },
   "peerDependencies": {
-    
   }
 }
