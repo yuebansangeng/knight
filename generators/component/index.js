@@ -39,6 +39,7 @@ module.exports = class extends Generator {
   writing () {
   	this._private_copies([
       [ '.babelrc' ],
+      // npm publish，会忽略 .gitignore 文件
       [ 'gitignore', '.gitignore' ],
       [ 'index.js', 'src/index.js' ],
       [ 'package.json' ],
