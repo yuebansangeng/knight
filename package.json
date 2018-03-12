@@ -20,7 +20,7 @@
     "publish-doc"
   ],
   "bin": {
-    "bs-develop-cli": "./bin/bs-cmp.js"
+    "bs-demo": "./bin/demo.js"
   },
   "author": {
     "email": "zhangyue@beisen.com",
@@ -32,10 +32,6 @@
   },
   "homepage": "https://github.com/BeisenUX/generator-standard-cmp#readme",
   "dependencies": {
-    "object-assign": "^4.1.1",
-    "shelljs": "^0.8.1",
-    "yeoman-environment": "^2.0.5",
-    "yeoman-generator": "^2.0.3"
   },
   "peerDependencies": {
     
