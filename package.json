@@ -1,6 +1,6 @@
 {
   "name": "bs-develop-cli",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "cli：标准组件创建",
   "main": "generators/app/index.js",
   "scripts": {},
@@ -25,8 +25,5 @@
     "shelljs": "^0.8.1",
     "yeoman-environment": "^2.0.5",
     "yeoman-generator": "^2.0.3"
-  },
-  "peerDependencies": {
-    "yo": "^2.0.1"
   }
 }
