@@ -57,11 +57,18 @@ module.exports = class extends Generator {
 
   	this.npmInstall(
       [
-        'babel-cli', 'babel-loader', 'babel-core', 'babel-preset-env', // babel
-        'babel-plugin-transform-react-jsx', // react
-        'sass-loader', 'less-loader', // css
-        'file-loader', // png gif ..files
-        '@storybook/cli', '@storybook/react' // storybook
+        'babel-cli', 'babel-loader', 'babel-core','babel-preset-env', // babel
+
+        'babel-plugin-transform-object-assign', 'babel-plugin-transform-runtime',
+        'babel-plugin-add-module-exports', 'babel-plugin-transform-decorators-legacy',
+        'babel-plugin-transform-react-display-name', 'babel-plugin-transform-react-jsx', // babel plugins
+
+        'sass-loader', 'less-loader', 'postcss-loader', 'style-loader',
+        'file-loader', 'html-loader', 'markdown-loader', 'url-loader', // webpack loader
+
+        '@storybook/cli', '@storybook/react', // storybook
+
+        'react', 'react-dom', // react
       ], {
         'save-dev': true
       }
