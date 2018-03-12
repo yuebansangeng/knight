@@ -19,9 +19,7 @@
     "components",
     "publish-doc"
   ],
-  "bin": {
-    "bs-cmp": "./bin/bs-cmp"
-  },
+  "bin": "bin.js",
   "author": {
     "email": "zhangyue@beisen.com",
     "name": "zhangyue"
