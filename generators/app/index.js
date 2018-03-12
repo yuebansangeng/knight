@@ -45,8 +45,8 @@ module.exports = class extends Generator {
     if (this.promptes.hasStorybook === true) {
       this._private_copies([
         [ '.storybook/config.js' ],
-        [ '.storybook/.babelrc' ],
-        [ '.storybook/webpack.config.js' ]
+        [ '.storybook/webpack.config.js' ],
+        [ '.babelrc', '.storybook/.babelrc' ]
       ])
     }
   }
