@@ -1,6 +1,6 @@
 {
   "name": "bs-develop-cli",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "description": "cli：标准组件创建",
   "main": "generators/app/index.js",
   "scripts": {},

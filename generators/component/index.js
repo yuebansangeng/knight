@@ -38,8 +38,8 @@ module.exports = class extends Generator {
 
   writing () {
   	this._private_copies([
-      [ '.gitignore' ],
       [ '.babelrc' ],
+      [ 'gitignore', '.gitignore' ],
       [ 'index.js', 'src/index.js' ],
       [ 'package.json' ],
       [ 'webpack.config.js' ],
