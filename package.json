@@ -11,6 +11,14 @@
   "bin": {
     "bscpm": "./bin/index.js"
   },
+  "keywords": [
+    "yeoman-generator",
+    "nodejs",
+    "cli",
+    "paas",
+    "component",
+    "react"
+  ],
   "author": {
     "email": "zhangyue@beisen.com",
     "name": "zhangyue"
