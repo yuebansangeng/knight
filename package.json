@@ -1,6 +1,6 @@
 {
   "name": "bs-develop-cli",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "cli：标准组件创建",
   "main": "generators/app/index.js",
   "scripts": {},
@@ -8,19 +8,8 @@
     "type": "git",
     "url": "git+https://github.com/BeisenUX/generator-standard-cmp.git"
   },
-  "keywords": [
-    "yeoman-generator",
-    "paas",
-    "react",
-    "component"
-  ],
-  "files": [
-    "app",
-    "components",
-    "publish-doc"
-  ],
   "bin": {
-    "bscmp": "./bin/bs-cmp.js"
+    "bscmp": "./bin/bscmp.js"
   },
   "author": {
     "email": "zhangyue@beisen.com",
