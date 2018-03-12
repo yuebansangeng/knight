@@ -47,12 +47,12 @@ module.exports = class extends Generator {
   }
 
   install () {
-  	// this.npmInstall([
-   //      'babel-loader',
-   //      'babel-core'
-   //    ],
-   //    { 'save-dev': true }
-   //  )
+  	this.npmInstall([
+        'babel-loader',
+        'babel-core'
+      ],
+      { 'save-dev': true }
+    )
   }
 
   end () {
