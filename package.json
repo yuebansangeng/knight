@@ -29,8 +29,8 @@
     "publish-doc"
   ],
 
-  "bin": {
-    "bs-cmp": "bin/component.js"
+  "directories": {
+    "bin": "./bin"
   },
 
   "author": {
