@@ -5,6 +5,7 @@ module.exports = {
   entry : './src/index.js',
 
   module : {
+
     loaders : [
       {
         loader : 'babel-loader',
@@ -20,7 +21,16 @@ module.exports = {
         test: /\.(ttf|eot|svg|woff(2)?)(\?[^('|")]*)?$/, 
         loader: "file-loader?name=images/[hash:8].[name].[ext]"
       }
-    ]
+    ],
+
+    rules: [{
+      test: /\.md$/,
+      use: [{
+        loader: 'html-loader'
+      }, {
+        loader: 'markdown-loader'
+      }]
+    }]
   },
 
   output: {

@@ -44,8 +44,10 @@ module.exports = class extends Generator {
 
     if (this.promptes.hasStorybook === true) {
       this._private_copies([
+        [ '.storybook/index.js' ],
         [ '.storybook/config.js' ],
         [ '.storybook/webpack.config.js' ],
+        [ '.storybook/addons.js' ],
         [ '.babelrc', '.storybook/.babelrc' ]
       ])
     }
@@ -66,7 +68,7 @@ module.exports = class extends Generator {
         'sass-loader', 'less-loader', 'postcss-loader', 'style-loader',
         'file-loader', 'html-loader', 'markdown-loader', 'url-loader', // webpack loader
 
-        '@storybook/cli', '@storybook/react', // storybook
+        '@storybook/cli', '@storybook/react', 'storybook-readme', // storybook
 
         'react', 'react-dom', // react
       ], {
