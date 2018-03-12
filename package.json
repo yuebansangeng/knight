@@ -1,6 +1,6 @@
 {
   "name": "bs-develop-cli",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "cli：标准组件创建",
   "main": "generators/app/index.js",
   "scripts": {},
@@ -19,8 +19,8 @@
     "components",
     "publish-doc"
   ],
-  "directories": {
-    "bin": "./bin"
+  "bin": {
+    "bs-cmp": "./bin/bs-cmp"
   },
   "author": {
     "email": "zhangyue@beisen.com",
