@@ -2,7 +2,7 @@
 {
   "name": "bs-develop-cli",
 
-  "version": "0.0.2",
+  "version": "0.0.3",
 
   "description": "cli：标准组件创建",
 
@@ -30,7 +30,7 @@
   ],
 
   "bin": {
-    "bs-cmp": "./bin/component.js"
+    "bs-cmp": "bin/component.js"
   },
 
   "author": {
