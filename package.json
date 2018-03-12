@@ -30,7 +30,7 @@
   ],
 
   "bin": {
-    "bs:cmp": "./bin/component.js"
+    "bs-cmp": "./bin/component.js"
   },
 
   "author": {
