@@ -38,11 +38,11 @@ module.exports = class extends Generator {
 
   writing () {
   	this._private_copies([
+      [ '.gitignore' ],
+      [ '.babelrc' ],
       [ 'index.js', 'src/index.js' ],
       [ 'package.json' ],
       [ 'webpack.config.js' ],
-      [ '.gitignore' ],
-      [ '.babelrc' ],
       [ 'README.md' ]
     ])
 
@@ -111,9 +111,7 @@ module.exports = class extends Generator {
       this.fs.copyTpl(
         this.templatePath(tplFilePath),
         this.destinationPath(`${this.contextRoot}/${destFilePath}`),
-        this.promptes,
-        undefined,
-        { globOptions: { dot: true } }
+        this.promptes
       )
     })
   }
