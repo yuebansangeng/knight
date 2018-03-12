@@ -1,2 +1,3 @@
+
 # standard-cmp-template
-标准组件模板项目，内含有.builder.json文件
+使用 Yeoman 创建 组件脚手架工具
