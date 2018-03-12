@@ -1,6 +1,6 @@
 
 import Component from '../src/index.js'
-import reademe from '../README.md'
+import readme from '../README.md'
 import { withReadme, withDocs }  from 'storybook-readme'
 
 export default {

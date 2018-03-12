@@ -36,6 +36,7 @@ module.exports = class extends Generator {
       [ 'webpack.config.js' ],
       [ '.gitignore' ],
       [ '.babelrc' ]
+      [ 'README.md' ]
     ])
 
     if (this.promptes.type === 'Shared Component') {
