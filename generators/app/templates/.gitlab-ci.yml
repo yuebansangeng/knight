@@ -7,8 +7,8 @@ build_cmps:
   stage: publish
 
   variables:
-    importName: 'PaasComponentsTemplate'
-    importModule: '@beisen/paas-components-template'
+    importName: '<%= name %>'
+    importModule: '<%= moduleName %>'
 
   only: 
     - tags

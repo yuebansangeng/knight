@@ -3,7 +3,7 @@ var Generator = require('yeoman-generator')
 
 module.exports = class extends Generator {
 
-  prompting() {
+  prompting () {
   	return this.prompt([
       {
         type: 'input',
@@ -12,7 +12,7 @@ module.exports = class extends Generator {
       }, {
         type: 'list',
         name: 'type',
-        choices: [ 'Normal Component', 'Shared Component', 'Application Component' ],
+        choices: [ 'Normal Component', 'Shared Component' ],
         message: 'This is your component type.'
       }, {
         type: 'input',
@@ -24,10 +24,6 @@ module.exports = class extends Generator {
     })
   }
 
-  configuring () {
-
-  }
-
   writing () {
   	this._private_copies([
       [ 'index.js', 'src/index.js' ],
@@ -35,9 +31,8 @@ module.exports = class extends Generator {
       [ 'webpack.config.js' ],
       [ '.gitignore' ]
     ])
-
     if (this.promptes.type === 'Shared Component') {
-      this._private_copies([ '.gitlab-ci.yml' ])
+      this._private_copies([[ '.gitlab-ci.yml' ]])
     }
   }
 
@@ -46,8 +41,9 @@ module.exports = class extends Generator {
     process.chdir(`${this.contextRoot}`)
 
   	this.npmInstall([
-        'babel-loader',
-        'babel-core'
+        'babel-loader', 'babel-core', // babel
+        'sass-loader', 'less-loader', // css
+        'file-loader' // png gif ..files
       ],
       { 'save-dev': true }
     )
