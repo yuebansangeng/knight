@@ -7,17 +7,22 @@ module.exports = class extends Generator {
   	return this.prompt([
       {
         type: 'input',
-        name: 'name',
+        name: 'cmpName',
         message: 'This is your component name on flying.'
+      }, {
+        type: 'input',
+        name: 'moduleName',
+        message: 'This is your component moudle name which use on dependencies manage.'
       }, {
         type: 'list',
         name: 'type',
         choices: [ 'Normal Component', 'Shared Component' ],
         message: 'This is your component type.'
       }, {
-        type: 'input',
-        name: 'moduleName',
-        message: 'This is your component moudle name which use on dependencies manage.'
+        type: 'confirm',
+        name: 'hasStorybook',
+        message: 'Are you use storybook ?',
+        default: true
       }
     ]).then(promptes => {
       this.promptes = promptes
@@ -32,8 +37,15 @@ module.exports = class extends Generator {
       [ '.gitignore' ],
       [ '.babelrc' ]
     ])
+
     if (this.promptes.type === 'Shared Component') {
       this._private_copies([[ '.gitlab-ci.yml' ]])
+    }
+
+    if (this.promptes.hasStorybook === true) {
+      this._private_copies([
+        [ '.storybook/index.js' ]
+      ])
     }
   }
 
@@ -46,9 +58,14 @@ module.exports = class extends Generator {
         'babel-plugin-transform-react-jsx', // react
         'sass-loader', 'less-loader', // css
         'file-loader', // png gif ..files
+        '@storybook/cli', '@storybook/react' // storybook
       ],
       { 'save-dev': true }
     )
+
+    if (this.promptes.hasStorybook === true) {
+      this.npmInstall([ '@storybook/react' ], { 'save-dev': true })  
+    }
   }
 
   /*

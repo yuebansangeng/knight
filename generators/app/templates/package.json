@@ -8,7 +8,8 @@
   "main": "lib/index.js",
 
   "scripts": {
-    "build:lib": "babel src --out-dir lib"
+    "build:lib": "babel src --out-dir lib",
+    "storybook": "start-storybook -s . -p 9001 -c .storybook"
   },
 
   "keywords": [

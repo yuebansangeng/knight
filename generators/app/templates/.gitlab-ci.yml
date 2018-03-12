@@ -7,7 +7,7 @@ build_cmps:
   stage: publish
 
   variables:
-    importName: '<%= name %>'
+    importName: '<%= cmpName %>'
     importModule: '<%= moduleName %>'
 
   only: 
