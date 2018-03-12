@@ -44,7 +44,9 @@ module.exports = class extends Generator {
 
     if (this.promptes.hasStorybook === true) {
       this._private_copies([
-        [ '.storybook/index.js' ]
+        [ '.storybook/config.js' ],
+        [ '.storybook/.babelrc' ],
+        [ '.storybook/webpack.config.js' ]
       ])
     }
   }
@@ -53,19 +55,27 @@ module.exports = class extends Generator {
     // 修改程序的执行路径到目标文件夹中
     process.chdir(`${this.contextRoot}`)
 
-  	this.npmInstall([
+  	this.npmInstall(
+      [
         'babel-cli', 'babel-loader', 'babel-core', 'babel-preset-env', // babel
         'babel-plugin-transform-react-jsx', // react
         'sass-loader', 'less-loader', // css
         'file-loader', // png gif ..files
         '@storybook/cli', '@storybook/react' // storybook
-      ],
-      { 'save-dev': true }
+      ], {
+        'save-dev': true
+      }
     )
 
     if (this.promptes.hasStorybook === true) {
-      this.npmInstall([ '@storybook/react' ], { 'save-dev': true })  
-    }
+      this.npmInstall(
+        [
+          '@storybook/react'
+        ], {
+          'save-dev': true
+        }
+      )
+    } // if
   }
 
   /*
