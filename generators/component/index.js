@@ -105,10 +105,15 @@ module.exports = class extends Generator {
       if (!destFilePath) {
         destFilePath = tplFilePath
       }
+      if (!tplFilePath) throw new Error('tplFilePath is none')
+      if (!destFilePath) throw new Error('destFilePath is none')
+
       this.fs.copyTpl(
         this.templatePath(tplFilePath),
         this.destinationPath(`${this.contextRoot}/${destFilePath}`),
-        this.promptes
+        this.promptes,
+        undefined,
+        { globOptions: { dot: true } }
       )
     })
   }
