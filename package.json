@@ -1,31 +1,49 @@
+
 {
   "name": "generator-develop-cli",
+
   "version": "0.0.1",
+
   "description": "cli：标准组件创建",
+
   "main": "generators/app/index.js",
+
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
   },
+
   "repository": {
     "type": "git",
     "url": "git+https://github.com/BeisenUX/generator-standard-cmp.git"
   },
+
   "keywords": [
     "yeoman-generator"
   ],
+
   "files": [
     "app",
-    "router"
+    "components",
+    "publish-doc"
   ],
+
+  "bin": {
+    "bs:cmp": "./bin/component.js"
+  },
+
   "author": "zhangyue@beisen.com",
+
   "license": "ISC",
+
   "bugs": {
     "url": "https://github.com/BeisenUX/generator-standard-cmp/issues"
   },
+
   "homepage": "https://github.com/BeisenUX/generator-standard-cmp#readme",
+
   "dependencies": {
     "object-assign": "^4.1.1",
     "shelljs": "^0.8.1",
+    "yeoman-environment": "^2.0.5",
     "yeoman-generator": "^2.0.3"
   }
 }
