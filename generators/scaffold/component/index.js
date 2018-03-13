@@ -3,13 +3,6 @@ var Generator = require('yeoman-generator')
 
 module.exports = class extends Generator {
 
-  configuring () {
-    // 如果参数重配置 contextRoot，则使用传入的变量
-    if (this.options.contextRoot) {
-      this.contextRoot = this.options.contextRoot  
-    }
-  }
-
   prompting () {
   	return this.prompt([
       {
@@ -64,7 +57,7 @@ module.exports = class extends Generator {
 
   install () {
     // 修改程序的执行路径到目标文件夹中
-    process.chdir(`${this.contextRoot}`)
+    process.chdir(`${this.options.contextRoot}`)
 
   	this.npmInstall(
       [
@@ -111,7 +104,7 @@ module.exports = class extends Generator {
 
       this.fs.copyTpl(
         this.templatePath(tplFilePath),
-        this.destinationPath(`${this.contextRoot}/${destFilePath}`),
+        this.destinationPath(`${this.options.contextRoot}/${destFilePath}`),
         this.promptes
       )
     })

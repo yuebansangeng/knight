@@ -21,8 +21,7 @@ module.exports = class extends Generator {
     if (this.promptes.category === 'Component') {
       this.composeWith(
         require.resolve('../component/index.js'),
-        // 子命令中，通过this.contextRoot取不到工作目录
-        objectAssign({ contextRoot: this.contextRoot }, this.promptes)
+        this.promptes
       )
     }
   }
