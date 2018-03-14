@@ -12,7 +12,7 @@ module.exports = class extends Generator {
   configuring () {
     var ss = this.options.storedData.split(':')
     this.config.set({
-      [ss[0]]: ss[1]
+      [ss[0]]: ss.slice(1).join(':')
     })
   }
 }
