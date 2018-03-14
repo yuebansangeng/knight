@@ -29,6 +29,8 @@
   },
   "homepage": "https://github.com/BeisenUX/generator-standard-cmp#readme",
   "dependencies": {
+    "http": "0.0.0",
+    "jsonfile": "^4.0.0",
     "object-assign": "^4.1.1",
     "shelljs": "^0.8.1",
     "yeoman-environment": "^2.0.5",

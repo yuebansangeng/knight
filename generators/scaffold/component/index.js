@@ -32,6 +32,7 @@ module.exports = class extends Generator {
   writing () {
   	this._private_copies([
       [ '.babelrc' ],
+      [ '.publish' ],
       // npm publish，会忽略 .gitignore 文件
       [ 'gitignore', '.gitignore' ],
       [ 'index.js', 'src/index.js' ],
@@ -39,10 +40,6 @@ module.exports = class extends Generator {
       [ 'webpack.config.js' ],
       [ 'README.md' ]
     ])
-
-    if (this.promptes.type === 'Shared Component') {
-      this._private_copies([[ '.gitlab-ci.yml' ]])
-    }
 
     if (this.promptes.hasStorybook === true) {
       this._private_copies([
