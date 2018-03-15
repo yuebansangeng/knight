@@ -1,3 +1,16 @@
 {
-  "name": "<%= cmpName %>"
+  "name": "<%= cmpName %>",
+  "type": "Demo",
+  "label": "Demo组件",
+  "data": {},
+  "events": {},
+  "editProps": [{
+    "type": "Text",
+    "label": "标题",
+    "name": "Title",
+    "validation": [{
+      "type": "required",
+      "message": "必填"
+    }]
+  }]
 }

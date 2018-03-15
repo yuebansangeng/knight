@@ -1,6 +1,6 @@
 {
   "name": "bs-develop-cli",
-  "version": "0.0.24",
+  "version": "0.0.25",
   "description": "cli：标准组件创建",
   "main": "generators/app/index.js",
   "scripts": {},
@@ -33,6 +33,7 @@
     "jsonfile": "^4.0.0",
     "npm-check": "^5.5.2",
     "object-assign": "^4.1.1",
+    "request": "^2.85.0",
     "shelljs": "^0.8.1",
     "yeoman-environment": "^2.0.5",
     "yeoman-generator": "^2.0.3"

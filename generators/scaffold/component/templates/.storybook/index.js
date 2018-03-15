@@ -4,6 +4,7 @@ import readme from '../README.md'
 import { withReadme, withDocs }  from 'storybook-readme'
 
 export default {
+  name: '<%= cmpName %>',
   // 开发可以定义多个 DEMO/STORY
   'stories': [{
     'name': 'default',

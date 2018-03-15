@@ -1,9 +1,9 @@
 
 var Generator = require('yeoman-generator')
-var http = require('http')
-var fs = require('fs')
 var jsonfile = require('jsonfile')
 var shelljs = require('shelljs')
+var os = require('object-assign')
+var request = require('request')
 
 module.exports = class extends Generator {
 
@@ -30,33 +30,20 @@ module.exports = class extends Generator {
                 console.log('New pck version has be discovered.')
                 clearInterval(inter)
 
-                // 调用共享库站点的接口，发布组件
-                http.get(`${this.config.get('publish-path')}?name=${publishJson.name}&module=${pckJson.name}&version=${pckJson.version}`, (res) => {
-
-                  var { statusCode } = res
-                  var contentType = res.headers['content-type']
-                  var error
-                  if (statusCode !== 200) {
-                    error = new Error('Request Failed.\n' + `Status Code: ${statusCode}`)
-                  }
-                  if (error) {
-                    console.error(error.message);
-                    res.resume()
-                    return
-                  }
-                  res.setEncoding('utf8')
-                  var rawData = ''
-                  res.on('data', (chunk) => { rawData += chunk })
-                  res.on('end', () => {
-                    try {
-                      console.log(rawData)
-                    } catch (e) {
-                      console.error(e.message)
+                request.post(
+                  this.config.get('publish-path'),
+                  {
+                    form: {
+                      metadata: JSON.stringify(os({
+                        module: pckJson.name,
+                        version: pckJson.version
+                      }, publishJson))
                     }
-                  })
-                }).on('error', (e) => {
-                  console.error(`Got error: ${e.message}`)
-                })
+                  },
+                  (e, r, body) => {
+                    console.log(body)
+                  }
+                )
               }
             }, 500)
           }
