@@ -14,11 +14,6 @@ module.exports = class extends Generator {
         name: 'moduleName',
         message: 'This is your component moudle name which use on dependencies manage.'
       }, {
-        type: 'list',
-        name: 'type',
-        choices: [ 'Normal Component', 'Shared Component' ],
-        message: 'This is your component type.'
-      }, {
         type: 'confirm',
         name: 'hasStorybook',
         message: 'Are you use storybook ?',

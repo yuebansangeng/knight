@@ -1,34 +1,26 @@
 {
   "name": "<%= moduleName %>",
-
   "version": "0.0.1",
-
   "description": "",
-
-  "main": "lib/index.js",
-
+  "main": "src/index.js",
   "scripts": {
     "build:lib": "babel src --out-dir lib",
-    "storybook": "start-storybook -s . -p 9001 -c .storybook"
+    "storybooks": "start-storybook -s . -p 9001 -c .storybook"
   },
-
   "keywords": [
     "beisen",
     "react-component",
     "es6"
   ],
-
   "author": {
     "name": "beisen",
     "email": "beisen@beisen.com"
   },
-
   "maintainers": [
     {
       "name": "beisen",
       "email": "beisen@beisen.com"
     }
   ],
-
   "license": "ISC"
 }
