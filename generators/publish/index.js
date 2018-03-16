@@ -26,7 +26,13 @@ module.exports = class extends Generator {
             // 发布组件到 npm 服务器
             shelljs.exec(`cd ${this.contextRoot} && npm publish`)
             var inter = setInterval(() => {
-              var { stdout } = shelljs.exec(`npm show ${pckJson.name} version`)
+
+              var { code, stdout } = shelljs.exec(`npm show ${pckJson.name} version`)
+              if (code !== 0) {
+                console.log(`\nShell Script Error: npm show ${pckJson.name} version`)
+                clearInterval(inter)
+                return
+              }
 
               // 判断包已经发布到了 npm 服务器上
               if (stdout.replace(/\n/ig, '') === pckJson.version) {
