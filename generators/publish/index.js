@@ -20,6 +20,9 @@ module.exports = class extends Generator {
           `${this.contextRoot}/package.json`,
           (err, pckJson) => {
 
+            // 生成 es5 代码
+            shelljs.exec(`cd ${this.contextRoot} && npm run build:lib`)
+
             // 发布组件到 npm 服务器
             shelljs.exec(`cd ${this.contextRoot} && npm publish`)
             var inter = setInterval(() => {
