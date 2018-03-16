@@ -32,7 +32,6 @@ module.exports = class extends Generator {
       [ 'gitignore', '.gitignore' ],
       [ 'index.js', 'src/index.js' ],
       [ 'package.json' ],
-      [ 'webpack.config.js' ],
       [ 'README.md' ]
     ])
 

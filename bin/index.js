@@ -24,6 +24,10 @@ if (secondArg === 'create:cmp') {
   env.run('scaffold Component')
 }
 
+if (secondArg === 'create:webpack') {
+  env.run('scaffold Webpack')
+}
+
 // 发布组件命令
 if (secondArg === 'publish') {
   env.run('publish') 
