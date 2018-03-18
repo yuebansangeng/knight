@@ -59,7 +59,7 @@ module.exports = class extends Generator {
         'babel-plugin-transform-react-display-name', 'babel-plugin-transform-react-jsx', // babel plugins
 
         'sass-loader', 'less-loader', 'postcss-loader', 'style-loader',
-        'file-loader', 'html-loader', 'markdown-loader', 'url-loader', // webpack loader
+        'file-loader', 'html-loader', 'markdown-loader', 'url-loader', 'node-sass', // webpack loader
 
         '@storybook/cli', '@storybook/react', 'storybook-readme', // storybook
 
