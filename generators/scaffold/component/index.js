@@ -15,6 +15,12 @@ module.exports = class extends Generator {
         message: 'This is your component moudle name which use on dependencies manage.'
       }, {
         type: 'confirm',
+        name: 'cpmCategoty',
+        choices: [ 'Element Component', 'Layout Component', 'Property Component' ],
+        message: 'Are you use storybook ?',
+        default: true
+      }, {
+        type: 'confirm',
         name: 'hasStorybook',
         message: 'Are you use storybook ?',
         default: true
@@ -28,21 +34,47 @@ module.exports = class extends Generator {
   	this._private_copies([
       [ '.babelrc' ],
       [ '.publish' ],
-      // npm publish，会忽略 .gitignore 文件
-      [ 'gitignore', '.gitignore' ],
+      [ 'gitignore', '.gitignore' ], // npm publish，会忽略 .gitignore 文件
       [ 'index.js', 'src/index.js' ],
       [ 'package.json' ],
       [ 'README.md' ]
     ])
 
+    if (this.promptes.cpmCategoty === 'Element Component') {
+      this._private_copies([
+        [ 'index.js', 'src/index.js' ]
+      ])
+    } else if (this.promptes.cpmCategoty === 'Layout Component') {
+      this._private_copies([
+        [ 'index-layout.js', 'src/index.js' ]
+      ])
+    } else {
+      this._private_copies([
+        [ 'index.js', 'src/index.js' ]
+      ])
+    }
+
     if (this.promptes.hasStorybook === true) {
       this._private_copies([
-        [ '.storybook/index.js' ],
         [ '.storybook/config.js' ],
         [ '.storybook/webpack.config.js' ],
         [ '.storybook/addons.js' ],
         [ '.babelrc', '.storybook/.babelrc' ]
       ])
+
+      if (this.promptes.cpmCategoty === 'Element Component') {
+        this._private_copies([
+          [ '.storybook/index.js' ]
+        ])
+      } else if (this.promptes.cpmCategoty === 'Layout Component') {
+        this._private_copies([
+          [ '.storybook/index-layout.js', '.storybook/index.js' ]
+        ])
+      } else {
+        this._private_copies([
+          [ '.storybook/index.js' ]
+        ])
+      }
     }
   }
 

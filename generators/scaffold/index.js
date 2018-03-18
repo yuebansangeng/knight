@@ -12,9 +12,6 @@ module.exports = class extends Generator {
     if (this.options.category === 'Component') {
       this._private_resolve('./component/index.js')
     }
-    if (this.options.category === 'Webpack') {
-      this._private_resolve('./webpack/index.js')
-    }
   }
 
   _private_resolve (path) {
