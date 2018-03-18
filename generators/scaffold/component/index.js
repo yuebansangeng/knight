@@ -14,10 +14,10 @@ module.exports = class extends Generator {
         name: 'moduleName',
         message: 'This is your component moudle name which use on dependencies manage.'
       }, {
-        type: 'confirm',
+        type: 'list',
         name: 'cpmCategoty',
         choices: [ 'Element Component', 'Layout Component', 'Property Component' ],
-        message: 'Are you use storybook ?',
+        message: 'Pick you component category.',
         default: true
       }, {
         type: 'confirm',
