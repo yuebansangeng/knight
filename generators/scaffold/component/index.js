@@ -36,6 +36,7 @@ module.exports = class extends Generator {
       [ '.publish' ],
       [ 'gitignore', '.gitignore' ], // npm publish，会忽略 .gitignore 文件
       [ 'index.js', 'src/index.js' ],
+      [ 'BaseComponent.js', 'src/BaseComponent.js' ],
       [ 'package.json' ],
       [ 'README.md' ]
     ])
@@ -59,6 +60,7 @@ module.exports = class extends Generator {
         [ '.storybook/config.js' ],
         [ '.storybook/webpack.config.js' ],
         [ '.storybook/addons.js' ],
+        [ '.storybook/env.js' ],
         [ '.babelrc', '.storybook/.babelrc' ]
       ])
 
