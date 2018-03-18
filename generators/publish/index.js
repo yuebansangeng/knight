@@ -58,7 +58,7 @@ module.exports = class extends Generator {
                 )
               } else {
                 console.log(`The new pck diff is different, please wait. [ ${currentPckVersion} diff ${pckJson.version} ]`)
-                console.log(`If the pck version in package.json is different with npm‘s online-version, you must sync.`)
+                console.log(`If the version which in package.json is different with npm‘s online-version, you must sync it.`)
               }
             }, 500)
           }
