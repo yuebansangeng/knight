@@ -34,8 +34,11 @@ module.exports = class extends Generator {
                 return
               }
 
+              // 当前模块的最新版本号
+              var currentPckVersion = stdout.replace(/\n/ig, '')
+
               // 判断包已经发布到了 npm 服务器上
-              if (stdout.replace(/\n/ig, '') === pckJson.version) {
+              if (currentPckVersion === pckJson.version) {
                 console.log('New pck version has be discovered.')
                 clearInterval(inter)
 
@@ -53,6 +56,9 @@ module.exports = class extends Generator {
                     console.log(body)
                   }
                 )
+              } else {
+                console.log(`The new pck diff is different, please wait. [ ${currentPckVersion} diff ${pckJson.version} ]`)
+                console.log(`If the pck version in package.json is different with npm‘s online-version, you must sync.`)
               }
             }, 500)
           }
