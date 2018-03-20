@@ -16,4 +16,12 @@ export default class extends Component {
       return containerDom
     }
   }
+
+  /*
+  * 支持jsx中类似slots的机制
+  * 只需要 { this.slots('name') } 使用即可
+  */
+  slot (name) {
+    return (this.props.children || []).filter(({ props = {} }) => props.slot === name)
+  }
 }
