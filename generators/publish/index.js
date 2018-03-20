@@ -53,7 +53,11 @@ module.exports = class extends Generator {
                     }
                   },
                   (e, r, body) => {
-                    console.log(body)
+                    if (e) {
+                      console.log(e)
+                    } else {
+                      console.log(body)  
+                    }
                   }
                 )
               } else {
