@@ -7,21 +7,13 @@ export default class extends Component {
   * 对于Pagebuilder来说，实现容器节点必须要使用connectPlaceholder属性
   * 为了去除connectPlaceholder在运行态和开发态的不兼容性
   */
-  connectPlaceholder () {
+  slot (name, props) {
     let { connectPlaceholder } = this.props
-    // 在开发态环境中，肯定传入了该属性，则直接返回
-    if (connectPlaceholder) return connectPlaceholder
-    // 运行态环境，直接返回Dom对象
-    return (containerName) => (containerDom) => {
-      return containerDom
+    if (connectPlaceholder) {
+      return connectPlaceholder(name)(<div { ...props }></div>)
     }
-  }
-
-  /*
-  * 支持jsx中类似slots的机制
-  * 只需要 { this.slots('name') } 使用即可
-  */
-  slot (name) {
-    return (this.props.children || []).filter(({ props = {} }) => props.slot === name)
+    return <div { ...props }>{
+      (this.props.children || []).filter(({ props = {} }) => props.slot === name)
+    }</div>
   }
 }
