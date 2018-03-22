@@ -29,9 +29,12 @@
   },
   "homepage": "https://github.com/BeisenUX/generator-standard-cmp#readme",
   "dependencies": {
+    "colors": "^1.2.1",
     "http": "0.0.0",
     "jsonfile": "^4.0.0",
+    "jsonlint": "^1.6.3",
     "npm-check": "^5.5.2",
+    "npm-cli-login": "0.0.10",
     "object-assign": "^4.1.1",
     "request": "^2.85.0",
     "shelljs": "^0.8.1",
