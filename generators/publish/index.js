@@ -22,7 +22,7 @@ module.exports = class extends Generator {
     let email = this.config.get('npm-user-email')
 
     // 判断是否登陆了 npm
-    let { code } = shelljs.exec(`npm whoami --color always`)
+    let { code, stdout } = shelljs.exec(`npm whoami --color always`)
 
     // 未登录成功
     if (code !== 0) {
@@ -36,9 +36,17 @@ module.exports = class extends Generator {
         // 登陆 npm
         npmLogin(name, password, email)
       }
+    } else {
+      // npm 登陆的账号并不是所配置的，切换账号
+      if (stdout !== name) {
+        console.log(`The npm logined user is not configed user, longing again.`.yellow)
+        shelljs.exec(`npm logout --color always`)
+        npmLogin(name, password, email)
+      }
     }
 
     console.log(`\nNpm user logined: ${name}`.green)
+
     this.isNpmLogined = true
   }
 
