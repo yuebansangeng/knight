@@ -38,8 +38,9 @@ module.exports = class extends Generator {
       }
     } else {
       // npm 登陆的账号并不是所配置的，切换账号
-      if (stdout !== name) {
-        console.log(`The npm logined user is not configed user, longing again.`.yellow)
+      // stdout 默认会带有换行符号
+      if (stdout.replace(/\n/ig, '') !== name) {
+        console.log(`The npm logined user is not configed user, longing again. Current username: ${ stdout }.`.yellow)
         shelljs.exec(`npm logout --color always`)
         npmLogin(name, password, email)
       }
