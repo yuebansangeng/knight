@@ -30,6 +30,8 @@
   * 需要使用 bscpm set publish-path:? 设置 “组件管理平台” 的地址
 
 ## 需要的预配置
+bscom set 是用于配置必要的变量，底层使用 Yeoman 的 [sotrage机制](http://yeoman.io/authoring/storage.html)
+
 * 设置 “组件管理平台” 的地址
   > ~/ bscpm set publish-path:?
 * 设置 npm 用户名
@@ -38,3 +40,7 @@
   > ~/ bscom set npm-user-passwors:?
 * 设置 npm 用户邮箱
   > ~/ bscom set npm-user-email:?
+  
+## 更新
+* 0.0.36
+  > 增加了自动登陆 npm 账号的功能，账号信息需要预先配置
