@@ -5,6 +5,7 @@
 ```
 ~/ npm install bs-develop-cli -g
 ```
+安装使用了 npm package.json 中的 "bin" 属性，安装完毕后会自动注入 “bscpm” 命令到 /bin 目录下。开发者直接在 shell 中就可以调用到 bscom 命令
 
 ## 提供的功能
 #### 创建组件解决方案
