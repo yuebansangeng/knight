@@ -24,6 +24,10 @@ if (secondArg === 'create:cmp') {
   env.run('scaffold Component')
 }
 
+if (secondArg === 'setup:storybooks') {
+  env.run('scaffold Storybooks')
+}
+
 // 发布组件命令
 if (secondArg === 'publish') {
   env.run('publish') 

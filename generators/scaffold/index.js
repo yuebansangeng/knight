@@ -12,6 +12,9 @@ module.exports = class extends Generator {
     if (this.options.category === 'Component') {
       this._private_resolve('./component/index.js')
     }
+    if (this.options.category === 'Storybooks') {
+      this._private_resolve('./storybooks/index.js')
+    }
   }
 
   _private_resolve (path) {
