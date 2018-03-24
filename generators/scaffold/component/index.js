@@ -41,42 +41,15 @@ module.exports = class extends Generator {
       [ 'README.md' ]
     ])
 
-    if (this.promptes.cpmCategoty === 'Element Component') {
-      this._private_copies([
-        [ 'index.js', 'src/index.js' ]
-      ])
-    } else if (this.promptes.cpmCategoty === 'Layout Component') {
-      this._private_copies([
-        [ 'index-layout.js', 'src/index.js' ]
-      ])
-    } else {
-      this._private_copies([
-        [ 'index.js', 'src/index.js' ]
-      ])
-    }
-
     if (this.promptes.hasStorybook === true) {
       this._private_copies([
         [ '.storybook/config.js' ],
         [ '.storybook/webpack.config.js' ],
         [ '.storybook/addons.js' ],
         [ '.storybook/env.js' ],
+        [ '.storybook/stories.js' ],
         [ '.babelrc', '.storybook/.babelrc' ]
       ])
-
-      if (this.promptes.cpmCategoty === 'Element Component') {
-        this._private_copies([
-          [ '.storybook/index.js' ]
-        ])
-      } else if (this.promptes.cpmCategoty === 'Layout Component') {
-        this._private_copies([
-          [ '.storybook/index-layout.js', '.storybook/index.js' ]
-        ])
-      } else {
-        this._private_copies([
-          [ '.storybook/index.js' ]
-        ])
-      }
     }
   }
 
