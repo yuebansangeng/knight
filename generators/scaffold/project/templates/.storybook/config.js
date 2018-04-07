@@ -11,7 +11,7 @@ configure(
   () => {
   	let { name, stories } = storiesConf(Project)
     let storiesInstence = storiesOf(name, module)
-    stories(Project).forEach(({ name, story }) => {
+    stories.forEach(({ name, story }) => {
       storiesInstence.add(name, story)
     })
   },

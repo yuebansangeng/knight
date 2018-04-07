@@ -18,15 +18,16 @@ var env = require('yeoman-environment').createEnv()
   .register(require.resolve('../generators/publish'), 'publish')
   .register(require.resolve('../generators/config'), 'config')
 
-// bscpm create:cmp
-// 创建组件脚手架
-if (secondArg === 'create:cmp') {
-  env.run('scaffold Component')
-}
-
-// 创建一个项目
-if (secondArg === 'create:project') {
-  env.run('scaffold Project')
+// bscpm 脚手架
+if (secondArg === 'create') {
+  switch (thirdArg) {
+    case 'cmp':
+      env.run('scaffold Component')  
+      break;
+    case 'project':
+      env.run('scaffold Project')
+    default: break;
+  }
 }
 
 // 发布组件命令
