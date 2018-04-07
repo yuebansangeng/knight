@@ -1,15 +1,14 @@
 
-var Generator = require('yeoman-generator')
-
-var devDependencies = require('./dev-dependencies')
-var dependencies = require('./dependencies')
-var copies = require('./copies')
-
+const Generator = require('yeoman-generator')
+const devDependencies = require('./dev-dependencies')
+const dependencies = require('./dependencies')
+const copies = require('./copies')
+const copyUtil = require('../base/copy-util')
 
 module.exports = class extends Generator {
 
   prompting () {
-  	return this.prompt([
+    return this.prompt([
       {
         type: 'input',
         name: 'projectName',
@@ -34,36 +33,17 @@ module.exports = class extends Generator {
   }
 
   writing () {
-  	this._private_copies(copies(this.promptes))
+    copyUtil.call(this, copies(this.promptes))
   }
 
   install () {
     // 修改程序的执行路径到目标文件夹中
     process.chdir(`${this.options.contextRoot}`)
+
+    // 安装依赖项
     this.npmInstall(dependencies(this.promptes))
-  	this.npmInstall(devDependencies(this.promptes), {
+    this.npmInstall(devDependencies(this.promptes), {
       'save-dev': true
-    })
-  }
-
-  /*
-  * 封装copy（API），减少代码量
-  * 28原则：百分之20%的代码解决80%的功能
-  * 函数名前面添加下滑线，告知Yeoman不自定执行改函数
-  */
-  _private_copies (copyJobs = []) {
-    copyJobs.forEach(([ tplFilePath, destFilePath, tplData = {} ]) => {
-      if (!destFilePath) {
-        destFilePath = tplFilePath
-      }
-      if (!tplFilePath) throw new Error('tplFilePath is none')
-      if (!destFilePath) throw new Error('destFilePath is none')
-
-      this.fs.copyTpl(
-        this.templatePath(tplFilePath),
-        this.destinationPath(`${this.options.contextRoot}/${destFilePath}`),
-        this.promptes
-      )
     })
   }
 }
