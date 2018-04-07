@@ -24,6 +24,11 @@ if (secondArg === 'create:cmp') {
   env.run('scaffold Component')
 }
 
+// 创建一个项目
+if (secondArg === 'create:project') {
+  env.run('scaffold Project')
+}
+
 // 发布组件命令
 if (secondArg === 'publish') {
   env.run('publish') 
