@@ -43,11 +43,11 @@ CLI工具的底层使用Yeoman，Yeoman是可用来实现脚手架工具的底�
 * 设置 “组件管理平台” 的地址
   > ~/ bscpm set publish-path:?
 * 设置 npm 用户名
-  > ~/ bscom set npm-user-name:?
+  > ~/ bscpm set npm-user-name:?
 * 设置 npm 用户密码
-  > ~/ bscom set npm-user-passwors:?
+  > ~/ bscpm set npm-user-passwors:?
 * 设置 npm 用户邮箱
-  > ~/ bscom set npm-user-email:?
+  > ~/ bscpm set npm-user-email:?
 
 ## 更新
 * 0.0.36
