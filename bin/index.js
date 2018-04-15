@@ -1,41 +1,55 @@
 #!/usr/bin/env node
 
-// todo
-// * 使用现有库，实现 --help，等标准命令附加功能
+// 结合使用commander强大的命令行框架
+const program = require('commander')
 
-// 获取nodejs命令的参数
-// 前两个参数默认传递，不需要考虑
-var [
-  nodePath,
-  nodeScriptPath,
-  secondArg,
-  thirdArg
-] = process.argv
+const yeomanEnv = require('yeoman-environment')
+const jsonlint = require('jsonlint')
+const path = require('path')
+const fs = require('fs')
 
-// 执行指定的 command，不依赖 yo 命令
-var env = require('yeoman-environment').createEnv()
-  .register(require.resolve('../generators/scaffold'), 'scaffold')
-  .register(require.resolve('../generators/publish'), 'publish')
-  .register(require.resolve('../generators/config'), 'config')
 
-// bscpm 脚手架
-if (secondArg === 'create') {
-  switch (thirdArg) {
-    case 'cmp':
-      env.run('scaffold Component')  
-      break;
-    case 'project':
-      env.run('scaffold Project')
-    default: break;
-  }
-}
+// 加载yeoman命令，初始化
+const env = yeomanEnv.createEnv()
+  .register(require.resolve('../src/scaffold-solutions'), 'scaffold')
+  .register(require.resolve('../src/publish'), 'publish')
+  .register(require.resolve('../src/config'), 'config')
 
-// 发布组件命令
-if (secondArg === 'publish') {
-  env.run('publish') 
-}
+// 获取当前模块的版本，初始化
+let pckContent = fs.readFileSync(path.join(__dirname, '..', 'package.json'), 'utf8')
+let pckJson = jsonlint.parse(pckContent)
+program.version(pckJson.version)
 
-// 提供给开发者用于配置本地config的命令
-if (secondArg === 'set') {
-  env.run(`config ${thirdArg}`)
-}
+// 脚手架
+program
+  .command('create <solution>')
+  .description('脚手架工具生成解决方案')
+  .action((solution) => {
+    switch (solution) {
+      case 'Component':
+        env.run('scaffold Component')
+        break
+      case 'Project':
+        env.run('scaffold Project')
+        break
+      default: break
+    }
+  })
+
+// 组件发布
+program
+  .command('publish')
+  .description('发布组件')
+  .action(() => {
+    env.run('publish')
+  })
+
+// 配置环境参数
+program
+  .command('set <param>')
+  .description('发布组件')
+  .action(param => {
+    env.run(`config ${param}`)
+  })
+
+program.parse(process.argv)

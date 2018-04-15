@@ -5,7 +5,6 @@ module.exports = class extends Generator {
   
   constructor (args, opts) {
     super(args, opts)
-    // propName:propValue
     this.argument('storedData', { type: String, required: true })
   }
 
