@@ -48,6 +48,7 @@ module.exports = class extends Generator {
         [ '.storybook/addons.js' ],
         [ '.storybook/env.js' ],
         [ '.storybook/stories.js' ],
+        [ '.storybook/index.js' ],
         [ '.babelrc', '.storybook/.babelrc' ]
       ])
     }
@@ -68,7 +69,7 @@ module.exports = class extends Generator {
         'sass-loader', 'less-loader', 'postcss-loader', 'style-loader',
         'file-loader', 'html-loader', 'markdown-loader', 'url-loader', 'node-sass', // webpack loader
 
-        '@storybook/cli', '@storybook/react', 'storybook-readme', // storybook
+        '@storybook/cli', '@storybook/react', 'storybook-readme', '@storybook/addon-knobs', // storybook
 
         'react', 'react-dom', // react
       ], {
