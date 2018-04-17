@@ -49,6 +49,7 @@ module.exports = class extends Generator {
         [ '.storybook/env.js' ],
         [ '.storybook/stories.js' ],
         [ '.storybook/index.js' ],
+        [ '.storybook/util.js' ],
         [ '.babelrc', '.storybook/.babelrc' ]
       ])
     }
