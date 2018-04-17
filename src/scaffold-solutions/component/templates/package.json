@@ -4,9 +4,9 @@
   "description": "",
   "main": "lib/index.js",
   "scripts": {
+    "storybooks": "npm run build:lib && start-storybook -s . -p 9001 -c .storybook",
     "build": "npm run build:lib && npm run story:lib",
     "build:lib": "babel src --out-dir lib",
-    "storybooks": "start-storybook -s . -p 9001 -c .storybook",
     "story:lib": "babel .storybook --out-dir story-lib"
   },
   "keywords": [
