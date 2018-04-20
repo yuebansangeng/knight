@@ -43,7 +43,6 @@ module.exports = class extends Generator {
 
     if (this.promptes.hasStorybook === true) {
       this._private_copies([
-        [ '.babelrc', '.storybook/.babelrc' ],
         [ 'demo.js', 'demos/default/index.js' ]
       ])
     }
