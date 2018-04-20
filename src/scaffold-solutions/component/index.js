@@ -65,7 +65,8 @@ module.exports = class extends Generator {
 
         'babel-plugin-transform-object-assign', 'babel-plugin-transform-runtime',
         'babel-plugin-add-module-exports', 'babel-plugin-transform-decorators-legacy',
-        'babel-plugin-transform-react-display-name', 'babel-plugin-transform-react-jsx', // babel plugins
+        'babel-plugin-transform-react-display-name', 'babel-plugin-transform-react-jsx',
+        'babel-preset-es2015', 'babel-preset-react', 'babel-preset-stage-0', 'babel-plugin-transform-proto-to-assign', // babel plugins
 
         'sass-loader', 'less-loader', 'postcss-loader', 'style-loader',
         'file-loader', 'html-loader', 'markdown-loader', 'url-loader', 'node-sass', // webpack loader
