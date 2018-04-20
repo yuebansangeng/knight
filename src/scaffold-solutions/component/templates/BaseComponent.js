@@ -12,8 +12,11 @@ export default class extends Component {
     if (connectPlaceholder) {
       return connectPlaceholder(name)(<div { ...props }></div>)
     }
+
+    // children结构兼容性
     let { children } = this.props
     let childs = children ? Array.isArray(children) ? this.props.children : [this.props.children] : []
+
     return <div { ...props }>{
       childs.filter(({ props = {} }) => props.slot === name)
     }</div>
