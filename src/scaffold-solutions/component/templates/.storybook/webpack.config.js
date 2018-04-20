@@ -5,6 +5,22 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.js$/,
+        exclude: [
+          /node_modules\/(?!bsp-left-right-layout)/
+        ],
+        use: [
+          { loader: 'babel-loader' }
+        ]
+      },
+      {
+        test: /\.md$/,
+        use: [
+          { loader: 'html-loader' },
+          { loader: 'markdown-loader' }
+        ]
+      },
+      {
         test: /\.scss|\.css$/,
         use: [
           { loader: 'style-loader' },

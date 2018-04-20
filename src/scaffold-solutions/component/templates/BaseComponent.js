@@ -12,8 +12,10 @@ export default class extends Component {
     if (connectPlaceholder) {
       return connectPlaceholder(name)(<div { ...props }></div>)
     }
+    let { children } = this.props
+    let childs = children ? Array.isArray(children) ? this.props.children : [this.props.children] : []
     return <div { ...props }>{
-      (this.props.children || []).filter(({ props = {} }) => props.slot === name)
+      childs.filter(({ props = {} }) => props.slot === name)
     }</div>
   }
 }
