@@ -64,16 +64,6 @@ module.exports = class extends Generator {
         'save-dev': true
       }
     )
-
-    if (this.promptes.hasStorybook === true) {
-      this.npmInstall(
-        [
-          '@storybook/react'
-        ], {
-          'save-dev': true
-        }
-      )
-    } // if
   }
 
   /*
