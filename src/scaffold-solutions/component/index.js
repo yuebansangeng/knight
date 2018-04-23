@@ -50,7 +50,7 @@ module.exports = class extends Generator {
         'file-loader', 'html-loader', 'markdown-loader', 'url-loader', 'node-sass', // webpack loader
 
         '@storybook/cli', '@storybook/react', 'storybook-readme', '@storybook/addon-knobs',
-        'storybook-lib', // storybook
+        '@beisen/storybook-lib', // storybook
 
         'ejs',
 
