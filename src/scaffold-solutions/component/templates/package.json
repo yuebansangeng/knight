@@ -5,8 +5,8 @@
   "main": "lib/index.js",
   "scripts": {
     "build:lib": "babel src --out-dir lib",
-    "build:demos": "node node_modules/storybook-lib/src/build/index.js `pwd`",
-    "storybook": "npm run build:demos && start-storybook -s . -p 9001 -c node_modules/storybook-lib/src"
+    "build:demos": "node node_modules/@beisen/storybook-lib/src/build/index.js `pwd`",
+    "storybook": "npm run build:demos && start-storybook -s . -p 9001 -c node_modules/@beisen/storybook-lib/src"
   },
   "keywords": [
     "beisen",
