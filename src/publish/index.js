@@ -27,7 +27,7 @@ module.exports = class extends Generator {
     // 未登录成功
     if (code !== 0) {
       if (!name || !password || !email) {
-        console.log(`\nPlease set config for npm login [ username, password, email ].`.red)
+        console.log(`\n需要配置npm账号 [ username, password, email ].`.red)
         console.log(`bscpm set npm-user-name: [username]`)
         console.log(`bscpm set npm-user-password: [password]`)
         console.log(`bscpm set npm-user-email: [email]\n`)
@@ -40,13 +40,13 @@ module.exports = class extends Generator {
       // npm 登陆的账号并不是所配置的，切换账号
       // stdout 默认会带有换行符号
       if (stdout.replace(/\n/ig, '') !== name) {
-        console.log(`The npm logined user is not configed user, longing again. Current username: ${ stdout }.`.yellow)
+        console.log(`当前npm登录中的用户，不是beisencorp用户（${ stdout }），已在尝试重新登录.`.yellow)
         shelljs.exec(`npm logout --color always`)
         npmLogin(name, password, email)
       }
     }
 
-    console.log(`\nNpm user logined: ${name}`.green)
+    console.log(`\nNpm已登录，用户名: ${name}`.green)
 
     this.isNpmLogined = true
   }
@@ -55,7 +55,7 @@ module.exports = class extends Generator {
     if (!this.isNpmLogined) return
 
     if (!this.config.get('publish-path')) {
-      console.log('Please use `bscpm set publish-path:[url]` set url which path will be publishing.'.red)
+      console.log('需要设置组件发布的地址（`bscpm set publish-path:[url]`)'.red)
       return
     }
 
@@ -88,35 +88,31 @@ module.exports = class extends Generator {
 
       // 判断包已经发布到了 npm 服务器上
       if (currentPckVersion === pckJson.version) {
-        console.log('\nNew pck version had discovered.'.green)
+        console.log('\n组件Npm新版本已发布成功.'.green)
         clearInterval(inter)
 
-        request.post(
-          this.config.get('publish-path'),
-          {
-            form: {
-              metadata: JSON.stringify(os({
-                module: pckJson.name,
-                version: pckJson.version
-              }, publishJson))
-            }
-          },
-          (e, r, body) => {
-            if (e) {
-              console.log(e)
+        request.post({
+          'url': this.config.get('publish-path'),
+          'formData': {
+            'readme': fs.createReadStream(`${this.contextRoot}/README.md`),
+            'package': fs.createReadStream(`${this.contextRoot}/package.json`),
+            'editableProps': fs.createReadStream(`${this.contextRoot}/.publish`)
+          }
+        },
+        (e, r, body) => {
+          if (e) {
+            console.log(e)
+          } else {
+            body = JSON.parse(body)
+            if (body.code === 200) {
+              console.log(`\n组件发布成功.`.green)
             } else {
-              body = JSON.parse(body)
-              if (body.code === 200) {
-                console.log(`\nThe component had published.`.green)
-              } else {
-                consoel.log(`\nbscpm ${'ERR!'} ${body.message}`)
-              }
+              consoel.log(`\nbscpm ${'ERR!'} ${body.message}`)
             }
           }
-        )
+        })
       } else {
-        console.log(`bscpm ${'ERR!'.red} The new pck diff is different, please wait. [ ${currentPckVersion} diff ${pckJson.version} ]`)
-        console.log(`If the version which in package.json is different with npm‘s online-version, you must sync it.`)
+        console.log('组件正在发布中.'.yellow)
       }
     }, 500)
   }
