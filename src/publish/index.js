@@ -17,9 +17,9 @@ module.exports = class extends Generator {
   }
 
   configuring () {
-    let name = this.config.get('npm-user-name')
-    let password = this.config.get('npm-user-password')
-    let email = this.config.get('npm-user-email')
+    let name = this.config.get('name')
+    let password = this.config.get('password')
+    let email = this.config.get('email')
 
     // 判断是否登陆了 npm
     let { code, stdout } = shelljs.exec(`npm whoami --color always`)
@@ -28,9 +28,9 @@ module.exports = class extends Generator {
     if (code !== 0) {
       if (!name || !password || !email) {
         console.log(`\n需要配置npm账号 [ username, password, email ].`.red)
-        console.log(`bscpm set npm-user-name: [username]`)
-        console.log(`bscpm set npm-user-password: [password]`)
-        console.log(`bscpm set npm-user-email: [email]\n`)
+        console.log(`bscpm set name: [username]`)
+        console.log(`bscpm set password: [password]`)
+        console.log(`bscpm set email: [email]\n`)
         return
       } else {
         // 登陆 npm
@@ -54,16 +54,14 @@ module.exports = class extends Generator {
   writing () {
     if (!this.isNpmLogined) return
 
-    if (!this.config.get('publish-path')) {
-      console.log('需要设置组件发布的地址（`bscpm set publish-path:[url]`)'.red)
+    if (!this.config.get('publish')) {
+      console.log('需要设置组件发布的地址（`bscpm set publish:[url]`)'.red)
       return
     }
 
-    let pubcnt = fs.readFileSync(`${this.contextRoot}/.publish`, 'utf8')
     let pckcnt = fs.readFileSync(`${this.contextRoot}/package.json`, 'utf8')
 
     // 转换文本到 json 对象，同时验证格式是否正确，并会返回错误ERR
-    let publishJson = jsonlint.parse(pubcnt)
     let pckJson = jsonlint.parse(pckcnt)
 
     // 生成 es5 代码
@@ -92,11 +90,12 @@ module.exports = class extends Generator {
         clearInterval(inter)
 
         request.post({
-          'url': this.config.get('publish-path'),
+          'url': this.config.get('publish'),
           'formData': {
             'readme': fs.createReadStream(`${this.contextRoot}/README.md`),
             'package': fs.createReadStream(`${this.contextRoot}/package.json`),
-            'editableProps': fs.createReadStream(`${this.contextRoot}/.publish`)
+            'editableProps': fs.createReadStream(`${this.contextRoot}/.build/.publish`),
+            'qualityReport': fs.createReadStream(`${this.contextRoot}/.build/.quality-report.html`)
           }
         },
         (e, r, body) => {
@@ -107,7 +106,7 @@ module.exports = class extends Generator {
             if (body.code === 200) {
               console.log(`\n组件发布成功.`.green)
             } else {
-              consoel.log(`\nbscpm ${'ERR!'} ${body.message}`)
+              console.log(`\nbscpm ${'ERR!'} ${body.message}`)
             }
           }
         })

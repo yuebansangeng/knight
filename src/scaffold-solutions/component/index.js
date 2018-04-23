@@ -54,7 +54,7 @@ module.exports = class extends Generator {
 
         'ejs',
 
-        '@storybook/react',
+        '@storybook/react', 'eslint',
         
         'react', 'react-dom', // react
       ], {
