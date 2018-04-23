@@ -4,6 +4,6 @@ import React, { Component } from 'react'
 
 export default class extends Component {
   render () {
-    return <DefaultComponent />
+    return <DefaultComponent {...this.props} />
   }
 }
