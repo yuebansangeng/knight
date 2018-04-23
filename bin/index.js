@@ -39,10 +39,10 @@ program
   .description('脚手架工具生成解决方案')
   .action((solution) => {
     switch (solution) {
-      case 'Component':
+      case 'component':
         env.run('scaffold Component')
         break
-      case 'Project':
+      case 'project':
         env.run('scaffold Project')
         break
       default: break
