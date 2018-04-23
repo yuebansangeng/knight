@@ -19,11 +19,6 @@ module.exports = class extends Generator {
         choices: [ 'Element Component', 'Layout Component', 'Property Component' ],
         message: 'Pick you component category.',
         default: true
-      }, {
-        type: 'confirm',
-        name: 'hasStorybook',
-        message: 'Are you use storybook ?',
-        default: true
       }
     ]).then(promptes => {
       this.promptes = promptes
@@ -38,14 +33,9 @@ module.exports = class extends Generator {
       [ 'index.js', 'src/index.js' ],
       [ 'BaseComponent.js', 'src/BaseComponent.js' ],
       [ 'package.json' ],
-      [ 'README.md' ]
+      [ 'README.md' ],
+      [ 'demo.js', 'demos/default/index.js' ]
     ])
-
-    if (this.promptes.hasStorybook === true) {
-      this._private_copies([
-        [ 'demo.js', 'demos/default/index.js' ]
-      ])
-    }
   }
 
   install () {
