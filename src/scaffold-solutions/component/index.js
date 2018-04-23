@@ -7,21 +7,16 @@ module.exports = class extends Generator {
   	return this.prompt([
       {
         type: 'input',
-        name: 'cmpName',
-        message: 'This is your component name on flying.'
-      }, {
-        type: 'input',
         name: 'moduleName',
-        message: 'This is your component moudle name which use on dependencies manage.'
-      }, {
-        type: 'list',
-        name: 'cpmCategoty',
-        choices: [ 'Element Component', 'Layout Component', 'Property Component' ],
-        message: 'Pick you component category.',
-        default: true
+        message: 'package.json中name字段.'
       }
     ]).then(promptes => {
       this.promptes = promptes
+      this.promptes.cmpName =
+        this.promptes.moduleName
+          .replace('@beisen-cmps/', '')
+          .replace(/-(\w)/g, (all, letter) => letter.toUpperCase())
+          .replace(/^\w/, (all, letter) => all.toUpperCase())
     })
   }
 
@@ -58,22 +53,14 @@ module.exports = class extends Generator {
         'storybook-lib', // storybook
 
         'ejs',
+
+        '@storybook/react',
         
         'react', 'react-dom', // react
       ], {
         'save-dev': true
       }
     )
-
-    if (this.promptes.hasStorybook === true) {
-      this.npmInstall(
-        [
-          '@storybook/react'
-        ], {
-          'save-dev': true
-        }
-      )
-    } // if
   }
 
   /*
