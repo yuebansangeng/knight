@@ -2,11 +2,11 @@
 
 // 结合使用commander强大的命令行框架
 const program = require('commander')
-
 const yeomanEnv = require('yeoman-environment')
 const jsonlint = require('jsonlint')
 const path = require('path')
 const fs = require('fs')
+const shelljs = require('shelljs')
 
 
 // 加载yeoman命令，初始化
@@ -19,6 +19,19 @@ const env = yeomanEnv.createEnv()
 let pckContent = fs.readFileSync(path.join(__dirname, '..', 'package.json'), 'utf8')
 let pckJson = jsonlint.parse(pckContent)
 program.version(pckJson.version)
+
+// 更新模板
+// program
+//   .command('upgrade <obj>')
+//   .description('更新')
+//   .action(obj => {
+//     switch (obj) {
+//       case 'template':
+//         shelljs.exec(`cd /usr/local/bin/${pckJson.name} && pwd`)
+//         break
+//       default: break
+//     }
+//   })
 
 // 脚手架
 program

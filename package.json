@@ -1,6 +1,6 @@
 {
   "name": "bscpm",
-  "version": "0.0.46",
+  "version": "0.0.47",
   "description": "cli：标准组件创建",
   "main": "generators/app/index.js",
   "scripts": {},
