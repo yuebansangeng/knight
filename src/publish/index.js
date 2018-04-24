@@ -11,48 +11,7 @@ var fs = require('fs')
 
 module.exports = class extends Generator {
 
-  // constructor (args, opts) {
-  //   super(args, opts)
-  //   this.isNpmLogined = false
-  // }
-
-  // configuring () {
-  //   let name = this.config.get('name')
-  //   let password = this.config.get('password')
-  //   let email = this.config.get('email')
-
-  //   // 判断是否登陆了 npm
-  //   let { code, stdout } = shelljs.exec(`npm whoami --color always`)
-
-  //   // 未登录成功
-  //   if (code !== 0) {
-  //     if (!name || !password || !email) {
-  //       console.log(`\n需要配置npm账号 [ name, password, email ].`.red)
-  //       console.log(`bscpm set name: [name]`)
-  //       console.log(`bscpm set password: [password]`)
-  //       console.log(`bscpm set email: [email]\n`)
-  //       return
-  //     } else {
-  //       // 登陆 npm
-  //       npmLogin(name, password, email)
-  //     }
-  //   } else {
-  //     // npm 登陆的账号并不是所配置的，切换账号
-  //     // stdout 默认会带有换行符号
-  //     if (stdout.replace(/\n/ig, '') !== name) {
-  //       console.log(`当前npm登录中的用户，不是beisencorp用户（${ stdout }），已在尝试重新登录.`.yellow)
-  //       shelljs.exec(`npm logout --color always`)
-  //       npmLogin(name, password, email)
-  //     }
-  //   }
-
-  //   console.log(`\nNpm已登录，用户名: ${name}`.green)
-
-  //   this.isNpmLogined = true
-  // }
-
   writing () {
-    // if (!this.isNpmLogined) return
 
     if (!this.config.get('publish')) {
       console.log('需要设置组件发布的地址（`bscpm set publish:[url]`)'.red)
@@ -91,12 +50,14 @@ module.exports = class extends Generator {
 
         request.post({
           'url': this.config.get('publish'),
-          'formData': {
-            'readme': fs.createReadStream(`${this.contextRoot}/README.md`),
-            'package': fs.createReadStream(`${this.contextRoot}/package.json`),
-            'editableProps': fs.createReadStream(`${this.contextRoot}/.build/.publish`),
-            'qualityReport': fs.createReadStream(`${this.contextRoot}/.build/.quality-report.html`)
-          }
+          'formData': os(
+            {},
+            this._private_getFormData('readme', 'README.md'),
+            this._private_getFormData('package', 'package.json'),
+            this._private_getFormData('editableProps', '.build/.publish'),
+            this._private_getFormData('qualityReport', '.build/.quality-report.html'),
+            this._private_getFormData('demos', '.build/.demos')
+          )
         },
         (e, r, body) => {
           if (e) {
@@ -114,5 +75,15 @@ module.exports = class extends Generator {
         console.log('组件正在发布中.'.yellow)
       }
     }, 500)
+  }
+
+  _private_getFormData (fieldname, filepath) {
+    var fullFilePath = `${this.contextRoot}/${filepath}`
+    if (!fs.existsSync(fullFilePath)) {
+      return {}
+    }
+    return {
+      [fieldname]: fs.createReadStream(fullFilePath)
+    }
   }
 }
