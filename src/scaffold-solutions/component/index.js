@@ -27,9 +27,10 @@ module.exports = class extends Generator {
       [ 'gitignore', '.gitignore' ], // npm publish，会忽略 .gitignore 文件
       [ 'index.js', 'src/index.js' ],
       [ 'BaseComponent.js', 'src/BaseComponent.js' ],
+      [ 'demo.js', 'demos/default/index.js' ],
       [ 'package.json' ],
-      [ 'README.md' ],
-      [ 'demo.js', 'demos/default/index.js' ]
+      [ '.eslintrc.json' ],
+      [ 'README.md' ]
     ])
   }
 
@@ -52,10 +53,7 @@ module.exports = class extends Generator {
         '@storybook/cli', '@storybook/react', 'storybook-readme', '@storybook/addon-knobs',
         '@beisen/storybook-lib', // storybook
 
-        'ejs',
-
-        '@storybook/react', 'eslint',
-        
+        'ejs', '@storybook/react', 'eslint',
         'react', 'react-dom', // react
       ], {
         'save-dev': true
