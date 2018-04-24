@@ -30,7 +30,8 @@ module.exports = class extends Generator {
       [ 'demo.js', 'demos/default/index.js' ],
       [ 'package.json' ],
       [ '.eslintrc.json' ],
-      [ 'README.md' ]
+      [ 'README.md' ],
+      [ '.yo-rc.json' ]
     ])
   }
 
