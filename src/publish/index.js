@@ -28,7 +28,7 @@ module.exports = class extends Generator {
     if (code !== 0) {
       if (!name || !password || !email) {
         console.log(`\n需要配置npm账号 [ username, password, email ].`.red)
-        console.log(`bscpm set name: [username]`)
+        console.log(`bscpm set name: [name]`)
         console.log(`bscpm set password: [password]`)
         console.log(`bscpm set email: [email]\n`)
         return
