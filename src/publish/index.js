@@ -11,10 +11,10 @@ var fs = require('fs')
 
 module.exports = class extends Generator {
 
-  constructor (args, opts) {
-    super(args, opts)
-    this.isNpmLogined = false
-  }
+  // constructor (args, opts) {
+  //   super(args, opts)
+  //   this.isNpmLogined = false
+  // }
 
   // configuring () {
   //   let name = this.config.get('name')
@@ -52,7 +52,7 @@ module.exports = class extends Generator {
   // }
 
   writing () {
-    if (!this.isNpmLogined) return
+    // if (!this.isNpmLogined) return
 
     if (!this.config.get('publish')) {
       console.log('需要设置组件发布的地址（`bscpm set publish:[url]`)'.red)
@@ -74,7 +74,7 @@ module.exports = class extends Generator {
     var inter = setInterval(() => {
 
       var { code, stdout } = shelljs.exec(`npm show ${pckJson.name} version --color always`)
-      
+
       if (code !== 0) {
         console.log(`\nbscpm ${'ERR!'} Shell Script Error: npm show ${pckJson.name} version`)
         clearInterval(inter)
