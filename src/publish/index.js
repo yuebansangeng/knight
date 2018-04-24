@@ -27,7 +27,7 @@ module.exports = class extends Generator {
     shelljs.exec(`cd ${this.contextRoot} && npm run build:lib --color always`)
 
     // 发布组件到 npm 服务器
-    let { code } = shelljs.exec(`cd ${this.contextRoot} && npm publish --color always`)
+    shelljs.exec(`cd ${this.contextRoot} && npm publish --color always`)
 
     // 持续抓包，检测新的包已经发布到了 npm 上
     var inter = setInterval(() => {
@@ -65,9 +65,9 @@ module.exports = class extends Generator {
           } else {
             body = JSON.parse(body)
             if (body.code === 200) {
-              console.log(`\n组件发布成功.`.green)
+              console.log(`\n共享库发布成功.`.green)
             } else {
-              console.log(`\nbscpm ${'ERR!'} ${body.message}`)
+              console.log(`\n${body.message}，共享库发布失败`.red)
             }
           }
         })
