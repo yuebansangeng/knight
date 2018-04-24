@@ -27,7 +27,7 @@ module.exports = class extends Generator {
     shelljs.exec(`cd ${this.contextRoot} && npm run build:lib --color always`)
 
     // 发布组件到 npm 服务器
-    shelljs.exec(`cd ${this.contextRoot} && npm publish --color always`)
+    shelljs.exec(`cd ${this.contextRoot} && npm publish --access=public --color always`)
 
     // 持续抓包，检测新的包已经发布到了 npm 上
     var inter = setInterval(() => {
@@ -47,6 +47,9 @@ module.exports = class extends Generator {
       if (currentPckVersion === pckJson.version) {
         console.log('\n组件Npm新版本已发布成功.'.green)
         clearInterval(inter)
+
+        // 发布前的组件配置执行
+        shelljs.exec(`npm run build:publish --color always`)
 
         request.post({
           'url': this.config.get('publish'),
