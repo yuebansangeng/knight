@@ -1,5 +1,5 @@
 {
-  "name": "<%= moduleName %>",
+  "name": "@beisen-cmps/<%= moduleName %>",
   "version": "0.0.1",
   "description": "",
   "main": "lib/index.js",
