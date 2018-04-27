@@ -55,7 +55,9 @@ module.exports = class extends Generator {
         '@storybook/cli', '@storybook/react', 'storybook-readme', '@storybook/addon-knobs',
         '@beisen/storybook-lib', // storybook
 
-        'ejs', '@storybook/react', 'eslint'
+        'ejs', '@storybook/react', 'eslint',
+
+        'react', 'react-dom'
       ], {
         'save-dev': true
       }
