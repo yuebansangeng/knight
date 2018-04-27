@@ -69,6 +69,7 @@ module.exports = class extends Generator {
             body = JSON.parse(body)
             if (body.code === 200) {
               console.log(`\n共享库发布成功.`.green)
+
             } else {
               console.log(`\n${body.message}，共享库发布失败`.red)
             }

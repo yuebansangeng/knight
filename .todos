@@ -1,3 +1,0 @@
-
-* 在 bin/index.js 使用现有库，实现 --help，等标准命令附加功能
-* 安装标准 generator 重构结构，发布到 Yeoman 社区中

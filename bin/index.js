@@ -45,6 +45,9 @@ program
       case 'project':
         env.run('scaffold Project')
         break
+      case 'codesandbox':
+        env.run('scaffold Codesandbox')
+        break
       default: break
     }
   })

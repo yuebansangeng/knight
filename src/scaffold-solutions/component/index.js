@@ -40,8 +40,6 @@ module.exports = class extends Generator {
     // 修改程序的执行路径到目标文件夹中
     process.chdir(`${this.options.contextRoot}`)
 
-    this.npmInstall([ 'react', 'react-dom' ])
-
   	this.npmInstall(
       [
         'babel-cli', 'babel-loader', 'babel-core','babel-preset-env', // babel
@@ -57,8 +55,7 @@ module.exports = class extends Generator {
         '@storybook/cli', '@storybook/react', 'storybook-readme', '@storybook/addon-knobs',
         '@beisen/storybook-lib', // storybook
 
-        'ejs', '@storybook/react', 'eslint',
-        'react', 'react-dom', // react
+        'ejs', '@storybook/react', 'eslint'
       ], {
         'save-dev': true
       }

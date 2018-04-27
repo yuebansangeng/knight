@@ -4,7 +4,7 @@
   * 28原则：百分之20%的代码解决80%的功能
   * 函数名前面添加下滑线，告知Yeoman不自定执行改函数
 */
-module.exports = function (copyJobs = []) {
+module.exports = function (copyJobs = [], targetFolder) {
   copyJobs.forEach(([ tplFilePath, destFilePath, tplData = {} ]) => {
     if (!destFilePath) {
       destFilePath = tplFilePath
@@ -14,7 +14,7 @@ module.exports = function (copyJobs = []) {
 
     this.fs.copyTpl(
       this.templatePath(tplFilePath),
-      this.destinationPath(`${this.options.contextRoot}/${destFilePath}`),
+      this.destinationPath(`${this.options.contextRoot}/${ targetFolder ? targetFolder + '/' : '/' }${destFilePath}`),
       this.promptes
     )
   })
