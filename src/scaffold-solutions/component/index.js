@@ -40,6 +40,8 @@ module.exports = class extends Generator {
     // 修改程序的执行路径到目标文件夹中
     process.chdir(`${this.options.contextRoot}`)
 
+    this.npmInstall([ 'react', 'react-dom' ])
+
   	this.npmInstall(
       [
         'babel-cli', 'babel-loader', 'babel-core','babel-preset-env', // babel
