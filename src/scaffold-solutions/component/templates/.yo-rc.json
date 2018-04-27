@@ -1,5 +1,5 @@
 {
   "@beisen/bscpm": {
-    "publish": "http://10.129.5.238:5006/users/publish"
+    "publish": "http://shared-cmps.beisen.co/users/publish"
   }
 }
