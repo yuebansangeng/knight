@@ -6,9 +6,8 @@
   "scripts": {
     "build:lib": "gulp",
     "build:eslint": "node_modules/eslint/bin/eslint.js src/** -f html -o ./.build/.quality-report.html",
-    "build:demos": "node node_modules/@beisen/storybook-lib/src/build/index.js `pwd`",
     "build:publish": "npm run build:demos && npm run build:lib && npm run build:eslint",
-    "storybook": "npm run build:demos && start-storybook -s . -p 9001 -c node_modules/@beisen/storybook-lib/src"
+    "demo": "node node_modules/@beisen/storybook-lib/bin/index.js `pwd`"
   },
   "keywords": [
     "beisen",
