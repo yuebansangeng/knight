@@ -32,7 +32,8 @@ module.exports = class extends Generator {
       [ 'package.json' ],
       [ '.eslintrc.json' ],
       [ 'README.md' ],
-      [ '.yo-rc.json' ]
+      [ '.yo-rc.json' ],
+      [ '.gulpfile.js' ]
     ])
   }
 
@@ -56,6 +57,8 @@ module.exports = class extends Generator {
         '@beisen/storybook-lib', // storybook
 
         'ejs', '@storybook/react', 'eslint',
+
+        'gulp', 'gulp-babel', 'gulp-cssbeautify', 'gulp-postcss', 'gulp-replace', 'gulp-sass',
 
         'react', 'react-dom'
       ], {
