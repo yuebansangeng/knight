@@ -12,7 +12,12 @@ gulp.task('default', [ 'clear', 'scripts', 'style', 'images', 'fonts' ])
 // 监控
 // npm run demo 会地调用到这里的watch任务
 gulp.task('watch', function () {
-  gulp.watch([ 'src/**/*.js', './src/**/*.scss', './src/**/*.css' ], [ 'style', 'scripts' ])
+  gulp.watch([
+    'src/**/*.js', './src/**/*.scss', './src/**/*.css', // js, css
+    'src/**/*.jpeg', 'src/**/*.png', 'src/**/*.jpg', 'src/**/*.gif', 'src/**/*.svg', // images
+    'src/**/*.woff2', 'src/**/*.woff', 'src/**/*.eot', 'src/**/*.ttf', 'src/**/*.otf' // fonts
+     // 清空所有的源代码，重新执行命令
+  ], [ 'clear', 'scripts', 'style', 'images', 'fonts' ])
 })
 
 // 清理lib文件夹内的文件
