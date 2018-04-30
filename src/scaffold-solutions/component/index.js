@@ -24,7 +24,6 @@ module.exports = class extends Generator {
   	this._private_copies([
       [ '.babelrc' ],
       [ '.publish', '.build/.publish' ],
-      [ '.sandbox.js', '.build/.sandbox.js' ],
       [ 'gitignore', '.gitignore' ], // npm publish，会忽略 .gitignore 文件
       [ 'index.js', 'src/index.js' ],
       [ 'BaseComponent.js', 'src/BaseComponent.js' ],
