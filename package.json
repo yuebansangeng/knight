@@ -1,6 +1,6 @@
 {
   "name": "@beisen/bscpm",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "description": "cli：标准组件创建",
   "main": "generators/app/index.js",
   "scripts": {},
@@ -32,6 +32,7 @@
   "dependencies": {
     "colors": "^1.2.1",
     "commander": "^2.15.1",
+    "del": "^3.0.0",
     "http": "0.0.0",
     "jsonfile": "^4.0.0",
     "jsonlint": "^1.6.3",
