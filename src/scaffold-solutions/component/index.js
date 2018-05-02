@@ -6,9 +6,9 @@ module.exports = class extends Generator {
   prompting () {
   	return this.prompt([
       {
-        type: 'input',
-        name: 'moduleName',
-        message: 'package.json中name字段.'
+        'type': 'input',
+        'name': 'moduleName',
+        'message': '组件名字，规则为：1.字母; 2:字母不允许大写（可中划线替代），如果使用中划线，组件名称自动替换成大写字母'
       }
     ]).then(promptes => {
       this.promptes = promptes
