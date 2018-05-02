@@ -38,7 +38,7 @@ module.exports = class extends Generator {
     // 输入storybook 配置
     if (this.options.printStorybookConfig) {
       this._private_copies([
-        [ '.storybook/.babelrc' ],
+        [ '.babelrc', '.storybook/.babelrc' ],
         [ '.storybook/addons.js' ],
         [ '.storybook/config.js' ],
         [ '.storybook/preview-head.html' ],
