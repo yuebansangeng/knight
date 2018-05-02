@@ -72,7 +72,7 @@ module.exports = class extends Generator {
 
         'ejs', '@storybook/react', 'eslint',
 
-        'gulp', 'gulp-babel', 'gulp-cssbeautify', 'gulp-postcss', 'gulp-replace', 'gulp-sass',
+        'gulp', 'gulp-babel', 'gulp-cssbeautify', 'gulp-postcss', 'gulp-replace', 'gulp-sass', 'del',
       ], {
         'save-dev': true
       }
