@@ -7,6 +7,7 @@
     "build:lib": "gulp",
     "build:eslint": "node_modules/eslint/bin/eslint.js src/** -f html -o ./.build/.quality-report.html",
     "build:publish": "npm run build:demos && npm run build:lib && npm run build:eslint",
+    "build:demos": "node node_modules/@beisen/storybook-lib/bin/make-demos.js `pwd`",
     "demo": "node node_modules/@beisen/storybook-lib/bin/index.js `pwd`"
   },
   "keywords": [
