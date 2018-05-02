@@ -17,7 +17,7 @@ gulp.task('watch', function () {
     'src/**/*.jpeg', 'src/**/*.png', 'src/**/*.jpg', 'src/**/*.gif', 'src/**/*.svg', // images
     'src/**/*.woff2', 'src/**/*.woff', 'src/**/*.eot', 'src/**/*.ttf', 'src/**/*.otf' // fonts
      // 清空所有的源代码，重新执行命令
-  ], [ 'clear', 'scripts', 'style', 'images', 'fonts' ])
+  ], [ 'scripts', 'style', 'images', 'fonts' ])
 })
 
 // 清理lib文件夹内的文件

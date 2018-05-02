@@ -20,27 +20,15 @@ let pckContent = fs.readFileSync(path.join(__dirname, '..', 'package.json'), 'ut
 let pckJson = jsonlint.parse(pckContent)
 program.version(pckJson.version)
 
-// 更新模板
-// program
-//   .command('upgrade <obj>')
-//   .description('更新')
-//   .action(obj => {
-//     switch (obj) {
-//       case 'template':
-//         shelljs.exec(`cd /usr/local/bin/${pckJson.name} && pwd`)
-//         break
-//       default: break
-//     }
-//   })
-
 // 脚手架
 program
   .command('create <solution>')
+  .option('-s, --storybook', '输出storybook的配置，往往因默认配置无法满足')
   .description('脚手架工具生成解决方案')
-  .action((solution) => {
+  .action((solution, opts) => {
     switch (solution) {
       case 'component':
-        env.run('scaffold Component')
+        env.run('scaffold Component', { 'printStorybookConfig': opts.storybook })
         break
       case 'project':
         env.run('scaffold Project')

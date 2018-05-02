@@ -8,7 +8,7 @@ module.exports = class extends Generator {
       {
         'type': 'input',
         'name': 'moduleName',
-        'message': '组件名字，规则为：1.字母; 2:字母不允许大写（可中划线替代），如果使用中划线，组件名称自动替换成大写字母'
+        'message': '组件名字 ( 不允许大写字母，中划线命名 )：'
       }
     ]).then(promptes => {
       this.promptes = promptes
@@ -34,11 +34,26 @@ module.exports = class extends Generator {
       [ '.yo-rc.json' ],
       [ 'gulpfile.js' ]
     ])
+
+    // 输入storybook 配置
+    if (this.options.printStorybookConfig) {
+      this._private_copies([
+        [ '.storybook/.babelrc' ],
+        [ '.storybook/addons.js' ],
+        [ '.storybook/config.js' ],
+        [ '.storybook/preview-head.html' ],
+        [ '.storybook/manager-head.html' ],
+        [ '.storybook/util.js' ],
+        [ '.storybook/webpack.config.js' ]
+      ])
+    }
   }
 
   install () {
     // 修改程序的执行路径到目标文件夹中
     process.chdir(`${this.options.contextRoot}`)
+
+    this.npmInstall([ 'react', 'react-dom' ])
 
   	this.npmInstall(
       [
@@ -58,8 +73,6 @@ module.exports = class extends Generator {
         'ejs', '@storybook/react', 'eslint',
 
         'gulp', 'gulp-babel', 'gulp-cssbeautify', 'gulp-postcss', 'gulp-replace', 'gulp-sass',
-
-        'react', 'react-dom'
       ], {
         'save-dev': true
       }

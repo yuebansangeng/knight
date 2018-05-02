@@ -27,7 +27,10 @@ module.exports = class extends Generator {
       require.resolve(path),
       // composeWith 调用的模块中
       // 无法通过this.contextRoot 获取到当前工作目录
-      { contextRoot: this.contextRoot }
+      {
+        contextRoot: this.contextRoot,
+        ...this.options
+      }
     )
   }
 }
