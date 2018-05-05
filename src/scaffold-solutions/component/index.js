@@ -64,13 +64,15 @@ module.exports = class extends Generator {
         'babel-plugin-transform-react-display-name', 'babel-plugin-transform-react-jsx',
         'babel-preset-es2015', 'babel-preset-react', 'babel-preset-stage-0', 'babel-plugin-transform-proto-to-assign', // babel plugins
 
-        'sass-loader', 'less-loader', 'postcss-loader', 'style-loader',
-        'file-loader', 'html-loader', 'markdown-loader', 'url-loader', 'node-sass', // webpack loader
+        // 'sass-loader', 'less-loader', 'postcss-loader', 'style-loader',
+        // 'file-loader', 'html-loader', 'markdown-loader', 'url-loader', 'node-sass', // webpack loader
 
-        '@storybook/cli', '@storybook/react', 'storybook-readme', '@storybook/addon-knobs',
+        // '@storybook/cli', '@storybook/react', 'storybook-readme', '@storybook/addon-knobs',
         '@beisen/storybook-lib', // storybook
 
-        'ejs', '@storybook/react', 'eslint',
+        // 'ejs', '@storybook/react', 
+
+        'eslint',
 
         'gulp', 'gulp-babel', 'gulp-cssbeautify', 'gulp-postcss', 'gulp-replace', 'gulp-sass', 'del',
       ], {
