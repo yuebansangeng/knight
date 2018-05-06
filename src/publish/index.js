@@ -18,13 +18,15 @@ module.exports = class extends Generator {
       return
     }
 
+    console.log('请在发布之前，执行命令：npm run build:publish'.yellow)
+
     let pckcnt = fs.readFileSync(`${this.contextRoot}/package.json`, 'utf8')
 
     // 转换文本到 json 对象，同时验证格式是否正确，并会返回错误ERR
     let pckJson = jsonlint.parse(pckcnt)
 
     // 生成 es5 代码
-    shelljs.exec(`cd ${this.contextRoot} && npm run build:lib --color always`)
+    // shelljs.exec(`cd ${this.contextRoot} && npm run build:lib --color always`)
 
     // 发布组件到 npm 服务器
     shelljs.exec(`cd ${this.contextRoot} && npm publish --access=public --color always`)
@@ -49,17 +51,17 @@ module.exports = class extends Generator {
         clearInterval(inter)
 
         // 发布前的组件配置执行
-        shelljs.exec(`npm run build:publish --color always`)
+        // shelljs.exec(`npm run build:publish --color always`)
 
         request.post({
           'url': this.config.get('publish'),
           'formData': os(
-            {},
             this._private_getFormData('readme', 'README.md'),
             this._private_getFormData('package', 'package.json'),
             this._private_getFormData('editableProps', '.build/.publish'),
             this._private_getFormData('qualityReport', '.build/.quality-report.html'),
-            this._private_getFormData('demos', '.build/.demos')
+            this._private_getFormData('demos', '.build/.demos'),
+            this._private_getDemos()
           )
         },
         (e, r, body) => {
@@ -79,6 +81,20 @@ module.exports = class extends Generator {
         console.log('组件正在发布中.'.yellow)
       }
     }, 500)
+  }
+
+  _private_getDemos () {
+    let data = {}
+    let fileContent = fs.readFileSync(`${this.contextRoot}/.build/.demos`)
+    let demosJson = JSON.parse(fileContent)
+    demosJson.forEach(({ name }) => {
+      os(
+        data,
+        this._private_getFormData(`demo_screenshot_${name}`, `.build/.screenshot/${name}.png`),
+        this._private_getFormData(`demo_code_${name}`, `demos/${name}/index.js`)
+      )
+    })
+    return data
   }
 
   _private_getFormData (fieldname, filepath) {
