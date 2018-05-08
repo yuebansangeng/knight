@@ -1,5 +1,6 @@
 
 var Generator = require('yeoman-generator')
+var os = require('object-assign')
 
 module.exports = class extends Generator {
 
@@ -27,10 +28,9 @@ module.exports = class extends Generator {
       require.resolve(path),
       // composeWith 调用的模块中
       // 无法通过this.contextRoot 获取到当前工作目录
-      {
-        contextRoot: this.contextRoot,
-        ...this.options
-      }
+      os({
+        contextRoot: this.contextRoot
+      }, this.options)
     )
   }
 }
