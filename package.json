@@ -1,6 +1,6 @@
 {
   "name": "@beisen/bscpm",
-  "version": "0.3.94",
+  "version": "0.3.95",
   "description": "cli：标准组件创建",
   "main": "generators/app/index.js",
   "scripts": {},
@@ -9,7 +9,6 @@
     "url": "git+https://github.com/BeisenUX/generator-standard-cmp.git"
   },
   "bin": {
-    "bscpm": "./bin/index.js",
     "bc": "./bin/index.js"
   },
   "keywords": [
