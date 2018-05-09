@@ -33,7 +33,7 @@ module.exports = class extends Generator {
       [ 'README.md' ],
       [ '.yo-rc.json' ],
       [ 'gulpfile.js' ],
-      // [ '.npmrc' ]
+      [ '.npmignore' ]
     ])
 
     // 输入storybook 配置
