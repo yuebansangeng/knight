@@ -56,7 +56,8 @@ module.exports = class extends Generator {
         request.post({
           'url': this.config.get('publish'),
           'formData': os(
-            this._private_getFormData('readme', 'README.md'),
+            // this._private_getFormData('readme', 'README.md'),
+            this._private_getDocs('documents_', pckJson),
             this._private_getFormData('package', 'package.json'),
             this._private_getFormData('editableProps', '.build/.publish'),
             this._private_getFormData('qualityReport', '.build/.quality-report.html'),
@@ -83,6 +84,20 @@ module.exports = class extends Generator {
     }, 500)
   }
 
+  _private_getDocs (preName, pckJson) {
+    let data = {}
+    let { documents } = pckJson
+    if (documents) {
+      Object.keys(documents).forEach(key => {
+        os(data, this._private_getFormData(`${preName}${key}`, documents[key]))
+      })
+    } else {
+      // 如果没有配置 documents 属性, 则默认使用 README.md 文件
+      os(data, this._private_getFormData(`${preName}readme`, 'README.md'))
+    }
+    return data
+  }
+
   _private_getDemos () {
     let data = {}
     let fileContent = fs.readFileSync(`${this.contextRoot}/.build/.demos`)
@@ -97,9 +112,12 @@ module.exports = class extends Generator {
     return data
   }
 
+  // 读取文件
   _private_getFormData (fieldname, filepath) {
+    filepath = filepath.replace(/^\.\//, '')
     var fullFilePath = `${this.contextRoot}/${filepath}`
     if (!fs.existsSync(fullFilePath)) {
+      console.log(`未找到文件: ${fullFilePath}`.red)
       return {}
     }
     return {
