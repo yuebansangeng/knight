@@ -50,9 +50,11 @@ program
 // 组件发布
 program
   .command('publish')
+  .option('-f, --force', '强制发布组件')
+  .option('-b, --rebuild', '强制发布组件')
   .description('发布组件')
-  .action(() => {
-    env.run('publish')
+  .action(opts => {
+    env.run('publish', { 'force': opts.force, 'rebuild': opts.rebuild })
   })
 
 // 配置环境参数
