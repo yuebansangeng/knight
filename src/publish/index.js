@@ -29,7 +29,10 @@ module.exports = class extends Generator {
     // shelljs.exec(`cd ${this.contextRoot} && npm run build:lib --color always`)
 
     // 发布组件到 npm 服务器
-    shelljs.exec(`cd ${this.contextRoot} && npm publish --access=public --color always`)
+    var { code, stdout } = shelljs.exec(`cd ${this.contextRoot} && npm publish --access=public --color always`)
+    if (code !== 0) {
+      return false
+    }
 
     // 持续抓包，检测新的包已经发布到了 npm 上
     var inter = setInterval(() => {

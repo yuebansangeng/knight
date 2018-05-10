@@ -14,6 +14,7 @@ const env = yeomanEnv.createEnv()
   .register(require.resolve('../src/scaffold-solutions'), 'scaffold')
   .register(require.resolve('../src/publish'), 'publish')
   .register(require.resolve('../src/config'), 'config')
+  .register(require.resolve('../src/link'), 'link')
 
 // 获取当前模块的版本，初始化
 let pckContent = fs.readFileSync(path.join(__dirname, '..', 'package.json'), 'utf8')
@@ -60,6 +61,17 @@ program
   .description('发布组件')
   .action(param => {
     env.run(`config ${param}`)
+  })
+
+program
+  .command('link <dest>')
+  .option('-u, --unlink', '删除调试链接')
+  .description('创建/删除 node_modules 中模块的调试环境')
+  .action((param, opts) => {
+    env.run(`link`, {
+      'destProject': param,
+      'unlink': opts.unlink
+    })
   })
 
 program.parse(process.argv)
