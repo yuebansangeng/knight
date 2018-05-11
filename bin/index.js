@@ -89,7 +89,7 @@ program
       // 登录开始
       let { name, password, email } = JSON.parse(body)
       npmCliLogin({ 'user': name, 'pass': password, email }, () => {
-        console.log('NPM账号登录成功，可以发开组件了'.green)
+        console.log('Bscpm登录成功'.green)
       })
     })
   })
