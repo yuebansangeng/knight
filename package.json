@@ -1,6 +1,6 @@
 {
   "name": "@beisen/bscpm",
-  "version": "0.4.8",
+  "version": "0.4.9",
   "description": "cli：标准组件创建",
   "main": "generators/app/index.js",
   "scripts": {},
@@ -30,6 +30,7 @@
   },
   "homepage": "https://github.com/BeisenUX/generator-standard-cmp#readme",
   "dependencies": {
+    "@beisen/npm-cli-login": "0.0.1",
     "colors": "^1.2.1",
     "commander": "^2.15.1",
     "del": "^3.0.0",
@@ -37,7 +38,6 @@
     "jsonfile": "^4.0.0",
     "jsonlint": "^1.6.3",
     "npm-check": "^5.5.2",
-    "npm-cli-login": "0.0.10",
     "object-assign": "^4.1.1",
     "request": "^2.85.0",
     "shelljs": "^0.8.1",

@@ -7,6 +7,9 @@ const jsonlint = require('jsonlint')
 const path = require('path')
 const fs = require('fs')
 const shelljs = require('shelljs')
+const request = require('request')
+const npmCliLogin = require('@beisen/npm-cli-login')
+const colors = require('colors')
 
 
 // 加载yeoman命令，初始化
@@ -51,10 +54,35 @@ program
 program
   .command('publish')
   .option('-f, --force', '强制发布组件')
-  .option('-b, --rebuild', '强制发布组件')
+  .option('-b, --rebuild', '发布前，重新构建组件源码')
+  .option('-l, --login', '登录npm账号，常用在第一次发布时')
+  .option('-n, --npmOnly', '只发布组件到NPM上')
   .description('发布组件')
   .action(opts => {
-    env.run('publish', { 'force': opts.force, 'rebuild': opts.rebuild })
+    env.run('publish', {
+      'force': opts.force,
+      'rebuild': opts.rebuild,
+      'login': opts.login,
+      'npmOnly': opts.npmOnly
+    })
+  })
+
+// 组件发布
+program
+  .command('login')
+  .description('登录账号')
+  .action(opts => {
+    // 获取账号信息，临时
+    request(`http://shared-cmps.beisen.co/users/get-publish-account`, (err, response, body) => {
+      if (err) {
+        return console.log(`NPM登录失败: ${err}`)
+      }
+      // 登录开始
+      let { name, password, email } = JSON.parse(body)
+      npmCliLogin({ 'user': name, 'pass': password, email }, () => {
+        console.log('NPM账号登录成功，可以发开组件了'.green)
+      })
+    })
   })
 
 // 配置环境参数

@@ -4,7 +4,6 @@ var jsonfile = require('jsonfile')
 var shelljs = require('shelljs')
 var os = require('object-assign')
 var request = require('request')
-var npmLogin = require('npm-cli-login')
 var colors = require('colors')
 var jsonlint = require("jsonlint")
 var fs = require('fs')
@@ -17,8 +16,6 @@ module.exports = class extends Generator {
       console.log('需要设置组件发布的地址（`bscpm set publish:[url]`)'.red)
       return
     }
-
-    console.log('请在发布之前，执行命令：npm run build:publish'.yellow)
 
     let pckcnt = fs.readFileSync(`${this.contextRoot}/package.json`, 'utf8')
 
@@ -38,6 +35,11 @@ module.exports = class extends Generator {
         return false
       }
     }
+
+    // 只发布组件到 NPM 上
+    if (this.options.npmOnly) {
+      return true
+    } 
 
     // 持续抓包，检测新的包已经发布到了 npm 上
     var inter = setInterval(() => {
@@ -99,20 +101,6 @@ module.exports = class extends Generator {
       }
     })
   }
-
-  // _private_getDocs (preName, pckJson) {
-  //   let data = {}
-  //   let { documents } = pckJson
-  //   if (documents) {
-  //     Object.keys(documents).forEach(key => {
-  //       os(data, this._private_getFormData(`${preName}${key}`, documents[key]))
-  //     })
-  //   } else {
-  //     // 如果没有配置 documents 属性, 则默认使用 README.md 文件
-  //     os(data, this._private_getFormData(`${preName}readme`, 'README.md'))
-  //   }
-  //   return data
-  // }
 
   _private_getDemos () {
     let data = {}
