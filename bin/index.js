@@ -55,7 +55,6 @@ program
   .command('publish')
   .option('-f, --force', '强制发布组件')
   .option('-b, --rebuild', '发布前，重新构建组件源码')
-  .option('-l, --login', '登录npm账号，常用在第一次发布时')
   .option('-n, --npmOnly', '只发布组件到NPM上')
   .description('发布组件')
   .action(opts => {
