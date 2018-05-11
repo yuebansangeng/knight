@@ -11,7 +11,6 @@ const request = require('request')
 const npmCliLogin = require('@beisen/npm-cli-login')
 const colors = require('colors')
 
-
 // 加载yeoman命令，初始化
 const env = yeomanEnv.createEnv()
   .register(require.resolve('../src/scaffold-solutions'), 'scaffold')
@@ -24,6 +23,14 @@ let pckContent = fs.readFileSync(path.join(__dirname, '..', 'package.json'), 'ut
 let pckJson = jsonlint.parse(pckContent)
 program.version(pckJson.version)
 
+// 检测是否有新的版本，建议升级
+const upgradeMsg = () => {
+  let { stdout } = shelljs.exec(`npm show ${pckJson.name} version`)
+  let lastVersion = stdout.replace(/\n/ig, '')
+  if (pckJson.version !== lastVersion) {
+    console.log('bscpm已有新的版本，建议升级'.yellow)
+  }
+}
 
 // 脚手架
 program
@@ -32,6 +39,7 @@ program
   .option('-s, --storybook', '输出storybook的配置，往往因默认配置无法满足')
   .description('脚手架工具生成解决方案')
   .action((solution, opts) => {
+    upgradeMsg()
     if (solution) {
       switch (solution) {
         case 'component':
@@ -58,6 +66,7 @@ program
   .option('-n, --npmOnly', '只发布组件到NPM上')
   .description('发布组件')
   .action(opts => {
+    upgradeMsg()
     env.run('publish', {
       'force': opts.force,
       'rebuild': opts.rebuild,
@@ -71,6 +80,7 @@ program
   .command('login')
   .description('登录账号')
   .action(opts => {
+    upgradeMsg()
     // 获取账号信息，临时
     request(`http://shared-cmps.beisen.co/users/get-publish-account`, (err, response, body) => {
       if (err) {
@@ -89,6 +99,7 @@ program
   .command('set <param>')
   .description('发布组件')
   .action(param => {
+    upgradeMsg()
     env.run(`config ${param}`)
   })
 
@@ -97,6 +108,7 @@ program
   .option('-u, --unlink', '删除调试链接')
   .description('创建/删除 node_modules 中模块的调试环境')
   .action((param, opts) => {
+    upgradeMsg()
     env.run(`link`, {
       'destProject': param,
       'unlink': opts.unlink
