@@ -6,10 +6,10 @@ const yeomanEnv = require('yeoman-environment')
 const jsonlint = require('jsonlint')
 const path = require('path')
 const fs = require('fs')
-const shelljs = require('shelljs')
 const request = require('request')
 const npmCliLogin = require('@beisen/npm-cli-login')
 const colors = require('colors')
+const { spawn } = require('child_process')
 
 // 加载yeoman命令，初始化
 const env = yeomanEnv.createEnv()
@@ -25,11 +25,12 @@ program.version(pckJson.version)
 
 // 检测是否有新的版本，建议升级
 const upgradeMsg = () => {
-  let { stdout } = shelljs.exec(`npm show ${pckJson.name} version`)
-  let lastVersion = stdout.replace(/\n/ig, '')
-  if (pckJson.version !== lastVersion) {
-    console.log('bscpm已有新的版本，建议升级'.yellow)
-  }
+  let s_process = spawn('npm', [ 'show', pckJson.name, 'version' ])
+  s_process.stdout.on('data', data => {
+    if (pckJson.version !== data) {
+      console.log('bscpm已有新的版本，建议升级'.yellow)
+    }
+  })
 }
 
 // 脚手架
