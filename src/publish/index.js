@@ -30,8 +30,9 @@ module.exports = class extends Generator {
     // 发布组件到 npm 服务器
     var { code, stdout } = shelljs.exec(`cd ${this.contextRoot} && npm publish --access=public --color always`)
     if (code !== 0) {
-      // 强制状态，不组织组件继续发布
-      if (!this.options.force) {
+      if (this.options.force) {
+        // 强制状态，不组织组件继续发布
+      } else {
         return false
       }
     }
@@ -39,7 +40,7 @@ module.exports = class extends Generator {
     // 只发布组件到 NPM 上
     if (this.options.npmOnly) {
       return true
-    } 
+    }
 
     // 持续抓包，检测新的包已经发布到了 npm 上
     var inter = setInterval(() => {
@@ -110,6 +111,7 @@ module.exports = class extends Generator {
       os(
         data,
         this._private_getFormData(`demo_screenshot_${name}`, `.build/.screenshot/${name}.png`),
+        this._private_getFormData(`demo_css_${name}`, `demos/${name}/index.css`),
         this._private_getFormData(`demo_code_${name}`, `demos/${name}/index.js`)
       )
     })
