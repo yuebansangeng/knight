@@ -84,7 +84,7 @@ module.exports = class extends Generator {
         this._private_getFormData('editableProps', '.build/.publish'),
         this._private_getFormData('qualityReport', '.build/.quality-report.html'),
         this._private_getFormData('examples', '.build/.examples'),
-        this._private_getDemos(),
+        this._private_getExamples(),
         this._private_getFormData('rc', '.bscpmrc'),
       )
     },
@@ -103,16 +103,16 @@ module.exports = class extends Generator {
     })
   }
 
-  _private_getDemos () {
+  _private_getExamples () {
     let data = {}
     let fileContent = fs.readFileSync(`${this.contextRoot}/.build/.examples`)
-    let demosJson = JSON.parse(fileContent)
-    demosJson.forEach(({ name }) => {
+    let examplesJson = JSON.parse(fileContent)
+    examplesJson.forEach(({ name }) => {
       os(
         data,
-        this._private_getFormData(`examples_screenshot_${name}`, `.build/.screenshot/${name}.png`),
-        this._private_getFormData(`examples_css_${name}`, `examples/${name}/index.css`),
-        this._private_getFormData(`examples_code_${name}`, `examples/${name}/index.js`)
+        this._private_getFormData(`example_screenshot_${name}`, `.build/.screenshot/${name}.png`),
+        this._private_getFormData(`example_css_${name}`, `examples/${name}/index.css`),
+        this._private_getFormData(`example_code_${name}`, `examples/${name}/index.js`)
       )
     })
     return data
