@@ -25,12 +25,12 @@ program.version(pckJson.version)
 
 // 检测是否有新的版本，建议升级
 const upgradeMsg = () => {
-  let s_process = spawn('npm', [ 'show', pckJson.name, 'version' ])
-  s_process.stdout.on('data', data => {
-    if (pckJson.version !== data) {
-      console.log('bscpm已有新的版本，建议升级'.yellow)
-    }
-  })
+  // let s_process = spawn('npm', [ 'show', pckJson.name, 'version' ])
+  // s_process.stdout.on('data', data => {
+  //   if (pckJson.version !== data) {
+  //     console.log('bscpm已有新的版本，建议升级'.yellow)
+  //   }
+  // })
 }
 
 // 脚手架
