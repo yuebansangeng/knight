@@ -123,7 +123,7 @@ module.exports = class extends Generator {
     filepath = filepath.replace(/^\.\//, '')
     var fullFilePath = `${this.contextRoot}/${filepath}`
     if (!fs.existsSync(fullFilePath)) {
-      console.log(`未找到文件: ${fullFilePath}`.yellow)
+      // console.log(`未找到文件: ${fullFilePath}`.yellow)
       return {}
     }
     return {
