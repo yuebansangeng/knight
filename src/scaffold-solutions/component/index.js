@@ -27,7 +27,7 @@ module.exports = class extends Generator {
       [ 'gitignore', '.gitignore' ], // npm publish，会忽略 .gitignore 文件
       [ 'index.js', 'src/index.js' ],
       [ 'BaseComponent.js', 'src/BaseComponent.js' ],
-      [ 'demo.js', 'demos/default/index.js' ],
+      [ 'example.js', 'examples/default/index.js' ],
       [ 'package.json' ],
       [ '.eslintrc.json' ],
       [ 'README.md' ],

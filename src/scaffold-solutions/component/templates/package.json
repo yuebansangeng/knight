@@ -9,7 +9,7 @@
     "build:screenshot": "node node_modules/@beisen/storybook-lib/bin/make-screenshot.js `pwd`",
     "build:demos": "node node_modules/@beisen/storybook-lib/bin/make-demos.js `pwd`",
     "build:publish": "npm run build:demos && npm run build:lib && npm run build:eslint",
-    "demo": "node node_modules/@beisen/storybook-lib/bin/index.js `pwd`"
+    "examples": "node node_modules/@beisen/storybook-lib/bin/index.js `pwd`"
   },
   "keywords": [
     "beisen",
