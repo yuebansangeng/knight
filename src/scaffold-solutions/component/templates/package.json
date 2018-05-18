@@ -26,5 +26,9 @@
       "email": "beisen@beisen.com"
     }
   ],
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": ""
+  }
 }
