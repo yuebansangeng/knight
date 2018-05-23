@@ -54,7 +54,7 @@ module.exports = class extends Generator {
     // 修改程序的执行路径到目标文件夹中
     process.chdir(`${this.options.contextRoot}`)
 
-    this.npmInstall([ 'react@15.0.1', 'react-dom@15.0.1' ])
+    this.npmInstall([ 'react@15.6.2', 'react-dom@15.6.2' ])
 
   	this.npmInstall(
       [
