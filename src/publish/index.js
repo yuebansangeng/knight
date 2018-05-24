@@ -17,10 +17,11 @@ module.exports = class extends Generator {
       return
     }
 
-    let pckcnt = fs.readFileSync(`${this.contextRoot}/package.json`, 'utf8')
-
-    // 转换文本到 json 对象，同时验证格式是否正确，并会返回错误ERR
-    let pckJson = jsonlint.parse(pckcnt)
+    // 只发布元数据到共享库
+    if (this.options.dataOnly) {
+      this._private_post()
+      return true
+    }
 
     // 生成 es5 代码
     if (this.options.rebuild) {
@@ -42,36 +43,8 @@ module.exports = class extends Generator {
       return true
     }
 
-    // 持续抓包，检测新的包已经发布到了 npm 上
-    var inter = setInterval(() => {
-
-      if (!this.options.force) {
-        // 检测组件的版本是否已经发布
-        var { code, stdout } = shelljs.exec(`npm show ${pckJson.name} version --color always`)
-
-        if (code !== 0) {
-          console.log(`\nbscpm ${'ERR!'} Shell Script Error: npm show ${pckJson.name} version`)
-          clearInterval(inter)
-          return
-        }
-
-        // 当前模块的最新版本号
-        var currentPckVersion = stdout.replace(/\n/ig, '')
-
-        // 判断包已经发布到了 npm 服务器上
-        if (currentPckVersion === pckJson.version) {
-          console.log('\n组件Npm新版本已发布成功.'.green)
-          clearInterval(inter)
-          this._private_post()
-
-        } else {
-          console.log('组件正在发布中.'.yellow)
-        }
-      } else {
-        clearInterval(inter)
-        this._private_post()
-      }
-    }, 500)
+    // 发布组件到共享库
+    this._private_post()
   }
 
   _private_post () {
@@ -79,7 +52,6 @@ module.exports = class extends Generator {
       'url': this.config.get('publish'),
       'formData': os(
         this._private_getFormData('readme', 'README.md'),
-        // this._private_getDocs('documents_', pckJson),
         this._private_getFormData('package', 'package.json'),
         this._private_getFormData('editableProps', '.build/.publish'),
         this._private_getFormData('qualityReport', '.build/.quality-report.html'),
@@ -123,7 +95,6 @@ module.exports = class extends Generator {
     filepath = filepath.replace(/^\.\//, '')
     var fullFilePath = `${this.contextRoot}/${filepath}`
     if (!fs.existsSync(fullFilePath)) {
-      // console.log(`未找到文件: ${fullFilePath}`.yellow)
       return {}
     }
     return {

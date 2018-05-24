@@ -1,5 +1,6 @@
 
-var Generator = require('yeoman-generator')
+const Generator = require('yeoman-generator')
+const shelljs = require('shelljs')
 
 module.exports = class extends Generator {
 
@@ -52,7 +53,7 @@ module.exports = class extends Generator {
 
   install () {
     // 修改程序的执行路径到目标文件夹中
-    process.chdir(`${this.options.contextRoot}`)
+    // process.chdir(`${this.options.contextRoot}`)
 
     this.npmInstall([ 'react@15.0.1', 'react-dom@15.0.1' ])
 
@@ -68,7 +69,7 @@ module.exports = class extends Generator {
         'os',
         // '@storybook/cli', '@storybook/react', 'storybook-readme', '@storybook/addon-knobs',
         '@beisen/storybook-lib', // storybook
-        // 'ejs', '@storybook/react', 
+        // 'ejs', '@storybook/react',
         'eslint',
         'gulp', 'gulp-babel', 'gulp-cssbeautify', 'gulp-postcss', 'gulp-replace', 'gulp-sass', 'del',
       ], {
