@@ -12,12 +12,6 @@ module.exports = class extends Generator {
 
   writing () {
 
-    // 只发布元数据到共享库
-    if (this.options.dataOnly) {
-      this._private_post()
-      return true
-    }
-
     // 生成 es5 代码
     if (this.options.rebuild) {
       shelljs.exec(`npm run build:publish --color always`)

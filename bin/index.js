@@ -65,7 +65,6 @@ program
   .option('-f, --force', '强制发布组件')
   .option('-b, --rebuild', '发布前，重新构建组件源码')
   .option('-n, --npmOnly', '只发布组件到NPM上')
-  .option('-d, --dataOnly', '只发布组件元数据，不发布新版本')
   .description('发布组件')
   .action(opts => {
     upgradeMsg()
