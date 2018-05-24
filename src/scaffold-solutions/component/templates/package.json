@@ -27,8 +27,8 @@
     }
   ],
   "license": "ISC",
-  "devDependencies": {
-  },
-  "dependencies": {
+  "repository": {
+    "type": "git",
+    "url": ""
   }
 }
