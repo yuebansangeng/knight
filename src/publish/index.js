@@ -12,11 +12,6 @@ module.exports = class extends Generator {
 
   writing () {
 
-    if (!this.config.get('publish')) {
-      console.log('需要设置组件发布的地址（`bscpm set publish:[url]`)'.red)
-      return
-    }
-
     // 只发布元数据到共享库
     if (this.options.dataOnly) {
       this._private_post()
@@ -49,7 +44,7 @@ module.exports = class extends Generator {
 
   _private_post () {
     request.post({
-      'url': this.config.get('publish'),
+      'url': 'http://cmp.beisen.io/users/publish',
       'formData': os(
         this._private_getFormData('readme', 'README.md'),
         this._private_getFormData('package', 'package.json'),

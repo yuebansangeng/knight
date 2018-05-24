@@ -32,7 +32,6 @@ module.exports = class extends Generator {
       [ 'package.json' ],
       [ '.eslintrc.json' ],
       [ 'README.md' ],
-      [ '.yo-rc.json' ],
       [ 'gulpfile.js' ],
       [ '.bscpmrc' ]
     ])
