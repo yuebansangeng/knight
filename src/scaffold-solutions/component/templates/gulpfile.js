@@ -14,7 +14,7 @@ gulp.task('default', [ 'clear', 'scripts', 'style', 'images', 'fonts' ])
 gulp.task('watch', function () {
   gulp.watch([ 'src/**/*.js' ], [ 'scripts' ])
   gulp.watch([ './src/**/*.scss', './src/**/*.css' ], [ 'style' ])
-  gulp.watch([ 'src/**/*.jpeg', 'src/**/*.png', 'src/**/*.jpg', 'src/**/*.gif', 'src/**/*.svg' ], [ 'images'])
+  gulp.watch([ 'src/**/*.jpeg', 'src/**/*.png', 'src/**/*.jpg', 'src/**/*.gif', 'src/**/*.svg' ], [ 'images' ])
   gulp.watch([ 'src/**/*.woff2', 'src/**/*.woff', 'src/**/*.eot', 'src/**/*.ttf', 'src/**/*.otf' ], [ 'fonts' ])
 })
 
