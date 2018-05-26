@@ -29,6 +29,7 @@ module.exports = class extends Generator {
       [ 'index.js', 'src/index.js' ],
       [ 'BaseComponent.js', 'src/BaseComponent.js' ],
       [ 'example.js', 'examples/default/index.js' ],
+      [ 'npmignore', '.npmignore' ],
       [ 'package.json' ],
       [ '.eslintrc.json' ],
       [ 'README.md' ],

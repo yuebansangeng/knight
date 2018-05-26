@@ -1,0 +1,29 @@
+
+# base
+src
+.build
+examples
+node_modules
+.babelrc
+.bscpmrc
+.eslintrc.json
+gulpfile.js
+package-lock.json
+
+# tests
+test
+coverage
+
+# build tools
+.travis.yml
+.jenkins.yml
+.codeclimate.yml
+
+# linters
+.jscsrc
+.jshintrc
+.eslintrc*
+
+# editor settings
+.idea
+.editorconfig
