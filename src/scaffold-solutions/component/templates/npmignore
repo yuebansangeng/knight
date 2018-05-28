@@ -1,8 +1,6 @@
 
 # base
 src
-.build
-examples
 node_modules
 .babelrc
 .bscpmrc
