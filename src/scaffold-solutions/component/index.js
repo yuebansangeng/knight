@@ -5,7 +5,7 @@ const shelljs = require('shelljs')
 module.exports = class extends Generator {
 
   prompting () {
-  	return this.prompt([
+    return this.prompt([
       {
         'type': 'input',
         'name': 'moduleName',
@@ -22,7 +22,7 @@ module.exports = class extends Generator {
   }
 
   writing () {
-  	this._private_copies([
+    this._private_copies([
       [ '.babelrc' ],
       [ '.publish', '.build/.publish' ],
       [ 'gitignore', '.gitignore' ], // npm publish，会忽略 .gitignore 文件
@@ -52,24 +52,16 @@ module.exports = class extends Generator {
   }
 
   install () {
-    // 修改程序的执行路径到目标文件夹中
-    // process.chdir(`${this.options.contextRoot}`)
-
     this.npmInstall([ 'react@15.6.2', 'react-dom@15.6.2' ])
-
-  	this.npmInstall(
+    this.npmInstall(
       [
-        'babel-cli', 'babel-loader', 'babel-core','babel-preset-env', // babel
+        'babel-cli', 'babel-loader', 'babel-core','babel-preset-env',
         'babel-plugin-transform-object-assign', 'babel-plugin-transform-runtime',
         'babel-plugin-add-module-exports', 'babel-plugin-transform-decorators-legacy',
         'babel-plugin-transform-react-display-name', 'babel-plugin-transform-react-jsx',
         'babel-preset-es2015', 'babel-preset-react', 'babel-preset-stage-0', 'babel-plugin-transform-proto-to-assign', // babel plugins
-        // 'sass-loader', 'less-loader', 'postcss-loader', 'style-loader',
-        // 'file-loader', 'html-loader', 'markdown-loader', 'url-loader', 'node-sass', // webpack loader
         'os',
-        // '@storybook/cli', '@storybook/react', 'storybook-readme', '@storybook/addon-knobs',
-        '@beisen/storybook-lib', // storybook
-        // 'ejs', '@storybook/react',
+        '@beisen/storybook-lib',
         'eslint',
         'gulp', 'gulp-babel', 'gulp-cssbeautify', 'gulp-postcss', 'gulp-replace', 'gulp-sass', 'del',
       ], {
