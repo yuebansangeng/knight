@@ -28,7 +28,7 @@ const upgradeMsg = () => {
   let { status, stdout } = spawnSync('npm', [ 'show', pckJson.name, 'version' ])
   let lastVersion = stdout.toString().replace(/^\s+|[\s\n\r]+$/, '')
   if (pckJson.version !== lastVersion) {
-    console.log('@beisen/bscpm 已有新的版本')
+    console.log('@beisen/bscpm 已有新的版本'.magenta)
   }
 }
 
