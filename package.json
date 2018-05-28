@@ -35,6 +35,7 @@
     "colors": "^1.2.1",
     "commander": "^2.15.1",
     "del": "^3.0.0",
+    "fstream": "^1.0.11",
     "http": "0.0.0",
     "jsonfile": "^4.0.0",
     "jsonlint": "^1.6.3",
@@ -42,6 +43,7 @@
     "object-assign": "^4.1.1",
     "request": "^2.85.0",
     "shelljs": "^0.8.1",
+    "tar": "^4.4.4",
     "yeoman-environment": "^2.0.5",
     "yeoman-generator": "^2.0.3"
   }

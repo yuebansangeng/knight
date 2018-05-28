@@ -1,28 +1,31 @@
 
-var Generator = require('yeoman-generator')
-var jsonfile = require('jsonfile')
-var shelljs = require('shelljs')
-var os = require('object-assign')
-var request = require('request')
-var colors = require('colors')
-var jsonlint = require("jsonlint")
-var fs = require('fs')
+const Generator = require('yeoman-generator')
+const { spawn, spawnSync, execSync } = require('child_process')
+const fs = require('fs')
+const request = require('request')
+const colors = require('colors')
 
 module.exports = class extends Generator {
 
   writing () {
-
     // 生成 es5 代码
+    // 同步执行，发布前需要先生成es5，不可异步执行
     if (this.options.rebuild) {
-      shelljs.exec(`npm run build:publish --color always`)
+      console.log(`bscpm ${'Starting'.yellow} es5 rebuild`)
+      spawnSync('npm', [ 'run', 'build:publish', '--color', 'always' ])
+      console.log(`bscpm ${'Finished'.green} es5 rebuild`)
     }
 
     // 发布组件到 npm 服务器
-    var { code, stdout } = shelljs.exec(`cd ${this.contextRoot} && npm publish --access=public --color always`)
-    if (code !== 0) {
+    let snp = spawnSync('npm', [ 'publish', '--access=public', '--color', 'always' ])
+    if (snp.status === 0) {
+      console.log(snp.stdout.toString())
+    } else {
       if (this.options.force) {
         // 强制状态，不组织组件继续发布
+        // 强制状态不输出发布失败信息
       } else {
+        console.log(snp.stderr.toString())
         return false
       }
     }
@@ -32,62 +35,43 @@ module.exports = class extends Generator {
       return true
     }
 
-    // 发布组件到共享库
-    this._private_post()
-  }
+    console.log(`bscpm ${'Starting'.yellow} package compress`)
 
-  _private_post () {
+    // 压缩项目，提交到服务器
+    let np = spawnSync('npm', [ 'pack' ])
+
+    // 获取当前组件包信息
+    let packinfo = require(`${this.contextRoot}/package.json`)
+
+    // 压缩后的包名称
+    // npm pack 不可以重新定义 tgz 的名称
+    // 转 Buffer 到字符，并且去掉前后空格换行，等
+    let tarfile = execSync(`ls | grep ${packinfo.version}\.tgz`).toString().replace(/^\s+|[\s\n\r]+$/, '')
+    console.log(`bscpm ${'Finished'.green} package compress`)
+
+    // 开始发布组件到共享中心
+    console.log(`bscpm ${'Starting'.yellow} publishing`)
+
     request.post({
-      'url': 'http://cmp.beisen.io/users/publish',
-      'formData': os(
-        this._private_getFormData('readme', 'README.md'),
-        this._private_getFormData('package', 'package.json'),
-        this._private_getFormData('editableProps', '.build/.publish'),
-        this._private_getFormData('qualityReport', '.build/.quality-report.html'),
-        this._private_getFormData('examples', '.build/.examples'),
-        this._private_getExamples(),
-        this._private_getFormData('rc', '.bscpmrc'),
-      )
+      'url': 'http://cmp.beisen.io/users/publish-tar',
+      'formData': {
+        'pack.tgz': fs.createReadStream(`${this.contextRoot}/${tarfile}`)
+      }
     },
-    (e, r, body) => {
-      if (e) {
-        console.log(e)
-      } else {
-        body = JSON.parse(body)
-        if (body.code === 200) {
-          console.log(`\n共享库发布成功.`.green)
+    (err, resp, body) => {
+      if (err) {
+        console.log(`bscpm ${'Error'.red} publishing`)
+        return console.log(`${err.message}`.red)
+      }
 
-        } else {
-          console.log(`\n${body.message}，共享库发布失败`.red)
-        }
+      // 处理结果返回值
+      let { code, message } = JSON.parse(body)
+      if (code === 200) {
+        console.log(`bscpm ${'Finished'.green} publishing`)
+      } else {
+        console.log(`bscpm ${'Error'.red} publishing`)
+        console.log(message)
       }
     })
-  }
-
-  _private_getExamples () {
-    let data = {}
-    let fileContent = fs.readFileSync(`${this.contextRoot}/.build/.examples`)
-    let examplesJson = JSON.parse(fileContent)
-    examplesJson.forEach(({ name }) => {
-      os(
-        data,
-        this._private_getFormData(`example_screenshot_${name}`, `.build/.screenshot/${name}.png`),
-        this._private_getFormData(`example_css_${name}`, `examples/${name}/index.css`),
-        this._private_getFormData(`example_code_${name}`, `examples/${name}/index.js`)
-      )
-    })
-    return data
-  }
-
-  // 读取文件
-  _private_getFormData (fieldname, filepath) {
-    filepath = filepath.replace(/^\.\//, '')
-    var fullFilePath = `${this.contextRoot}/${filepath}`
-    if (!fs.existsSync(fullFilePath)) {
-      return {}
-    }
-    return {
-      [fieldname]: fs.createReadStream(fullFilePath)
-    }
   }
 }
