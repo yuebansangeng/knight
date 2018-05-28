@@ -60,7 +60,7 @@ module.exports = class extends Generator {
     request.post({
       // name & version 放在 query 中传递
       // 未找到 request.post 传递参数的方式
-      'url': `http://127.0.0.1:3000/users/publish?name=${packinfo.name}&version=${packinfo.version}`,
+      'url': `http://cmp.beisen.io/users/publish?name=${packinfo.name}&version=${packinfo.version}`,
       'formData': {
         'pack.tgz': tgzStream
       }
