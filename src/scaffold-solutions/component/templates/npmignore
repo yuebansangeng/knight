@@ -2,10 +2,6 @@
 # base
 src
 node_modules
-.babelrc
-.bscpmrc
-.eslintrc.json
-gulpfile.js
 package-lock.json
 
 # tests

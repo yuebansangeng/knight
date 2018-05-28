@@ -52,10 +52,17 @@ module.exports = class extends Generator {
     // 开始发布组件到共享中心
     console.log(`bscpm ${'Starting'.yellow} publishing`)
 
+    let tgzStream = fs.createReadStream(`${this.contextRoot}/${tarfile}`)
+
+    // 删除没用的文件
+    spawn('rm', [ tarfile ])
+
     request.post({
-      'url': 'http://cmp.beisen.io/users/publish-tar',
+      // name & version 放在 query 中传递
+      // 未找到 request.post 传递参数的方式
+      'url': `http://127.0.0.1:3000/users/publish?name=${packinfo.name}&version=${packinfo.version}`,
       'formData': {
-        'pack.tgz': fs.createReadStream(`${this.contextRoot}/${tarfile}`)
+        'pack.tgz': tgzStream
       }
     },
     (err, resp, body) => {
