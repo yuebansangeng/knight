@@ -13,7 +13,7 @@ const { spawn } = require('child_process')
 
 // 加载yeoman命令，初始化
 const env = yeomanEnv.createEnv()
-  .register(require.resolve('../src/scaffold-solutions'), 'scaffold')
+  .register(require.resolve('../src/create'), 'create')
   .register(require.resolve('../src/publish'), 'publish')
   .register(require.resolve('../src/config'), 'config')
   .register(require.resolve('../src/link'), 'link')
@@ -44,17 +44,17 @@ program
     if (solution) {
       switch (solution) {
         case 'component':
-          env.run('scaffold Component', { 'printStorybookConfig': opts.storybook })
+          env.run('create Component', { 'printStorybookConfig': opts.storybook })
           break
         case 'project':
-          env.run('scaffold Project')
+          env.run('create Project')
           break
         default: break
       }  
     } else {
       // 开发者可以使用 -c 替换掉 component
       if (opts.component) {
-        env.run('scaffold Component', { 'printStorybookConfig': opts.storybook })
+        env.run('create Component', { 'printStorybookConfig': opts.storybook })
       }
     }
   })
