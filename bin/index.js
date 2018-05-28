@@ -9,7 +9,7 @@ const fs = require('fs')
 const request = require('request')
 const npmCliLogin = require('@beisen/npm-cli-login')
 const colors = require('colors')
-const { spawn } = require('child_process')
+const { spawnSync } = require('child_process')
 
 // 加载yeoman命令，初始化
 const env = yeomanEnv.createEnv()
@@ -25,12 +25,11 @@ program.version(pckJson.version)
 
 // 检测是否有新的版本，建议升级
 const upgradeMsg = () => {
-  // let s_process = spawn('npm', [ 'show', pckJson.name, 'version' ])
-  // s_process.stdout.on('data', data => {
-  //   if (pckJson.version !== data) {
-  //     console.log('bscpm已有新的版本，建议升级'.yellow)
-  //   }
-  // })
+  let { status, stdout } = spawnSync('npm', [ 'show', pckJson.name, 'version' ])
+  let lastVersion = stdout.toString().replace(/^\s+|[\s\n\r]+$/, '')
+  if (pckJson.version !== lastVersion) {
+    console.log('bscpm已有新的版本，建议升级'.yellow)
+  }
 }
 
 // 脚手架
@@ -99,7 +98,7 @@ program
 // 配置环境参数
 program
   .command('set <param>')
-  .description('发布组件')
+  .description('配置环境参数')
   .action(param => {
     upgradeMsg()
     env.run(`config ${param}`)
