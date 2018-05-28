@@ -17,10 +17,6 @@ module.exports = class extends Generator {
     if (this.options.category === 'Project') {
       this._private_resolve('./project/index.js')
     }
-
-    if (this.options.category === 'Codesandbox') {
-      this._private_resolve('./codesandbox/index.js')
-    }
   }
 
   _private_resolve (path) {
