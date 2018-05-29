@@ -34,7 +34,7 @@ module.exports = class extends Generator {
       [ '.eslintrc.json' ],
       [ 'README.md' ],
       [ 'gulpfile.js' ],
-      [ '.bscpmrc' ]
+      [ '.bscpmrc.json' ]
     ])
 
     // 输入storybook 配置

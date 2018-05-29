@@ -1,10 +1,8 @@
 
 import { storiesOf, configure } from '@storybook/react'
-
 import { withKnobs } from '@storybook/addon-knobs/react';
 import { withDocs, withReadme }  from 'storybook-readme'
 import { stories, name, readme } from '../.build/.stories.js'
-
 import handleType from './util'
 
 configure(
@@ -14,18 +12,12 @@ configure(
     storiesInstence.addDecorator(withReadme([readme]))
 
     stories.forEach(({ name, story }) => {
-      const { content: Component, editableProps, doc } = story
-      if (doc) {
-        storiesInstence.add(name, withDocs(doc, () => {
-          const params = handleType(editableProps)
-          return <Component {...params} />
-        }))
-      } else {
-        storiesInstence.add(name, () => {
-          const params = handleType(editableProps)
-          return <Component {...params} />
-        })
-      }
+      const { content: Component, editableProps, doc = '' } = story
+
+      storiesInstence.add(name, withDocs(doc, () => {
+        const params = handleType(editableProps)
+        return <Component {...params} />
+      }))
     })
   },
   module
