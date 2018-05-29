@@ -64,6 +64,7 @@ program
   .option('-f, --force', '强制发布组件')
   .option('-b, --rebuild', '发布前，重新构建组件源码')
   .option('-n, --npmOnly', '只发布组件到NPM上')
+  .option('-p, --npmPublish', '组件自动发布到npm')
   .description('发布组件')
   .action(opts => {
     upgradeMsg()
@@ -72,7 +73,8 @@ program
       'rebuild': opts.rebuild,
       'login': opts.login,
       'npmOnly': opts.npmOnly,
-      'dataOnly': opts.dataOnly
+      'dataOnly': opts.dataOnly,
+      'npmPublish': opts.npmPublish
     })
   })
 

@@ -16,17 +16,21 @@ module.exports = class extends Generator {
       console.log(`bscpm ${'Finished'.green} es5 rebuild`)
     }
 
+
     // 发布组件到 npm 服务器
-    let snp = spawnSync('npm', [ 'publish', '--access=public', '--color', 'always' ])
-    if (snp.status === 0) {
-      console.log(snp.stdout.toString())
-    } else {
-      if (this.options.force) {
-        // 强制状态，不组织组件继续发布
-        // 强制状态不输出发布失败信息
+    // 默认情况下不发布，需要添加参数: -p
+    if (this.options.npmPublish) {
+      let snp = spawnSync('npm', [ 'publish', '--access=public', '--color', 'always' ])
+      if (snp.status === 0) {
+        console.log(snp.stdout.toString())
       } else {
-        console.log(snp.stderr.toString())
-        return false
+        if (this.options.force) {
+          // 强制状态，不组织组件继续发布
+          // 强制状态不输出发布失败信息
+        } else {
+          console.log(snp.stderr.toString())
+          return false
+        }
       }
     }
 
