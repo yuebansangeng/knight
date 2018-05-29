@@ -7,7 +7,6 @@ const jsonlint = require('jsonlint')
 const path = require('path')
 const fs = require('fs')
 const request = require('request')
-const npmCliLogin = require('@beisen/npm-cli-login')
 const colors = require('colors')
 const { spawnSync } = require('child_process')
 
@@ -25,11 +24,11 @@ program.version(pckJson.version)
 
 // 检测是否有新的版本，建议升级
 const upgradeMsg = () => {
-  let { status, stdout } = spawnSync('npm', [ 'show', pckJson.name, 'version' ])
-  let lastVersion = stdout.toString().replace(/^\s+|[\s\n\r]+$/, '')
-  if (pckJson.version !== lastVersion) {
-    console.log('@beisen/bscpm 已有新的版本'.magenta)
-  }
+  // let { status, stdout } = spawnSync('npm', [ 'show', pckJson.name, 'version' ])
+  // let lastVersion = stdout.toString().replace(/^\s+|[\s\n\r]+$/, '')
+  // if (pckJson.version !== lastVersion) {
+  //   console.log('@beisen/bscpm 已有新的版本'.magenta)
+  // }
 }
 
 // 脚手架
@@ -44,9 +43,6 @@ program
       switch (solution) {
         case 'component':
           env.run('create Component', { 'printStorybookConfig': opts.storybook })
-          break
-        case 'project':
-          env.run('create Project')
           break
         default: break
       }  
@@ -75,25 +71,6 @@ program
       'npmOnly': opts.npmOnly,
       'dataOnly': opts.dataOnly,
       'npmPublish': opts.npmPublish
-    })
-  })
-
-// 组件发布
-program
-  .command('login')
-  .description('登录账号')
-  .action(opts => {
-    upgradeMsg()
-    // 获取账号信息，临时
-    request(`http://shared-cmps.beisen.co/users/get-publish-account`, (err, response, body) => {
-      if (err) {
-        return console.log(`NPM登录失败: ${err}`)
-      }
-      // 登录开始
-      let { name, password, email } = JSON.parse(body)
-      npmCliLogin({ 'user': name, 'pass': password, email }, () => {
-        console.log('Bscpm登录成功'.green)
-      })
     })
   })
 

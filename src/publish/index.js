@@ -16,7 +16,6 @@ module.exports = class extends Generator {
       console.log(`bscpm ${'Finished'.green} es5 rebuild`)
     }
 
-
     // 发布组件到 npm 服务器
     // 默认情况下不发布，需要添加参数: -p
     if (this.options.npmPublish) {
