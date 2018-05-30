@@ -26,10 +26,7 @@ module.exports = class extends Generator {
     let stklibPath = 'node_modules/@beisen/storybook-lib'
     let stkCli = 'node_modules/@storybook/react/bin/index.js'
 
-    console.log(contextRoot)
-
     print(spawn('node', [`${stklibPath}/bin/make-stories.js`, '--colors'], { 'cwd': contextRoot }))
-    print(spawn('node', [`${stklibPath}/bin/make-demos.js`, '--colors'], { 'cwd': contextRoot }))
 
     // 生成 lib 目录，以及内部转义好的文件
     print(spawn('gulp', ['--colors'], { 'cwd': contextRoot }))
