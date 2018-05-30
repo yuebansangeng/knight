@@ -16,6 +16,7 @@ const env = yeomanEnv.createEnv()
   .register(require.resolve('../src/publish'), 'publish')
   .register(require.resolve('../src/config'), 'config')
   .register(require.resolve('../src/link'), 'link')
+  .register(require.resolve('../src/run'), 'run')
 
 // 获取当前模块的版本，初始化
 let pckContent = fs.readFileSync(path.join(__dirname, '..', 'package.json'), 'utf8')
@@ -38,7 +39,7 @@ program
   .option('-s, --storybook', '输出storybook的配置，往往因默认配置无法满足')
   .description('脚手架工具生成解决方案')
   .action((solution, opts) => {
-    upgradeMsg()
+    upgradeMsg()    
     if (solution) {
       switch (solution) {
         case 'component':
@@ -48,7 +49,7 @@ program
       }  
     } else {
       // 开发者可以使用 -c 替换掉 component
-      if (opts.component) {
+      if (opts.component) {        
         env.run('create Component', { 'printStorybookConfig': opts.storybook })
       }
     }
@@ -72,6 +73,22 @@ program
       'dataOnly': opts.dataOnly,
       'npmPublish': opts.npmPublish
     })
+  })
+
+program
+  .command('run <cmd>')
+  .description('执行本地调试的命令')
+  .action(cmd => {
+    upgradeMsg()
+    switch (cmd) {
+      case 'examples':
+        env.run(`run examples`)
+        break
+      case 'build':
+        env.run(`run build`)
+        break
+      default: break
+    }  
   })
 
 // 配置环境参数

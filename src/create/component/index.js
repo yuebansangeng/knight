@@ -1,6 +1,6 @@
 
 const Generator = require('yeoman-generator')
-const shelljs = require('shelljs')
+const request = require('request')
 
 module.exports = class extends Generator {
 
