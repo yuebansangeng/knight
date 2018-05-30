@@ -100,6 +100,30 @@ program
     env.run(`config ${param}`)
   })
 
+// 组件登录，服务端使用
+program
+  .command('login')
+  .description('登录NPM账号，模块发布前操作')
+  .action(opts => {
+    upgradeMsg()
+
+    // 环境中获取提前配置好的 npm 账号
+    let {
+      'CMP_BUILDER_NPM_NAME': name,
+      'CMP_BUILDER_NPM_PASS': password,
+      'CMP_BUILDER_NPM_EMAIL': email
+    } = process.env
+
+    if (!name) {
+      throw new Errot('需要在jenkins服务器，配置账号登录信息')
+    }
+
+    // 使用登录模块登录，主要是为了实现一键登录
+    npmCliLogin({ 'user': name, 'pass': password, email }, () => {
+      console.log('Bscpm登录成功'.green)
+    })
+  })
+
 program
   .command('link <dest>')
   .option('-u, --unlink', '删除调试链接')
