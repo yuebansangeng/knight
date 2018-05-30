@@ -115,7 +115,7 @@ program
     } = process.env
 
     if (!name) {
-      throw new Errot('需要在jenkins服务器，配置账号登录信息')
+      throw new Error('需要在jenkins服务器，配置账号登录信息')
     }
 
     // 使用登录模块登录，主要是为了实现一键登录
