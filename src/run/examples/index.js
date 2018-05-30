@@ -29,7 +29,7 @@ module.exports = class extends Generator {
     print(spawn('node', [`${stklibPath}/bin/make-stories.js`, '--colors'], { 'cwd': contextRoot }))
 
     // 生成 lib 目录，以及内部转义好的文件
-    print(spawn('gulp', ['--colors'], { 'cwd': contextRoot }))
+    print(spawn('node', [ 'node_modules/gulp/bin/gulp.js', '--colors'], { 'cwd': contextRoot }))
 
     // 判断组件内部是否配置storybooks配置
     // 配置了则不适用内部的 storybook-lib config
@@ -45,6 +45,6 @@ module.exports = class extends Generator {
       print(spawn('node', stbPreArgs.concat([ path.join(stklibPath, 'src') ]), { 'cwd': contextRoot }))
     }
 
-    print(spawn('gulp', ['watch', '--colors'], { 'cwd': contextRoot }))
+    print(spawn('node', [ 'node_modules/gulp/bin/gulp.js', 'watch', '--colors'], { 'cwd': contextRoot }))
   }
 }
