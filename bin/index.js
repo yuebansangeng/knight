@@ -9,6 +9,8 @@ const fs = require('fs')
 const request = require('request')
 const colors = require('colors')
 const { spawnSync } = require('child_process')
+const npmCliLogin = require('@beisen/npm-cli-login')
+require('dotenv').config() // 配置 process.env
 
 // 加载yeoman命令，初始化
 const env = yeomanEnv.createEnv()
