@@ -4,12 +4,6 @@
   "description": "",
   "main": "lib/index.js",
   "scripts": {
-    "build:lib": "gulp",
-    "build:eslint": "node_modules/eslint/bin/eslint.js src/** -f html -o ./.build/.quality-report.html",
-    "build:screenshot": "node node_modules/@beisen/storybook-lib/bin/make-screenshot.js",
-    "build:demos": "node node_modules/@beisen/storybook-lib/bin/make-demos.js",
-    "build:publish": "npm run build:demos && npm run build:lib && npm run build:eslint",
-    "examples": "node node_modules/@beisen/storybook-lib/bin/index.js"
   },
   "keywords": [
     "beisen",

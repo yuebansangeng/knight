@@ -122,7 +122,7 @@ program
 
     // 使用登录模块登录，主要是为了实现一键登录
     npmCliLogin({ 'user': name, 'pass': password, email }, () => {
-      console.log('Bscpm登录成功'.green)
+      console.log('NPM 账号登录成功')
     })
   })
 
