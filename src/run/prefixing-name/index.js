@@ -8,16 +8,15 @@ module.exports = class extends Generator {
 
   // 统一添加前缀组件模块前缀
   writing () {
-    let { contextRoot } = this.options
+    let { contextRoot, prefix = '@beisen-cmps' } = this.options
 
     let pckJson = require(`${contextRoot}/package.json`)
-    let prefixname = '@beisen-cmps'
     
     // 去除添加的前缀
-    let clearname = pckJson.name.replace(new RegExp(`^(${prefixname}/)+`), '')
+    let clearname = pckJson.name.replace(new RegExp(`^(${prefix}/)+`), '')
 
     // 所有的模块都添加统一前缀
-    pckJson.name = `${prefixname}/${clearname}`
+    pckJson.name = `${prefix}/${clearname}`
 
     // 保存 package.json
     let pckcontent = JSON.stringify(pckJson, null, 2)
