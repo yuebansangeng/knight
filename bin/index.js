@@ -88,6 +88,9 @@ program
       case 'build':
         env.run(`run build`)
         break
+      case 'prefixing-name':
+        env.run(`run prefixing-name`)
+        break
       default: break
     }  
   })

@@ -15,6 +15,9 @@ module.exports = class extends Generator {
     if (this.options.category === 'build') {
       this._private_resolve('./build/index.js')
     }
+    if (this.options.category === 'prefixing-name') {
+      this._private_resolve('./prefixing-name/index.js')
+    }
   }
 
   _private_resolve (path) {

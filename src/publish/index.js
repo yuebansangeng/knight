@@ -73,7 +73,6 @@ module.exports = class extends Generator {
         console.log(`bscpm ${'Error'.red} publishing`)
         return console.log(`${err.message}`.red)
       }
-
       // 处理结果返回值
       let { code, message } = JSON.parse(body)
       if (code === 200) {
