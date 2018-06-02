@@ -73,10 +73,29 @@ module.exports = class extends Generator {
         console.log(`bscpm ${'Error'.red} publishing`)
         return console.log(`${err.message}`.red)
       }
+
       // 处理结果返回值
-      let { code, message } = JSON.parse(body)
+      let { code, message, data } = JSON.parse(body)
+
       if (code === 200) {
         console.log(`bscpm ${'Finished'.green} publishing`)
+
+        // 写入组件id，用于组件发布时的唯一性匹配
+        let { 'id': cmpId } = data
+        let bscpmrcJson = require(`${this.contextRoot}/.bscpmrc.json`)
+
+        // !：新发布的组件不带有 id
+        // !==：修改过名字的组件
+        // 重新生成带有组件 id 的 rc 配置文件
+        if (!bscpmrcJson.id || bscpmrcJson.id !== cmpId) {
+          console.log(`bscpm ${'Starting'.yellow} cmp id updating`)
+
+          let bscpmrcContent = JSON.stringify(bscpmrcJson, null, 2)
+          fs.writeFileSync(`${this.contextRoot}/.bscpmrc.json`, bscpmrcContent, 'utf8')  
+
+          console.log(`bscpm ${'Finished'.green} cmp id updating`)
+        }
+
       } else {
         console.log(`bscpm ${'Error'.red} publishing`)
         console.log(message)
