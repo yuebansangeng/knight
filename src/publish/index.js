@@ -93,7 +93,7 @@ module.exports = class extends Generator {
           let bscpmrcContent = JSON.stringify(bscpmrcJson, null, 2)
           fs.writeFileSync(`${this.contextRoot}/.bscpmrc.json`, bscpmrcContent, 'utf8')  
 
-          console.log(`bscpm ${'Finished'.green} cmp id updating`)
+          console.log(`bscpm ${'Finished'.green} cmp id updating: ${bscpmrcJson.id}`)
         }
 
       } else {
