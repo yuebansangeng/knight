@@ -99,7 +99,7 @@ module.exports = class extends Generator {
 
       } else {
         console.log(`bscpm ${'Error'.red} publishing`)
-        console.log(message)
+        throw new Error(message)
       }
     })
   }
