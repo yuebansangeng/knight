@@ -77,9 +77,9 @@ program
   })
 
 program
-  .command('run <cmd>')
+  .command('run <cmd> [arg1]')
   .description('执行本地调试的命令')
-  .action(cmd => {
+  .action((cmd, arg1) => {
     upgradeMsg()
     switch (cmd) {
       case 'examples':
@@ -93,6 +93,11 @@ program
         break
       case 'check-cmp':
         env.run(`run check-cmp`)
+        break
+      case 'update-version':
+        env.run('run update-version', {
+          'version': arg1
+        })
         break
       default: break
     }  

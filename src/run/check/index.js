@@ -13,6 +13,7 @@ module.exports = class extends Generator {
     let { code, message, data } = await new Promise((resolve, reject) => {
       request(`http://cmp.beisen.io/users/check-cmp?name=${name||''}&id=${id||''}&module=${module||''}`, (err, res, body) => {
         if (err) {
+          console.log(err)
           reject(err)
         }
         resolve(JSON.parse(body))
