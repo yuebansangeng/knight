@@ -91,6 +91,9 @@ program
       case 'prefixing-name':
         env.run(`run prefixing-name`)
         break
+      case 'check-cmp':
+        env.run(`run check-cmp`)
+        break
       default: break
     }  
   })

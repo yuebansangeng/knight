@@ -18,6 +18,9 @@ module.exports = class extends Generator {
     if (this.options.category === 'prefixing-name') {
       this._private_resolve('./prefixing-name/index.js')
     }
+    if (this.options.category === 'check-cmp') {
+      this._private_resolve('./check/index.js')
+    }
   }
 
   _private_resolve (path) {
