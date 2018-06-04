@@ -24,6 +24,9 @@ module.exports = class extends Generator {
     if (this.options.category === 'update-version') {
       this._private_resolve('./update-version/index.js')
     }
+    if (this.options.category === 'record') {
+      this._private_resolve('./record/index.js')
+    }
   }
 
   _private_resolve (path) {
