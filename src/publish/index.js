@@ -97,8 +97,6 @@ module.exports = class extends Generator {
           console.log(`bscpm ${'Finished'.green} cmp id updating`)
         }
 
-        console.log(`published cmp's id is '${cmpId}'`)
-
       } else {
         console.log(`bscpm ${'Error'.red} publishing`)
         throw new Error(message)
