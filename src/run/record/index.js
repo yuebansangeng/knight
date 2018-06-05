@@ -9,10 +9,10 @@ module.exports = class extends Generator {
   async writing () {
     let { name } = require(`${this.contextRoot}/.bscpmrc.json`)
     let { 'name': module, version } = require(`${this.contextRoot}/package.json`)
-    let { buildNumber, jobName = 'build' } = this.options
+    let { buildNumber = '', jobName = 'build' } = this.options
 
     let { code, message } = await new Promise((resolve, reject) => {
-      request(`http://dev.cmp.beisen.io/users/upgrade-cmp-build?name=${name}&version=${version}&module=${module}&cinumber=${buildNumber}&jobname=${jobName}`, (err, res, body) => {
+      request(`http://127.0.0.1:3000/users/upgrade-cmp-build?name=${name}&version=${version}&module=${module}&cinumber=${buildNumber}&jobname=${jobName}`, (err, res, body) => {
         if (err) {
           console.log(err)
           return reject(err)
