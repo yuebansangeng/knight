@@ -63,7 +63,7 @@ module.exports = class extends Generator {
     request.post({
       // name & version 放在 query 中传递
       // 未找到 request.post 传递参数的方式
-      'url': `http://cmp.beisen.io/users/publish?name=${packinfo.name}&version=${packinfo.version}`,
+      'url': `http://dev.cmp.beisen.io/users/publish?name=${packinfo.name}&version=${packinfo.version}`,
       'formData': {
         'pack.tgz': tgzStream
       }
@@ -94,8 +94,10 @@ module.exports = class extends Generator {
           let bscpmrcContent = JSON.stringify(bscpmrcJson, null, 2)
           fs.writeFileSync(`${this.contextRoot}/.bscpmrc.json`, bscpmrcContent, 'utf8')  
 
-          console.log(`bscpm ${'Finished'.green} cmp id updating: ${cmpId}`)
+          console.log(`bscpm ${'Finished'.green} cmp id updating`)
         }
+
+        console.log(`published cmp's id is '${cmpId}'`)
 
       } else {
         console.log(`bscpm ${'Error'.red} publishing`)
