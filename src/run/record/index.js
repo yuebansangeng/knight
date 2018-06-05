@@ -11,17 +11,17 @@ module.exports = class extends Generator {
     let { 'name': module, version } = require(`${this.contextRoot}/package.json`)
     let { buildNumber, jobName = 'build' } = this.options
 
-    let { code, message, data } = await new Promise((resolve, reject) => {
+    let { code, message } = await new Promise((resolve, reject) => {
       request(`http://dev.cmp.beisen.io/users/upgrade-cmp-build?name=${name}&version=${version}&module=${module}&cinumber=${buildNumber}&jobname=${jobName}`, (err, res, body) => {
         if (err) {
           console.log(err)
-          reject(err)
+          return reject(err)
         }
         resolve(JSON.parse(body))
       })
     })
 
-    if (code !== 200 || !data) {
+    if (code !== 200) {
       throw new Error(message)
     }
 
