@@ -91,16 +91,8 @@ program
       case 'prefixing-name':
         env.run(`run prefixing-name`)
         break
-      case 'check-cmp':
-        env.run(`run check-cmp`)
-        break
       case 'check':
         env.run(`run check`)
-        break
-      case 'update-version':
-        env.run('run update-version', {
-          'version': arg1
-        })
         break
       case 'record':
         env.run('run record', {

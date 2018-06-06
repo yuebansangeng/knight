@@ -15,7 +15,6 @@ module.exports = class extends Generator {
       this.promptes = promptes
       this.promptes.cmpName =
         this.promptes.moduleName
-          .replace('@beisen-cmps/', '')
           .replace(/-(\w)/g, (all, letter) => letter.toUpperCase())
           .replace(/^\w/, (all, letter) => all.toUpperCase())
     })

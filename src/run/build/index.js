@@ -21,7 +21,6 @@ let getDemos = (source) => {
 
 let getCmpName = (path) => {
   return require(path).name
-    .replace('@beisen-cmps/', '')
     .replace(/-(\w)/g, (all, letter) => letter.toUpperCase())
     .replace(/^\w/, (all, letter) => all.toUpperCase())
 }
