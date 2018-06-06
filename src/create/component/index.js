@@ -50,7 +50,7 @@ module.exports = class extends Generator {
     this.npmInstall([ 'react@15.6.2', 'react-dom@15.6.2' ])
     this.npmInstall(
       [
-        '@beisen/storybook-lib',
+        '@beisen/storybook-lib@latest'
       ], {
         'save-dev': true
       }
