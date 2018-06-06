@@ -21,6 +21,9 @@ module.exports = class extends Generator {
     if (this.options.category === 'check-cmp') {
       this._private_resolve('./check/index.js')
     }
+    if (this.options.category === 'check') {
+      this._private_resolve('./check/index.js')
+    }
     if (this.options.category === 'update-version') {
       this._private_resolve('./update-version/index.js')
     }

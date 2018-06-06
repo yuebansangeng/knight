@@ -94,6 +94,9 @@ program
       case 'check-cmp':
         env.run(`run check-cmp`)
         break
+      case 'check':
+        env.run(`run check-cmp`)
+        break
       case 'update-version':
         env.run('run update-version', {
           'version': arg1
