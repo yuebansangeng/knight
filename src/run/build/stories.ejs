@@ -1,0 +1,15 @@
+
+module.exports = {
+  'name': require('../.bscpmrc').name,
+  'stories': [
+<% examples.forEach(function(demo, index) { %>    {
+      'name': '<%=demo.name%>',
+      'story': Object.assign({
+        'content': require('../examples/<%=demo.name%>'),
+        'editableProps': <% if (demo.hasEditableProps) { %>require('../examples/<%=demo.name%>/editable-props'),<% } else { %>[],<% } %><% if (demo.hasDoc) { %>
+        'doc': require('../examples/<%=demo.name%>/doc.md')<% } %>
+      })
+    },<% }) %>
+  ],
+  'readme': require('../README.md')
+}

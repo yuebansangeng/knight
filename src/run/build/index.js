@@ -1,22 +1,89 @@
 
 const Generator = require('yeoman-generator')
-const { spawn, exec } = require('child_process')
+const { spawn, spawnSync } = require('child_process')
+const path = require('path')
+const fs = require('fs')
+const { lstatSync, readdirSync } = require('fs')
+const ejs = require('ejs')
 
-function print (chilprocess) {
-  chilprocess.stdout.on('data', data => process.stdout.write(`${data}`))
-  chilprocess.stderr.on('data', err_data => process.stdout.write(`${err_data}`))
+let getDemos = (source) => {
+  return readdirSync(source)
+    .map(name => path.join(source, name))
+    .filter(source => lstatSync(source).isDirectory())
+    .map(name => {
+      return {
+        'name': name.split('\/')[name.split('\/').length - 1],
+        'hasEditableProps': !!fs.existsSync(path.join(name, 'editable-props.js')),
+        'hasDoc': !!fs.existsSync(path.join(name, 'doc.md'))
+      }
+    })
+}
+
+let getCmpName = (path) => {
+  return require(path).name
+    .replace('@beisen-cmps/', '')
+    .replace(/-(\w)/g, (all, letter) => letter.toUpperCase())
+    .replace(/^\w/, (all, letter) => all.toUpperCase())
 }
 
 module.exports = class extends Generator {
 
-  writing () {
+  async writing () {
     let { contextRoot } = this.options
-    let stklibPath = 'node_modules/@beisen/storybook-lib'
 
-    print(spawn('node', [`${stklibPath}/bin/make-stories.js`, '--colors'], { 'cwd': contextRoot }))
-    print(spawn('node', [`${stklibPath}/bin/make-demos.js`, '--colors'], { 'cwd': contextRoot }))
+    // 创建 .build 文件夹
+    const buildFolderPath = path.join(contextRoot, '.build')
+    if (!fs.existsSync(buildFolderPath)) {
+      fs.mkdirSync(buildFolderPath)
+    }
+
+    await new Promise((resolve, reject) => {
+      ejs.renderFile(
+        path.join(__dirname, 'stories.ejs'),
+        {
+          'examples': getDemos(path.join(contextRoot, 'examples')),
+          'cmpName': getCmpName(path.join(contextRoot, 'package.json')),
+          'cpath': contextRoot
+        },
+        { }, // ejs options
+        (err, storiesjs) => {
+          if (err) {
+            console.log(err)
+            return reject(err)
+          }
+          // 在组建项目中创建配置文件
+          fs.writeFile(path.join(contextRoot, '.build', '.stories.js'), storiesjs, (err) => {
+            if (err) {
+              console.log(err)
+              return reject(false)
+            }
+            console.log('the stories file is saved!')
+            resolve(true)
+          })
+        }
+      )
+    })
+
+    // 创建demos的名字的文件，提供给组件共享平台使用
+    await new Promise((resolve, reject) => {
+      let demosFileContent =
+        getDemos(path.join(contextRoot, 'examples'))
+          .map(({ name }) => ({ 'name': name }))
+
+      fs.writeFile(path.join(contextRoot, '.build', '.examples'), JSON.stringify(demosFileContent), (err) => {
+        if (err) throw err
+        console.log('the .demos file is saved!')
+      })
+    })
 
     // 生成 lib 目录，以及内部转义好的文件
-    print(spawn('node', [ 'node_modules/gulp/bin/gulp.js', '--colors'], { 'cwd': contextRoot }))
+    await new Promise((resolve, reject) => {
+      let cp_n = spawn('node', [ 'node_modules/gulp/bin/gulp.js', '--colors'], { 'cwd': contextRoot })
+      cp_n.stdout.on('data', data => process.stdout.write(`${data}`))
+      cp_n.stderr.on('data', err_data => process.stdout.write(`${err_data}`))
+      cp_n.on('close', () => {
+        resolve(true)
+      })
+    })
   }
 }
