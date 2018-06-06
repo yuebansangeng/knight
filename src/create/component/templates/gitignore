@@ -3,6 +3,8 @@ node_modules/
 .idea/
 package-lock.json
 
+lib
+
 # some local files
 */.settings/
 */.DS_Store
