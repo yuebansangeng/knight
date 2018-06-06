@@ -9,7 +9,7 @@ module.exports = class extends Generator {
       {
         'type': 'input',
         'name': 'moduleName',
-        'message': '组件名字 ( 不允许大写字母，中划线命名 )：'
+        'message': '组件名字 ( 不允许大写字母，请使用中划线命名 )：'
       }
     ]).then(promptes => {
       this.promptes = promptes
@@ -50,14 +50,7 @@ module.exports = class extends Generator {
     this.npmInstall([ 'react@15.6.2', 'react-dom@15.6.2' ])
     this.npmInstall(
       [
-        'babel-cli', 'babel-loader', 'babel-core','babel-preset-env',
-        'babel-plugin-transform-object-assign', 'babel-plugin-transform-runtime',
-        'babel-plugin-add-module-exports', 'babel-plugin-transform-decorators-legacy',
-        'babel-plugin-transform-react-display-name', 'babel-plugin-transform-react-jsx',
-        'babel-preset-es2015', 'babel-preset-react', 'babel-preset-stage-0', 'babel-plugin-transform-proto-to-assign', // babel plugins
         '@beisen/storybook-lib',
-        'eslint',
-        // 'gulp', 'gulp-babel', 'gulp-cssbeautify', 'gulp-postcss', 'gulp-replace', 'gulp-sass', 'del',
       ], {
         'save-dev': true
       }
