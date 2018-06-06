@@ -55,7 +55,7 @@ module.exports = class extends Generator {
         'babel-plugin-add-module-exports', 'babel-plugin-transform-decorators-legacy',
         'babel-plugin-transform-react-display-name', 'babel-plugin-transform-react-jsx',
         'babel-preset-es2015', 'babel-preset-react', 'babel-preset-stage-0', 'babel-plugin-transform-proto-to-assign', // babel plugins
-        '@beisen/storybook-lib',
+        '@beisen/storybook-lib@latest',
         'eslint',
         // 'gulp', 'gulp-babel', 'gulp-cssbeautify', 'gulp-postcss', 'gulp-replace', 'gulp-sass', 'del',
       ], {
