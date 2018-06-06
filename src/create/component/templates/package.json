@@ -4,6 +4,7 @@
   "description": "",
   "main": "lib/index.js",
   "scripts": {
+    "examples": "node node_modules/@beisen/storybook-lib/bin/index.js"
   },
   "keywords": [
     "beisen",
