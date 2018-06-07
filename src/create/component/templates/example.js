@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react'
 // @ 会默认获取当前组件
-import DefaultComponent from '@'
+import DefaultComponent from '@component'
 
 export default class extends Component {
   render () {
