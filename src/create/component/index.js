@@ -49,7 +49,8 @@ module.exports = class extends Generator {
     this.npmInstall([ 'react@15.6.2', 'react-dom@15.6.2' ])
     this.npmInstall(
       [
-        '@beisen/storybook-lib@latest'
+        '@beisen/storybook-lib@latest',
+        '@beisen/gulp-lib@latest'
       ], {
         'save-dev': true
       }
