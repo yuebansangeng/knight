@@ -82,14 +82,16 @@ program
   .action((cmd, arg1, arg2) => {
     upgradeMsg()
     switch (cmd) {
-      case 'examples':
-        env.run(`run examples`)
-        break
       case 'build':
         env.run(`run build`)
         break
-      case 'prefixing-name':
-        env.run(`run prefixing-name`)
+      case 'prefixing':
+        env.run(`run prefixing`)
+        break
+      case 'upgrade':
+        env.run(`run upgrade`, {
+          'version': arg1
+        })
         break
       case 'check':
         env.run(`run check`)
@@ -111,33 +113,6 @@ program
   .action(param => {
     upgradeMsg()
     env.run(`config ${param}`)
-  })
-
-// 组件登录，服务端使用
-program
-  .command('login')
-  .description('登录NPM账号，模块发布前操作')
-  .action(opts => {
-    upgradeMsg()
-    // 配置 process.env
-    // 从本项目中加载 .env 配置
-    let dotenvs = require('dotenv').config({ 'path': path.join(__dirname, '..', '.env') })
-    if (dotenvs.error) {
-      throw dotenvs.error
-    }
-    // 环境中获取提前配置好的 npm 账号
-    let {
-      'CMP_BUILDER_NPM_NAME': name,
-      'CMP_BUILDER_NPM_PASS': password,
-      'CMP_BUILDER_NPM_EMAIL': email
-    } = process.env
-    if (!name) {
-      throw new Error('需要在jenkins服务器，配置账号登录信息')
-    }
-    // 使用登录模块登录，主要是为了实现一键登录
-    npmCliLogin({ 'user': name, 'pass': password, email }, () => {
-      console.log('NPM 账号登录成功')
-    })
   })
 
 program

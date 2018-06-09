@@ -9,20 +9,20 @@ module.exports = class extends Generator {
   }
 
   composing () {
-    if (this.options.category === 'examples') {
-      this._private_resolve('./examples/index.js')
-    }
     if (this.options.category === 'build') {
       this._private_resolve('./build/index.js')
     }
-    if (this.options.category === 'prefixing-name') {
-      this._private_resolve('./prefixing-name/index.js')
+    if (this.options.category === 'prefixing') {
+      this._private_resolve('./prefixing/index.js')
     }
     if (this.options.category === 'check') {
       this._private_resolve('./check/index.js')
     }
     if (this.options.category === 'record') {
       this._private_resolve('./record/index.js')
+    }
+    if (this.options.category === 'upgrade') {
+      this._private_resolve('./upgrade/index.js')
     }
   }
 
