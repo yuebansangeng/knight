@@ -27,8 +27,7 @@ module.exports = class extends Generator {
           // 强制状态，不组织组件继续发布
           // 强制状态不输出发布失败信息
         } else {
-          console.log(snp.stderr.toString())
-          return false
+          throw new Error(snp.stderr.toString())
         }
       }
     }
