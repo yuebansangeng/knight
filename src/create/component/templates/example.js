@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react'
-import DefaultComponent from '../../lib'
+import DefaultComponent from '../../src'
 
 export default class extends Component {
   render () {
