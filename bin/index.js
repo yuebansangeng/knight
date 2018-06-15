@@ -9,7 +9,6 @@ const fs = require('fs')
 const request = require('request')
 const colors = require('colors')
 const { spawnSync } = require('child_process')
-const npmCliLogin = require('@beisen/npm-cli-login')
 
 // 加载yeoman命令，初始化
 const env = yeomanEnv.createEnv()
@@ -84,6 +83,9 @@ program
     switch (cmd) {
       case 'build':
         env.run(`run build`)
+        break
+      case 'build-storybook':
+        env.run(`run build-storybook`)
         break
       case 'prefixing':
         env.run(`run prefixing`)

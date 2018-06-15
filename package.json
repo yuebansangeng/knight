@@ -1,6 +1,6 @@
 {
   "name": "@beisen/bscpm",
-  "version": "0.7.47",
+  "version": "0.7.48",
   "description": "cli：标准组件创建",
   "main": "generators/app/index.js",
   "scripts": {},
@@ -30,14 +30,18 @@
     "url": "https://github.com/BeisenUX/generator-standard-cmp/issues"
   },
   "homepage": "https://github.com/BeisenUX/generator-standard-cmp#readme",
-  "engines" : {
-    "node" : ">=8"
+  "engines": {
+    "node": ">=8"
   },
   "os": [
     "!win32"
   ],
   "dependencies": {
-    "@beisen/npm-cli-login": "0.0.1",
+    "@storybook/cli": "^3.3.15",
+    "@storybook/react": "^3.3.15",
+    "babel-core": "^6.26.3",
+    "react": "^15.6.2",
+    "react-dom": "^15.6.2",
     "bluebird": "^3.5.1",
     "colors": "^1.2.1",
     "commander": "^2.15.1",
