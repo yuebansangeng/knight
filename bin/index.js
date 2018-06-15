@@ -84,9 +84,6 @@ program
       case 'build':
         env.run(`run build`)
         break
-      case 'build-storybook':
-        env.run(`run build-storybook`)
-        break
       case 'prefixing':
         env.run(`run prefixing`)
         break
