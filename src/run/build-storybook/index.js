@@ -12,6 +12,19 @@ module.exports = class extends Generator {
 
     console.log(`${name}/${version} 编译中...`)
 
+    // 生成 stories.js 配置文件
+    await new Promise((resolve, reject) => {
+      let bo_cp = spawn('node', [ `${this.contextRoot}/node_modules/@beisen/storybook-lib/bin/index.js`, '--buildonly' ])
+
+      bo_cp.stdout.on('data', data => console.log(`${data}`))
+      bo_cp.stderr.on('data', data => console.log(`${data}`))
+
+      bo_cp.on('close', () => {
+        resolve(true)
+      })
+    })
+
+    // 构建
     await new Promise((resolve, reject) => {
       let resmsg = []
 
@@ -20,6 +33,7 @@ module.exports = class extends Generator {
       build_cp.stderr.on('data', data => resmsg.push(`${data}`))
 
       build_cp.on('close', () => {
+        // 如果不join的方式输出log，会在输出信息换行时出现问题
         console.log(resmsg.join(''))
         resolve(true)
       })
