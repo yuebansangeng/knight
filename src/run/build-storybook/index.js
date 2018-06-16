@@ -14,6 +14,7 @@ module.exports = class extends Generator {
 
     // 生成 stories.js 配置文件
     await new Promise((resolve, reject) => {
+      // buildonly: 只生成配置文件
       let bo_cp = spawn('node', [ `${this.contextRoot}/node_modules/@beisen/storybook-lib/bin/index.js`, '--buildonly' ])
 
       bo_cp.stdout.on('data', data => console.log(`${data}`))
@@ -28,7 +29,7 @@ module.exports = class extends Generator {
     await new Promise((resolve, reject) => {
       let resmsg = []
 
-      let build_cp = spawn('node', [ 'node_modules/@storybook/react/bin/build.js', '-c', `${this.contextRoot}/node_modules/@beisen/storybook-lib/lib`, '-o', `./${name}/${version}` ])
+      let build_cp = spawn('node', [ 'node_modules/@storybook/react/bin/build.js', '-c', `${this.contextRoot}/node_modules/@beisen/storybook-lib/lib`, '-o', `./storybook-static/${name}/${version}` ])
       build_cp.stdout.on('data', data => resmsg.push(`${data}`))
       build_cp.stderr.on('data', data => resmsg.push(`${data}`))
 
