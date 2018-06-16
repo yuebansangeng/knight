@@ -24,6 +24,9 @@ module.exports = class extends Generator {
     if (this.options.category === 'upgrade') {
       this._private_resolve('./upgrade/index.js')
     }
+    if (this.options.category === 'build-storybook') {
+      this._private_resolve('./build-storybook/index.js') 
+    }
   }
 
   _private_resolve (path) {
