@@ -1,6 +1,6 @@
 {
   "name": "@beisen/bscpm",
-  "version": "0.7.62",
+  "version": "0.7.64",
   "description": "cli：标准组件创建",
   "main": "generators/app/index.js",
   "scripts": {},
@@ -37,6 +37,7 @@
     "!win32"
   ],
   "dependencies": {
+    "@beisen/npm-cli-login": "0.0.1",
     "bluebird": "^3.5.1",
     "colors": "^1.2.1",
     "commander": "^2.15.1",

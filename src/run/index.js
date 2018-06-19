@@ -27,6 +27,9 @@ module.exports = class extends Generator {
     if (this.options.category === 'build-storybook') {
       this._private_resolve('./build-storybook/index.js') 
     }
+    if (this.options.category === 'rsync-statics') {
+      this._private_resolve('./rsync-statics/index.js') 
+    }
   }
 
   _private_resolve (path) {
