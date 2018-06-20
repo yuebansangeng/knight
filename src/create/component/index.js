@@ -1,6 +1,7 @@
 
 const Generator = require('yeoman-generator')
 const request = require('request')
+const { exec } = require('child_process')
 
 module.exports = class extends Generator {
 
@@ -10,6 +11,11 @@ module.exports = class extends Generator {
         'type': 'input',
         'name': 'moduleName',
         'message': '组件名字 ( 不允许大写字母，请使用中划线命名 )：'
+      }, {
+        'type': 'confirm',
+        'name': 'isSyncGitlab',
+        'message': '是否在gitlab上创建该项目 ( 默认为true )',
+        'default': true
       }
     ]).then(promptes => {
       this.promptes = promptes
@@ -21,6 +27,35 @@ module.exports = class extends Generator {
   }
 
   writing () {
+    if (!this.promptes.isSyncGitlab) {
+      this._copyTemplateFiles()
+      this._installPkg()
+      return
+    }
+
+    request(`http://cmp.beisen.io/users/create-project?name=${this.promptes.moduleName}`, (err, resp, body) => {
+      if (err) {
+        throw new Error(`${'Error'.red} gitlab上已有该项目|项目创建失败`)
+      }
+
+      const { data = {} } = JSON.parse(body)
+
+      exec(`git clone git@gitlab.beisencorp.com:${data.group}/${data.name}.git`, (err, stdout, stderr) => {
+        if (err) {
+          throw new Error(`clone error: ${err}`)
+        }
+        this._copyTemplateFiles()
+        this._installPkg()
+      })
+    })
+  }
+
+  /*
+  * 封装copy（API），减少代码量
+  * 28原则：百分之20%的代码解决80%的功能
+  * 函数名前面添加下滑线，告知Yeoman不自定执行改函数
+  */
+  _copyTemplateFiles () {
     this._private_copies([
       [ 'gitignore', '.gitignore' ], // npm publish，会忽略 .gitignore 文件
       [ 'index.js', 'src/index.js' ],
@@ -45,7 +80,12 @@ module.exports = class extends Generator {
     }
   }
 
-  install () {
+  _installPkg () {
+    if (this.promptes.isSyncGitlab) {
+      // 跳转至当前组件项目路径下
+      process.chdir(`${this.promptes.moduleName}`)
+    }
+    
     this.npmInstall([ 'react@15.6.2', 'react-dom@15.6.2' ])
     this.npmInstall(
       [
@@ -57,11 +97,6 @@ module.exports = class extends Generator {
     )
   }
 
-  /*
-  * 封装copy（API），减少代码量
-  * 28原则：百分之20%的代码解决80%的功能
-  * 函数名前面添加下滑线，告知Yeoman不自定执行改函数
-  */
   _private_copies (copyJobs = []) {
     copyJobs.forEach(([ tplFilePath, destFilePath, tplData = {} ]) => {
       if (!destFilePath) {
@@ -70,6 +105,10 @@ module.exports = class extends Generator {
       if (!tplFilePath) throw new Error('tplFilePath is none')
       if (!destFilePath) throw new Error('destFilePath is none')
 
+      // 改变路径为项目目录下
+      if (this.promptes.isSyncGitlab) {
+        destFilePath = `${this.promptes.moduleName}/${destFilePath}`
+      }
       this.fs.copyTpl(
         this.templatePath(tplFilePath),
         this.destinationPath(`${this.options.contextRoot}/${destFilePath}`),
