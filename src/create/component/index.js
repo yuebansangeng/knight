@@ -38,7 +38,11 @@ module.exports = class extends Generator {
       if (err) {
         throw new Error(`${'Error'.red} gitlab上已有该项目|项目创建失败`)
       }
-      const { data = {} } = JSON.parse(body)
+
+      const { code, message, data = {} } = JSON.parse(body)
+
+      // 如果接口中返回非200，异常，则提示错误
+      if (code !== 200) throw new Error(message)
 
       exec(`git clone git@gitlab.beisencorp.com:${data.group}/${this.promptes.projectName}.git`, (error, stdout, stderr) => {
         if (error) {
