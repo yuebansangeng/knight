@@ -11,7 +11,8 @@ module.exports = class extends Generator {
         'type': 'input',
         'name': 'moduleName',
         'message': '组件名字 ( 不允许大写字母，请使用中划线命名 )：'
-      }, {
+      },
+      {
         'type': 'confirm',
         'name': 'isSyncGitlab',
         'message': '是否在gitlab上创建该项目 ( 默认为true )',
@@ -33,11 +34,11 @@ module.exports = class extends Generator {
       return
     }
 
+    // 创建 Gitlab 项目
     request(`http://cmp.beisen.io/users/create-project?name=${this.promptes.moduleName}`, (err, resp, body) => {
       if (err) {
         throw new Error(`${'Error'.red} gitlab上已有该项目|项目创建失败`)
       }
-
       const { data = {} } = JSON.parse(body)
 
       exec(`git clone git@gitlab.beisencorp.com:${data.group}/${data.name}.git`, (err, stdout, stderr) => {
@@ -85,7 +86,7 @@ module.exports = class extends Generator {
       // 跳转至当前组件项目路径下
       process.chdir(`${this.promptes.moduleName}`)
     }
-    
+
     this.npmInstall([ 'react@15.6.2', 'react-dom@15.6.2' ])
     this.npmInstall(
       [
@@ -109,6 +110,7 @@ module.exports = class extends Generator {
       if (this.promptes.isSyncGitlab) {
         destFilePath = `${this.promptes.moduleName}/${destFilePath}`
       }
+
       this.fs.copyTpl(
         this.templatePath(tplFilePath),
         this.destinationPath(`${this.options.contextRoot}/${destFilePath}`),
