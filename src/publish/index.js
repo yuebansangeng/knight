@@ -70,7 +70,7 @@ module.exports = class extends Generator {
     (err, resp, body) => {
       if (err) {
         console.log(`bscpm ${'Error'.red} publishing`)
-        return console.log(`${err.message}`.red)
+        throw new Error(err.message)
       }
 
       // 处理结果返回值
