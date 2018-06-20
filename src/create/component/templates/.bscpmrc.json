@@ -1,6 +1,6 @@
 {
   "name": "<%= cmpName %>",
+  "team": "Unknown",
   "category": "",
-  "team": "",
   "description": ""
 }

@@ -4,7 +4,6 @@ const request = require('request')
 const { exec } = require('child_process')
 
 module.exports = class extends Generator {
-
   prompting () {
     return this.prompt([
       {
@@ -20,8 +19,9 @@ module.exports = class extends Generator {
       }
     ]).then(promptes => {
       this.promptes = promptes
+      this.promptes.projectName = promptes.moduleName // !(/^ux-/.test(cmpName)) ? `ux-${cmpName}` : cmpName
       this.promptes.cmpName =
-        this.promptes.moduleName
+          promptes.moduleName
           .replace(/-(\w)/g, (all, letter) => letter.toUpperCase())
           .replace(/^\w/, (all, letter) => all.toUpperCase())
     })
@@ -34,16 +34,15 @@ module.exports = class extends Generator {
       return
     }
 
-    // 创建 Gitlab 项目
-    request(`http://cmp.beisen.io/users/create-project?name=${this.promptes.moduleName}`, (err, resp, body) => {
+    request(`http://cmp.beisen.io/users/create-project?name=${this.promptes.projectName}`, (err, resp, body) => {
       if (err) {
         throw new Error(`${'Error'.red} gitlab上已有该项目|项目创建失败`)
       }
       const { data = {} } = JSON.parse(body)
 
-      exec(`git clone git@gitlab.beisencorp.com:${data.group}/${data.name}.git`, (err, stdout, stderr) => {
-        if (err) {
-          throw new Error(`clone error: ${err}`)
+      exec(`git clone git@gitlab.beisencorp.com:${data.group}/${this.promptes.projectName}.git`, (error, stdout, stderr) => {
+        if (error) {
+          throw new Error(`clone error: ${error}`)
         }
         this._copyTemplateFiles()
         this._installPkg()
@@ -84,9 +83,9 @@ module.exports = class extends Generator {
   _installPkg () {
     if (this.promptes.isSyncGitlab) {
       // 跳转至当前组件项目路径下
-      process.chdir(`${this.promptes.moduleName}`)
+      process.chdir(`${this.promptes.projectName}`)
     }
-
+    
     this.npmInstall([ 'react@15.6.2', 'react-dom@15.6.2' ])
     this.npmInstall(
       [
@@ -108,9 +107,8 @@ module.exports = class extends Generator {
 
       // 改变路径为项目目录下
       if (this.promptes.isSyncGitlab) {
-        destFilePath = `${this.promptes.moduleName}/${destFilePath}`
+        destFilePath = `${this.promptes.projectName}/${destFilePath}`
       }
-
       this.fs.copyTpl(
         this.templatePath(tplFilePath),
         this.destinationPath(`${this.options.contextRoot}/${destFilePath}`),
