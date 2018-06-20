@@ -7,7 +7,7 @@ module.exports = class extends Generator {
 
   // 统一添加前缀组件模块前缀
   async writing () {
-    let { name, team } = require(`${this.contextRoot}/.bscpmrc.json`)
+    let { name, team, category } = require(`${this.contextRoot}/.bscpmrc.json`)
     let { 'name': module } = require(`${this.contextRoot}/package.json`)
 
     if (!name) {
@@ -15,6 +15,10 @@ module.exports = class extends Generator {
     }
     if (!team) {
       throw new Error('请在 .bscpmrc.json 文件中，配置 team 字段（team 字段将会用来组件唯一性验证，以及搜索功能）')
+    }
+
+    if (!category) {
+      console.log('组件未配置 category，将为组件自动匹配一个最相近类型')
     }
 
     let { code, message, data } = await new Promise((resolve, reject) => {
