@@ -7,21 +7,10 @@
     "lib": "node node_modules/@beisen/gulp-lib/bin/index.js",
     "examples": "node node_modules/@beisen/storybook-lib/bin/index.js"
   },
-  "keywords": [
-    "beisen",
-    "react-component",
-    "es6"
-  ],
   "author": {
     "name": "beisen",
     "email": "beisen@beisen.com"
   },
-  "maintainers": [
-    {
-      "name": "beisen",
-      "email": "beisen@beisen.com"
-    }
-  ],
   "license": "ISC",
   "repository": {
     "type": "git",
