@@ -48,6 +48,9 @@ module.exports = class extends Generator {
         if (error) {
           throw new Error(`clone error: ${error}`)
         }
+        
+        console.log(`${'Warning:'.green}${this.promptes.projectName}项目clone成功,先执行cd ${this.promptes.projectName}跳至该项目再运行`)
+
         this._copyTemplateFiles()
         this._installPkg()
       })
