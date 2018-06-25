@@ -9,10 +9,10 @@ module.exports = class extends Generator {
   writing () {
     let filePath = `${this.options.contextRoot}/src/index.js`
 
-    let content = fs.readFileSync(filePath)
+    let readme = fs.readFileSync(`${this.options.contextRoot}/README.md`)
 
-    if (!content || this.options.force) {
-      let docmd = gen(content)
+    if (!`${readme}` || this.options.force) {
+      let docmd = gen(fs.readFileSync(filePath))
       fs.writeFileSync(`${this.options.contextRoot}/README.md`, docmd)
       console.log('文档自动生成完毕')
     } else {
