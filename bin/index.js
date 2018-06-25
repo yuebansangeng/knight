@@ -25,22 +25,15 @@ let pckJson = jsonlint.parse(pckContent)
 program.version(pckJson.version)
 
 // 检测是否有新的版本，建议升级
-const upgradeMsg = () => {
-
-  request('http://cmp.beisen.io/users/get-bscpm-last-version', (err, resp, body) => {
-    if (err) {
-      console.log(`${'Error'.red} err`)
-      return
-    }
-
+const upgradeMsg = async () => {
+  await request('http://cmp.beisen.io/users/get-bscpm-last-version', (err, resp, body) => {
+    if (err) return console.log(`${'Error'.red} err`)
     const { version } = JSON.parse(body)
-
     if (pckJson.version !== version) {
       console.log(`\n@beisen/bscpm 已有新的版本${version}, 请及时更新`.magenta)
     }
   })
 }
-
 
 // 脚手架
 program
