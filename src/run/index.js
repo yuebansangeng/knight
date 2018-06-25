@@ -30,6 +30,9 @@ module.exports = class extends Generator {
     if (this.options.category === 'rsync-statics') {
       this._private_resolve('./rsync-statics/index.js') 
     }
+    if (this.options.category === 'docgen') {
+      this._private_resolve('./docgen/index.js') 
+    }
   }
 
   _private_resolve (path) {

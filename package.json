@@ -1,6 +1,6 @@
 {
   "name": "@beisen/bscpm",
-  "version": "0.7.75",
+  "version": "0.7.76",
   "description": "cli：标准组件创建",
   "main": "bin/index.js",
   "repository": {
@@ -43,11 +43,13 @@
     "dotenv": "^5.0.1",
     "ejs": "^2.6.1",
     "fstream": "^1.0.11",
+    "handlebars": "^4.0.11",
     "http": "0.0.0",
     "jsonfile": "^4.0.0",
     "jsonlint": "^1.6.3",
     "npm-check": "^5.5.2",
     "object-assign": "^4.1.1",
+    "react-docgen": "^2.20.1",
     "request": "^2.85.0",
     "shelljs": "^0.8.1",
     "tar": "^4.4.4",

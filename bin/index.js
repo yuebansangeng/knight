@@ -86,8 +86,9 @@ program
 
 program
   .command('run <cmd> [arg1] [arg2]')
+  .option('-f, --force', '强制命令')
   .description('执行本地调试的命令')
-  .action((cmd, arg1, arg2) => {
+  .action((cmd, arg1, arg2, opts) => {
     switch (cmd) {
       case 'build':
         env.run(`run build`)
@@ -114,6 +115,9 @@ program
         break
       case 'rsync-statics':
         env.run('run rsync-statics')
+        break
+      case 'docgen':
+        env.run('run docgen', { 'force': opts.force })
         break
       default: break
     }  
