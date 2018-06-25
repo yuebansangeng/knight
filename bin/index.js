@@ -57,7 +57,9 @@ program
       }  
     } else {
       // 开发者可以使用 -c 替换掉 component
-      if (opts.component) {        
+      if (false) {
+        // 非组件类别的项目创建
+      } else {
         env.run('create Component', { 'printStorybookConfig': opts.storybook })
       }
     }
