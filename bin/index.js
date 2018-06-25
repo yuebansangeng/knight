@@ -8,7 +8,6 @@ const path = require('path')
 const fs = require('fs')
 const request = require('request')
 const colors = require('colors')
-const { spawnSync } = require('child_process')
 const npmCliLogin = require('@beisen/npm-cli-login')
 
 // 加载yeoman命令，初始化
@@ -25,13 +24,19 @@ let pckJson = jsonlint.parse(pckContent)
 program.version(pckJson.version)
 
 // 检测是否有新的版本，建议升级
-const upgradeMsg = async () => {
-  await request('http://cmp.beisen.io/users/get-bscpm-last-version', (err, resp, body) => {
-    if (err) return console.log(`${'Error'.red} err`)
-    const { version } = JSON.parse(body)
-    if (pckJson.version !== version) {
-      console.log(`\n@beisen/bscpm 已有新的版本${version}, 请及时更新`.magenta)
-    }
+const upgradeMsg = () => {
+  return new Promise((resolve, reject) => {
+    request('http://cmp.beisen.io/users/get-bscpm-last-version', (err, resp, body) => {
+      if (err) {
+        console.log(`${'Error'.red} err`)
+        return reject(false)
+      }
+      const { version } = JSON.parse(body)
+      if (pckJson.version !== version) {
+        console.log(`@beisen/bscpm 已有新的版本${version}, 请及时更新`.magenta)
+      }
+      resolve(true)
+    })
   })
 }
 
@@ -41,8 +46,8 @@ program
   .option('-c, --component', '创建组件项目')
   .option('-s, --storybook', '输出storybook的配置，往往因默认配置无法满足')
   .description('脚手架工具生成解决方案')
-  .action((solution, opts) => {
-    upgradeMsg()    
+  .action(async (solution, opts) => {
+    await upgradeMsg()
     if (solution) {
       switch (solution) {
         case 'component':
@@ -67,7 +72,6 @@ program
   .option('-p, --npmPublish', '组件自动发布到npm')
   .description('发布组件')
   .action(opts => {
-    upgradeMsg()
     env.run('publish', {
       'force': opts.force,
       'rebuild': opts.rebuild,
@@ -82,7 +86,6 @@ program
   .command('run <cmd> [arg1] [arg2]')
   .description('执行本地调试的命令')
   .action((cmd, arg1, arg2) => {
-    upgradeMsg()
     switch (cmd) {
       case 'build':
         env.run(`run build`)
@@ -128,7 +131,6 @@ program
   .command('login')
   .description('登录NPM账号，模块发布前操作')
   .action(opts => {
-    upgradeMsg()
     // 配置 process.env
     // 从本项目中加载 .env 配置
     let dotenvs = require('dotenv').config({ 'path': path.join(__dirname, '..', '.env') })
@@ -154,8 +156,8 @@ program
   .command('link <dest>')
   .option('-u, --unlink', '删除调试链接')
   .description('创建/删除 node_modules 中模块的调试环境')
-  .action((param, opts) => {
-    upgradeMsg()
+  .action(async (param, opts) => {
+    await upgradeMsg()
     env.run(`link`, {
       'destProject': param,
       'unlink': opts.unlink
