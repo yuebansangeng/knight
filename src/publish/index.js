@@ -57,7 +57,7 @@ module.exports = class extends Generator {
     let tgzStream = fs.createReadStream(`${this.contextRoot}/${tarfile}`)
 
     // 删除没用的文件
-    spawn('rm', [ tarfile ])
+    // spawn('rm', [ tarfile ])
 
     request.post({
       // name & version 放在 query 中传递
