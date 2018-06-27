@@ -1,5 +1,5 @@
 {
-  "name": "<%= cmpName %>",
+  "name": "<%= projectName %>",
   "team": "Unknown",
   "category": "",
   "description": ""
