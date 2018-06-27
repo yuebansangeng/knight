@@ -19,12 +19,6 @@ let getDemos = (source) => {
     })
 }
 
-let getCmpName = (path) => {
-  return require(path).name
-    .replace(/-(\w)/g, (all, letter) => letter.toUpperCase())
-    .replace(/^\w/, (all, letter) => all.toUpperCase())
-}
-
 module.exports = class extends Generator {
 
   async writing () {
@@ -41,7 +35,6 @@ module.exports = class extends Generator {
         path.join(__dirname, 'stories.ejs'),
         {
           'examples': getDemos(path.join(contextRoot, 'examples')),
-          'cmpName': getCmpName(path.join(contextRoot, 'package.json')),
           'cpath': contextRoot
         },
         { }, // ejs options

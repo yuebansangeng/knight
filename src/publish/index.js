@@ -55,7 +55,6 @@ module.exports = class extends Generator {
     console.log(`bscpm ${'Starting'.yellow} publishing`)
 
     let tgzStream = fs.createReadStream(`${this.contextRoot}/${tarfile}`)
-
     // 删除没用的文件
     // spawn('rm', [ tarfile ])
 
@@ -68,11 +67,10 @@ module.exports = class extends Generator {
       }
     },
     (err, resp, body) => {
-      if (err) {
+      if (err || !/^2/.test(resp.statusCode)) {
         console.log(`bscpm ${'Error'.red} publishing`)
-        throw new Error(err.message)
+        throw new Error(err)
       }
-
       // 处理结果返回值
       let { code, message, data } = JSON.parse(body)
 

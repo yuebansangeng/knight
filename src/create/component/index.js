@@ -20,10 +20,6 @@ module.exports = class extends Generator {
     ]).then(promptes => {
       this.promptes = promptes
       this.promptes.projectName = promptes.moduleName // !(/^ux-/.test(cmpName)) ? `ux-${cmpName}` : cmpName
-      this.promptes.cmpName =
-          promptes.moduleName
-          .replace(/-(\w)/g, (all, letter) => letter.toUpperCase())
-          .replace(/^\w/, (all, letter) => all.toUpperCase())
     })
   }
 
@@ -48,7 +44,7 @@ module.exports = class extends Generator {
         if (error) {
           throw new Error(`clone error: ${error}`)
         }
-        
+
         console.log(`${'Warning:'.green}${this.promptes.projectName}项目clone成功,先执行cd ${this.promptes.projectName}跳至该项目再运行`)
 
         this._copyTemplateFiles()
