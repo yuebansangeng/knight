@@ -68,20 +68,9 @@ program
 // 组件发布
 program
   .command('publish')
-  .option('-f, --force', '强制发布组件')
-  .option('-b, --rebuild', '发布前，重新构建组件源码')
-  .option('-n, --npmOnly', '只发布组件到NPM上')
-  .option('-p, --npmPublish', '组件自动发布到npm')
   .description('发布组件')
   .action(opts => {
-    env.run('publish', {
-      'force': opts.force,
-      'rebuild': opts.rebuild,
-      'login': opts.login,
-      'npmOnly': opts.npmOnly,
-      'dataOnly': opts.dataOnly,
-      'npmPublish': opts.npmPublish
-    })
+    env.run('publish')
   })
 
 program

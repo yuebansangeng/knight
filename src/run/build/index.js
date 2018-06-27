@@ -62,7 +62,7 @@ module.exports = class extends Generator {
         getDemos(path.join(contextRoot, 'examples'))
           .map(({ name }) => ({ 'name': name }))
 
-      fs.writeFile(path.join(contextRoot, '.build', '.examples'), JSON.stringify(demosFileContent), (err) => {
+      fs.writeFile(path.join(contextRoot, '.build', '.examples.json'), JSON.stringify(demosFileContent), (err) => {
         if (err) throw err
         console.log('the .demos file is saved!')
       })
