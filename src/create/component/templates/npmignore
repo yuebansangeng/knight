@@ -12,6 +12,8 @@ coverage
 .jenkins.yml
 .codeclimate.yml
 
+.vscode
+
 # linters
 .jscsrc
 .jshintrc
