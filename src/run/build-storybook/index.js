@@ -29,10 +29,17 @@ module.exports = class extends Generator {
     await new Promise((resolve, reject) => {
       let resmsg = []
 
-      let build_cp = spawn('node', [ 'node_modules/@storybook/react/bin/build.js', '-c', `${this.contextRoot}/node_modules/@beisen/storybook-lib/lib`, '-o', `./storybook-static/${name}/${version}` ])
+      let build_cp = spawn('node',
+        [
+          'node_modules/@storybook/react/bin/build.js',
+          '-c', `./node_modules/@beisen/storybook-lib/lib`,
+          '-o', `./storybook-static/${name}/${version}`
+        ], {
+          'cwd': this.contextRoot
+        }
+      )
       build_cp.stdout.on('data', data => resmsg.push(`${data}`))
       build_cp.stderr.on('data', data => resmsg.push(`${data}`))
-
       build_cp.on('close', () => {
         // 如果不join的方式输出log，会在输出信息换行时出现问题
         console.log(resmsg.join(''))

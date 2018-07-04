@@ -1,6 +1,6 @@
 {
   "name": "@beisen/bscpm",
-  "version": "0.7.82",
+  "version": "0.7.83",
   "description": "cli：标准组件创建",
   "main": "bin/index.js",
   "repository": {
