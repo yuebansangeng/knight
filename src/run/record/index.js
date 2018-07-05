@@ -11,6 +11,11 @@ module.exports = class extends Generator {
     let { 'name': module, version } = require(`${this.contextRoot}/package.json`)
     let { buildNumber = '', jobName = 'build' } = this.options
 
+    if (!name || !name.match(/[\w\-\d]+?/)) {
+      name = 'unknown'
+      console.log('组件 .bscpm 文件中的 name 属性格式不正确，只允许是字母、数字、中划线')
+    }
+
     let { code, message } = await new Promise((resolve, reject) => {
       request(`http://cmp.beisen.io/users/upgrade-cmp-build?name=${name}&version=${version}&module=${module}&cinumber=${buildNumber}&jobname=${jobName}`, (err, res, body) => {
         if (err) {
