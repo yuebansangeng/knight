@@ -9,7 +9,7 @@ module.exports = class extends Generator {
       {
         'type': 'input',
         'name': 'moduleName',
-        'message': '组件名字 ( 不允许大写字母，请使用中划线命名 )：'
+        'message': '组件名字 ( 请使用使用英文、数字、中划线 )：'
       },
       {
         'type': 'confirm',
@@ -18,6 +18,11 @@ module.exports = class extends Generator {
         'default': true
       }
     ]).then(promptes => {
+      // 名称只允许英文、数字、中划线
+      let { moduleName } = promptes
+      if (!moduleName || !moduleName.match(/^[\w\-\d]+?$/)) {
+        throw new Error(`组件名称格式不正确：${moduleName}`)
+      }
       this.promptes = promptes
       this.promptes.projectName = promptes.moduleName // !(/^ux-/.test(cmpName)) ? `ux-${cmpName}` : cmpName
     })

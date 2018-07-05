@@ -11,7 +11,7 @@ module.exports = class extends Generator {
     let { 'name': module, version } = require(`${this.contextRoot}/package.json`)
     let { buildNumber = '', jobName = 'build' } = this.options
 
-    if (!name || !name.match(/[\w\-\d]+?/)) {
+    if (!name || !name.match(/^[\w\-\d]+?$/)) {
       name = 'unknown'
       console.log('组件 .bscpm 文件中的 name 属性格式不正确，只允许是字母、数字、中划线')
     }
