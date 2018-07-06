@@ -73,19 +73,6 @@ module.exports = class extends Generator {
       [ 'README.md' ],
       [ '.bscpmrc.json' ]
     ])
-
-    // 输入storybook 配置
-    if (this.options.printStorybookConfig) {
-      this._private_copies([
-        [ '.babelrc', '.storybook/.babelrc' ],
-        [ '.storybook/addons.js' ],
-        [ '.storybook/config.js' ],
-        [ '.storybook/preview-head.html' ],
-        [ '.storybook/manager-head.html' ],
-        [ '.storybook/util.js' ],
-        [ '.storybook/webpack.config.js' ]
-      ])
-    }
   }
 
   _installPkg () {
