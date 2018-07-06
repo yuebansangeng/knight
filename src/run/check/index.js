@@ -13,7 +13,7 @@ module.exports = class extends Generator {
     if (!name) {
       throw new Error('请在 .bscpmrc 文件中，配置 name 字段')
     }
-    if (!name.match(/[\w\-\d]+?/)) {
+    if (!name.match(/^[A-Za-z\-\d]+?$/)) {
       throw new Error('.bscpmrc 文件中，name 字段只能包含有是字母、数字、中划线')
     }
     if (!team) {
