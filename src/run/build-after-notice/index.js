@@ -13,7 +13,9 @@ module.exports = class extends Generator {
     console.log(`邮件通知发送中...`)
 
     let { code, message } = await new Promise((resolve, reject) => {
-      request(`http://cmp.beisen.io/ci/build-after-notice?name=${name}&version=${version}&module=${module}&to=${this.options.to}`, (err, res, body) => {
+      // 组件发布状态，默认为成功
+      let { cinumber, to, status = 'success' } = this.options
+      request(`http://cmp.beisen.io/ci/build-after-notice?name=${name}&version=${version}&module=${module}&to=${to}&status=${status}&cinumber=${cinumber}`, (err, res, body) => {
         if (err) {
           console.log(err)
           reject(err)

@@ -74,10 +74,10 @@ program
   })
 
 program
-  .command('run <cmd> [arg1] [arg2]')
+  .command('run <cmd> [arg1] [arg2] [arg3]')
   .option('-f, --force', '强制命令')
   .description('执行本地调试的命令')
-  .action((cmd, arg1, arg2, opts) => {
+  .action((cmd, arg1, arg2, arg3, opts) => {
     switch (cmd) {
       case 'build':
         env.run(`run build`)
@@ -109,7 +109,11 @@ program
         env.run('run docgen', { 'force': opts.force })
         break
       case 'build-after-notice':
-        env.run('run build-after-notice', { 'to': arg1 })
+        env.run('run build-after-notice', {
+          'to': arg1,
+          'status': arg2 || 'success',
+          'cinumber': arg3
+        })
         break
       default: break
     }  
