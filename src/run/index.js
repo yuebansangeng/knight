@@ -33,6 +33,9 @@ module.exports = class extends Generator {
     if (this.options.category === 'docgen') {
       this._private_resolve('./docgen/index.js') 
     }
+    if (this.options.category === 'build-after-notice') {
+      this._private_resolve('./build-after-notice/index.js') 
+    }
   }
 
   _private_resolve (path) {

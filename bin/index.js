@@ -108,6 +108,9 @@ program
       case 'docgen':
         env.run('run docgen', { 'force': opts.force })
         break
+      case 'build-after-notice':
+        env.run('run build-after-notice', { 'to': arg1 })
+        break
       default: break
     }  
   })
