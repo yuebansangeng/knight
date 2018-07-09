@@ -26,9 +26,8 @@ module.exports = class extends Generator {
     })
 
     // 构建
-    await new Promise((resolve, reject) => {
+    let { code, message } = await new Promise((resolve, reject) => {
       let resmsg = []
-
       let build_cp = spawn('node',
         [
           'node_modules/@storybook/react/bin/build.js',
@@ -40,11 +39,16 @@ module.exports = class extends Generator {
       )
       build_cp.stdout.on('data', data => resmsg.push(`${data}`))
       build_cp.stderr.on('data', data => resmsg.push(`${data}`))
-      build_cp.on('close', () => {
+      build_cp.on('close', code => {
         // 如果不join的方式输出log，会在输出信息换行时出现问题
-        console.log(resmsg.join(''))
-        resolve(true)
+        resolve({ code, 'message': resmsg.join('') })
       })
     })
+
+    if (code !== 0 ) {
+      throw new Error(message)
+    } else {
+      console.log(message)
+    }
   }
 }
