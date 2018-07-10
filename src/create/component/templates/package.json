@@ -7,10 +7,6 @@
     "lib": "node node_modules/@beisen/gulp-lib/bin/index.js",
     "examples": "node node_modules/@beisen/storybook-lib/bin/index.js"
   },
-  "author": {
-    "name": "beisen",
-    "email": "beisen@beisen.com"
-  },
   "license": "ISC",
   "repository": {
     "type": "git",
