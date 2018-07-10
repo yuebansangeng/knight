@@ -115,6 +115,9 @@ program
           'cinumber': arg3
         })
         break
+      case 'rcgen':
+        env.run('run rcgen')
+        break
       default: break
     }  
   })

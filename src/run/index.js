@@ -36,6 +36,9 @@ module.exports = class extends Generator {
     if (this.options.category === 'build-after-notice') {
       this._private_resolve('./build-after-notice/index.js') 
     }
+    if (this.options.category === 'rcgen') {
+      this._private_resolve('./rcgen/index.js') 
+    }
   }
 
   _private_resolve (path) {
