@@ -14,6 +14,10 @@ module.exports = class extends Generator {
     const { 'name': module, version } = require(`${this.contextRoot}/package.json`)
     const { cinumber, to, status = 'success' } = this.options
 
+    if (!to) {
+      throw new Error('缺少邮箱地址，请传入参数：to')
+    }
+
     console.log(`邮件通知发送中...`)
 
     let { code, message } = await new Promise((resolve, reject) => {

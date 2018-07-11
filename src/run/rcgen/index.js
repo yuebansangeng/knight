@@ -6,8 +6,8 @@ module.exports = class extends Generator {
 
   // 统一添加前缀组件模块前缀
   writing () {
-    let packInfo = require(`${this.options.contextRoot}/package.json`)
-    let bscpmrc = require(`${this.options.contextRoot}/bscpmrc.json`)
+    let packInfo = require(`${this.contextRoot}/package.json`)
+    let bscpmrc = require(`${this.contextRoot}/bscpmrc.json`)
 
     // 自动配置字段生成
     if (!bscpmrc.description) {
@@ -24,6 +24,6 @@ module.exports = class extends Generator {
       bscpmrc.libversion = libversion
     }
 
-    fs.writeFileSync(`${this.options.contextRoot}/bscpmrc.json`, JSON.stringify(bscpmrc, null, 2))
+    fs.writeFileSync(`${this.contextRoot}/bscpmrc.json`, JSON.stringify(bscpmrc, null, 2))
   }
 }

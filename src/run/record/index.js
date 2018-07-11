@@ -13,7 +13,7 @@ module.exports = class extends Generator {
     const { CMP_SERVER_HOST } = process.env
     let { name } = require(`${this.contextRoot}/.bscpmrc.json`)
     let { 'name': module, version } = require(`${this.contextRoot}/package.json`)
-    let { buildNumber = '', jobName = 'build' } = this.options
+    let { cinumber = '', jobname = 'build' } = this.options
 
     if (!name || !name.match(/^[A-Za-z\-\d]+?$/)) {
       name = 'unknown'
@@ -21,7 +21,7 @@ module.exports = class extends Generator {
     }
 
     let { code, message } = await new Promise((resolve, reject) => {
-      request(`${CMP_SERVER_HOST}/users/upgrade-cmp-build?name=${name}&version=${version}&module=${module}&cinumber=${buildNumber}&jobname=${jobName}`, (err, res, body) => {
+      request(`${CMP_SERVER_HOST}/users/upgrade-cmp-build?name=${name}&version=${version}&module=${module}&cinumber=${cinumber}&jobname=${jobname}`, (err, res, body) => {
         if (err) {
           console.log(err)
           return reject(err)
