@@ -19,6 +19,9 @@ gradlew
 gradlew.bat
 unused.txt
 
+.babelrc
+gulpfile.js
+
 # Log Files
 *.log
 
