@@ -45,7 +45,6 @@
     "jsonlint": "^1.6.3",
     "react-docgen": "^2.20.1",
     "request": "^2.85.0",
-    "shelljs": "^0.8.1",
     "yeoman-environment": "^2.0.5",
     "yeoman-generator": "^2.0.3"
   }

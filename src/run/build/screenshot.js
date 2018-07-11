@@ -1,6 +1,5 @@
 
 const { spawn } = require('child_process')
-const shelljs = require('shelljs')
 const path = require('path')
 
 // cpath 组件调用命令传入的路径
@@ -18,4 +17,11 @@ print(spawn('gulp', [], { 'cwd': cpath }))
 
 print(spawn('node', ['make-config.js', cpath], { 'cwd': __dirname }))
 
-shelljs.exec(`storybook-chrome-screenshot -p 9001 -c ${path.join(__dirname, '..', 'src')} -o ${cpath}/.build/.screenshot`)
+spawn(
+  'storybook-chrome-screenshot',
+  [
+    '-p', '9001',
+    '-c', `${path.join(__dirname, '..', 'src')}`,
+    '-o', `${cpath}/.build/.screenshot`
+  ]
+)
