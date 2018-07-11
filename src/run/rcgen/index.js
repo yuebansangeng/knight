@@ -13,9 +13,11 @@ module.exports = class extends Generator {
     if (!bscpmrc.description) {
       bscpmrc.description = packInfo.description
     }
+
     if (!bscpmrc.name) {
       bscpmrc.name = packInfo.name
     }
+
     if (!bscpmrc.libversion) {
       let libversion = 15
       if (packInfo.dependencies.react.match(/16/g)) {
