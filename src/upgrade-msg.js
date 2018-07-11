@@ -8,12 +8,13 @@ require('dotenv').config({ 'path': path.join(__dirname, '..', '.env') })
 
 
 // 检测是否有新的版本，建议升级
-module.exports = () => {
+module.exports = (reqst) => {
   return new Promise((resolve, reject) => {
 
     const { CMP_SERVER_HOST } = process.env
 
-    request(`${CMP_SERVER_HOST}/users/get-bscpm-last-version`, (err, resp, body) => {
+    const r = (reqst || request)
+    r(`${CMP_SERVER_HOST}/users/get-bscpm-last-version`, (err, resp, body) => {
       if (err) {
         console.log(`${'Error'.red} err`)
         return reject(false)
