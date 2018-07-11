@@ -1,20 +1,17 @@
 #!/usr/bin/env node
 
-// 结合使用commander强大的命令行框架
 const program = require('commander')
 const yeomanEnv = require('yeoman-environment')
 const upgradeMsg = require('../src/upgrade-msg')
 const pckJson = require('../package.json')
 
-// 加载yeoman命令，初始化
 const env = yeomanEnv.createEnv()
   .register(require.resolve('../src/create'), 'create')
   .register(require.resolve('../src/run'), 'run')
 
 program
-  .version(pckJson.version, '-v, -V, --version')
+  .version(pckJson.version, '-v, --version')
 
-// 脚手架
 program
   .command('create')
   .option('-u, --username [username]', 'Gitlab账号名，创建项目时添加最高权限的用户，默认是当前机器上的 git user.name')
@@ -22,6 +19,7 @@ program
   .action(async (opts) => {
     await upgradeMsg()
     let { username } = opts
+    // 当前create命令还只支持组件项目，之后会逐步增加其他解决方案
     env.run('create component', { username })
   })
 
