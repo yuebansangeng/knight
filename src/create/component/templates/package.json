@@ -4,8 +4,8 @@
   "description": "",
   "main": "lib/index.js",
   "scripts": {
-    "lib": "node node_modules/@beisen/gulp-lib/bin/index.js",
-    "examples": "node node_modules/@beisen/storybook-lib/bin/index.js"
+    "lib": "gulp-lib",
+    "examples": "storybook-lib"
   },
   "license": "ISC",
   "repository": {
