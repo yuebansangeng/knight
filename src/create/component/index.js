@@ -4,6 +4,7 @@ const request = require('request')
 const { spawnSync, exec } = require('child_process')
 
 module.exports = class extends Generator {
+
   prompting () {
     // 获取用户名，用于给Gitlab项目添加权限
     let { stdout } = spawnSync('git', [ 'config', 'user.name' ])
@@ -19,12 +20,13 @@ module.exports = class extends Generator {
         'name': 'isSyncGitlab',
         'message': '是否在gitlab上创建该项目',
         'default': true
-      }, {
-        'type': 'input',
-        'name': 'username',
-        'message': 'gitlab用户名',
-        'default': username
       }
+      // , {
+      //   'type': 'input',
+      //   'name': 'username',
+      //   'message': 'gitlab用户名',
+      //   'default': username
+      // }
     ]).then(promptes => {
       // 名称只允许英文、数字、中划线
       let { moduleName } = promptes
@@ -33,6 +35,7 @@ module.exports = class extends Generator {
       }
       this.promptes = promptes
       this.promptes.projectName = promptes.moduleName // !(/^ux-/.test(cmpName)) ? `ux-${cmpName}` : cmpName
+      this.promptes.username = username
     })
   }
 
