@@ -1,8 +1,7 @@
 {
   "name": "@beisen/bscpm",
-  "version": "0.7.98",
+  "version": "0.7.99",
   "description": "cli：标准组件创建",
-  "main": "bin/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/BeisenUX/generator-standard-cmp.git"

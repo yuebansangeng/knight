@@ -2,7 +2,6 @@
 # base
 node_modules
 package-lock.json
-src
 
 # tests
 test
