@@ -34,6 +34,7 @@ module.exports = class extends Generator {
       this.promptes = promptes
       this.promptes.projectName = promptes.moduleName
       this.promptes.username = username
+      this.promptes.repository = ''
     })
   }
 
@@ -55,12 +56,18 @@ module.exports = class extends Generator {
       // 如果接口中返回非200，异常，则提示错误
       if (code !== 200) throw new Error(message)
 
-      exec(`git clone git@gitlab.beisencorp.com:${data.group}/${this.promptes.projectName}.git`, (error, stdout, stderr) => {
+      exec(`git clone git@gitlab.beisencorp.com:${data.group}/${projectName}.git`, (error, stdout, stderr) => {
         if (error) {
           throw new Error(`clone error: ${error}`)
         }
 
-        console.log(`${'Warning:'.green}${this.promptes.projectName}项目clone成功,先执行cd ${this.promptes.projectName}跳至该项目再运行`)
+        // 获取Gitlab项目仓库url，添加到 package.json 文件中
+        // const { rstdout } = spawnSync('git', [ 'config', '--get', 'remote.origin.url' ])
+        // let repository = `${rstdout}`.replace(/^\s+|\s+$/, '')
+        // console.log(repository)
+        // this.promptes.repository = repository
+
+        console.log(`${'Warning:'.green}${projectName}项目clone成功,先执行cd ${projectName}跳至该项目再运行`)
 
         this._copyTemplateFiles()
         this._installPkg()
