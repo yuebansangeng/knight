@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/BeisenUX/generator-standard-cmp#readme",
   "engines": {
-    "node": ">=6"
+    "node": ">=8"
   },
   "os": [
     "!win32"
