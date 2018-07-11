@@ -3,20 +3,13 @@
 // 结合使用commander强大的命令行框架
 const program = require('commander')
 const yeomanEnv = require('yeoman-environment')
-const jsonlint = require('jsonlint')
-const path = require('path')
-const fs = require('fs')
-const colors = require('colors')
 const upgradeMsg = require('../src/upgrade-msg')
+const pckJson = require('../package.json')
 
 // 加载yeoman命令，初始化
 const env = yeomanEnv.createEnv()
   .register(require.resolve('../src/create'), 'create')
   .register(require.resolve('../src/run'), 'run')
-
-// 获取当前模块的版本，初始化
-let pckContent = fs.readFileSync(path.join(__dirname, '..', 'package.json'), 'utf8')
-let pckJson = jsonlint.parse(pckContent)
 
 program
   .version(pckJson.version, '-v, -V, --version')

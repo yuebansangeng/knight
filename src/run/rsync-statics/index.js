@@ -3,19 +3,13 @@ const Generator = require('yeoman-generator')
 const { spawn } = require('child_process')
 const Promise = require('bluebird')
 const path = require('path')
+require('dotenv').config({ 'path': path.join(__dirname, '..', '..', '..', '.env') })
+
 
 module.exports = class extends Generator {
 
   async writing () {
-
     await new Promise((resolve, reject) => {
-
-      let dotenvs = require('dotenv').config({ 'path': path.join(__dirname, '..', '..', '..', '.env') })
-
-      if (dotenvs.error) {
-        console.log(dotenvs.error)
-        return reject(false)
-      }
 
       // 环境中获取提前配置好的 jenkins 账号
       let { 'JENKINS_DEPLOYUSER': deployuser } = process.env
