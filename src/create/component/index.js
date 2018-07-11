@@ -6,9 +6,13 @@ const { spawnSync, exec } = require('child_process')
 module.exports = class extends Generator {
 
   prompting () {
-    // 获取用户名，用于给Gitlab项目添加权限
-    let { stdout } = spawnSync('git', [ 'config', 'user.name' ])
-    let username = `${stdout}`.replace(/^\s+|\s+$/, '')
+    let { username } = this.options
+
+    // 如果为传递用户名，则自动获取，用于给Gitlab项目添加权限
+    if (!username) {
+      const { stdout } = spawnSync('git', [ 'config', 'user.name' ])
+      username = `${stdout}`.replace(/^\s+|\s+$/, '')
+    }
 
     return this.prompt([
       {
@@ -21,12 +25,6 @@ module.exports = class extends Generator {
         'message': '是否在gitlab上创建该项目',
         'default': true
       }
-      // , {
-      //   'type': 'input',
-      //   'name': 'username',
-      //   'message': 'gitlab用户名',
-      //   'default': username
-      // }
     ]).then(promptes => {
       // 名称只允许英文、数字、中划线
       let { moduleName } = promptes
@@ -34,7 +32,7 @@ module.exports = class extends Generator {
         throw new Error(`组件名称格式不正确：${moduleName}, 请使用使用小写英文、数字、中划线`)
       }
       this.promptes = promptes
-      this.promptes.projectName = promptes.moduleName // !(/^ux-/.test(cmpName)) ? `ux-${cmpName}` : cmpName
+      this.promptes.projectName = promptes.moduleName
       this.promptes.username = username
     })
   }
