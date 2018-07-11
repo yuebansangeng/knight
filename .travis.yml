@@ -8,4 +8,6 @@ cache:
 install:
   - npm install
 script: 
-  - npm run cover
+  - npm run test
+after_script:
+  - cat coverage/lcov.info | coveralls
