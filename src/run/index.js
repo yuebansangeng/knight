@@ -9,7 +9,6 @@ module.exports = class extends Generator {
   }
 
   composing () {
-    console.log(this.options.category)
     this._private_resolve(`./${this.options.category}/index.js`)
   }
 
