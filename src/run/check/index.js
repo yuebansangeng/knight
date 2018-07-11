@@ -1,14 +1,18 @@
 
+const path = require('path')
 const Generator = require('yeoman-generator')
 const Promise = require('bluebird')
 const request = require('request')
+require('dotenv').config({ 'path': path.join(__dirname, '..', '..', '.env') })
+
 
 module.exports = class extends Generator {
 
   // 统一添加前缀组件模块前缀
   async writing () {
-    let { name, team, category } = require(`${this.contextRoot}/.bscpmrc.json`)
-    let { 'name': module } = require(`${this.contextRoot}/package.json`)
+    const { CMP_SERVER_HOST } = process.env
+    const { name, team, category } = require(`${this.contextRoot}/.bscpmrc.json`)
+    const { 'name': module } = require(`${this.contextRoot}/package.json`)
 
     if (!name) {
       throw new Error('请在 .bscpmrc 文件中，配置 name 字段')
@@ -23,8 +27,8 @@ module.exports = class extends Generator {
       console.log('组件未配置 category，将为组件自动匹配一个最相近类型')
     }
 
-    let { code, message, data } = await new Promise((resolve, reject) => {
-      request(`http://cmp.beisen.io/users/check-cmp?name=${name||''}&team=${team||''}&module=${module||''}`, (err, res, body) => {
+    const { code, message, data } = await new Promise((resolve, reject) => {
+      request(`${CMP_SERVER_HOST}/users/check-cmp?name=${name||''}&team=${team||''}&module=${module||''}`, (err, res, body) => {
         if (err) {
           console.log(err)
           reject(err)

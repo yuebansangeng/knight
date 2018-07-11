@@ -5,40 +5,12 @@ module.exports = class extends Generator {
 
   constructor(args, opts) {
     super(args, opts)
-    this.argument('category', { type: String, required: true })
+    this.argument('category', { 'type': String, 'required': true })
   }
 
   composing () {
-    if (this.options.category === 'build') {
-      this._private_resolve('./build/index.js')
-    }
-    if (this.options.category === 'prefixing') {
-      this._private_resolve('./prefixing/index.js')
-    }
-    if (this.options.category === 'check') {
-      this._private_resolve('./check/index.js')
-    }
-    if (this.options.category === 'record') {
-      this._private_resolve('./record/index.js')
-    }
-    if (this.options.category === 'upgrade') {
-      this._private_resolve('./upgrade/index.js')
-    }
-    if (this.options.category === 'build-storybook') {
-      this._private_resolve('./build-storybook/index.js') 
-    }
-    if (this.options.category === 'rsync-statics') {
-      this._private_resolve('./rsync-statics/index.js') 
-    }
-    if (this.options.category === 'docgen') {
-      this._private_resolve('./docgen/index.js') 
-    }
-    if (this.options.category === 'build-after-notice') {
-      this._private_resolve('./build-after-notice/index.js') 
-    }
-    if (this.options.category === 'rcgen') {
-      this._private_resolve('./rcgen/index.js') 
-    }
+    console.log(this.options.category)
+    this._private_resolve(`./${this.options.category}/index.js`)
   }
 
   _private_resolve (path) {
@@ -47,7 +19,7 @@ module.exports = class extends Generator {
       // composeWith 调用的模块中
       // 无法通过this.contextRoot 获取到当前工作目录
       Object.assign({
-        contextRoot: this.contextRoot
+        'contextRoot': this.contextRoot
       }, this.options)
     )
   }

@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/BeisenUX/generator-standard-cmp#readme",
   "engines": {
-    "node": ">=8"
+    "node": ">=6"
   },
   "os": [
     "!win32"
@@ -39,20 +39,13 @@
     "bluebird": "^3.5.1",
     "colors": "^1.2.1",
     "commander": "^2.15.1",
-    "del": "^3.0.0",
     "dotenv": "^5.0.1",
     "ejs": "^2.6.1",
-    "fstream": "^1.0.11",
     "handlebars": "^4.0.11",
-    "http": "0.0.0",
-    "jsonfile": "^4.0.0",
     "jsonlint": "^1.6.3",
-    "npm-check": "^5.5.2",
-    "object-assign": "^4.1.1",
     "react-docgen": "^2.20.1",
     "request": "^2.85.0",
     "shelljs": "^0.8.1",
-    "tar": "^4.4.4",
     "yeoman-environment": "^2.0.5",
     "yeoman-generator": "^2.0.3"
   }

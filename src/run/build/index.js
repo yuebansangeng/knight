@@ -1,23 +1,10 @@
 
 const Generator = require('yeoman-generator')
-const { spawn, spawnSync } = require('child_process')
+const { spawn } = require('child_process')
 const path = require('path')
 const fs = require('fs')
-const { lstatSync, readdirSync } = require('fs')
 const ejs = require('ejs')
 
-let getDemos = (source) => {
-  return readdirSync(source)
-    .map(name => path.join(source, name))
-    .filter(source => lstatSync(source).isDirectory())
-    .map(name => {
-      return {
-        'name': name.split('\/')[name.split('\/').length - 1],
-        'hasEditableProps': !!fs.existsSync(path.join(name, 'editable-props.js')),
-        'hasDoc': !!fs.existsSync(path.join(name, 'doc.md'))
-      }
-    })
-}
 
 module.exports = class extends Generator {
 
