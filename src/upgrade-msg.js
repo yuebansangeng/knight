@@ -23,8 +23,7 @@ module.exports = () => {
       if (pckJson.version !== version) {
         console.log(`@beisen/bscpm 已有新的版本${version}, 请及时更新`.magenta)
       }
-
-      resolve(true)
+      resolve(version)
     })
   })
 }

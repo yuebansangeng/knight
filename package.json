@@ -2,13 +2,15 @@
   "name": "@beisen/bscpm",
   "version": "0.8.13",
   "description": "cli：标准组件创建",
+  "main": "src/upgrade-msg.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/BeisenUX/generator-standard-cmp.git"
   },
   "scripts": {
     "prepublish": "gulp",
-    "test": "mocha ./tests/index.js"
+    "test": "mocha ./tests/index.js",
+    "cover": "istanbul cover _mocha ./tests/index.js"
   },
   "bin": {
     "bscpm": "./bin/index.js",
@@ -65,6 +67,7 @@
     "del": "^3.0.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^7.0.1",
+    "istanbul": "^0.4.5",
     "mocha": "^5.2.0"
   }
 }
