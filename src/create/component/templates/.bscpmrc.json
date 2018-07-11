@@ -2,5 +2,7 @@
   "name": "<%= projectName %>",
   "team": "Unknown",
   "category": "",
-  "description": ""
+  "developers": [],
+  "description": "",
+  "device": ""
 }
