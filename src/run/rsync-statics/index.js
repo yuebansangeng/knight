@@ -12,12 +12,15 @@ module.exports = class extends Generator {
     await new Promise((resolve, reject) => {
 
       // 环境中获取提前配置好的 jenkins 账号
-      let { 'JENKINS_DEPLOYUSER': deployuser } = process.env
+      let {
+        'JENKINS_DEPLOYUSER': deployuser,
+        'JENKINS_RSYNC_JOB': jenkinsRsyncJob
+      } = process.env
 
       let curl_cp = spawn('curl', [
         '-X',
         'POST',
-        'http://jci.beisencorp.com/job/ux-bscpm-rsync/build',
+        jenkinsRsyncJob,
         '--user',
         deployuser
       ])
