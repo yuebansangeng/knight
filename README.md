@@ -1,4 +1,6 @@
 
+![UnitText](https://travis-ci.org/BeisenUX/bscpm.svg?branch=master)
+
 # Node实现的的CLI工具
 CLI工具的底层使用Yeoman，Yeoman是可用来实现脚手架工具的底层框（插件扩展机制），其本身并不是解决方案的实现。Yeoman 提供了底层API的接口，和生命周期函数，极大的提高了脚手架解决方案的开发时间。Yeoman社区中目前有 3500 个开源贡献插件可以直接使用。bs-develop-cli 使用了Yeoman底层的技术实现了CLI工具（不仅仅是脚手架）
 
