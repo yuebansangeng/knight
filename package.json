@@ -10,7 +10,7 @@
   "scripts": {
     "prepublish": "gulp",
     "test": "mocha ./tests/index.js",
-    "cover": "istanbul cover --report lcov _mocha -- -R spec test/*.js"
+    "cover": "istanbul cover --report lcov _mocha -- -R spec ./tests/*.js"
   },
   "bin": {
     "bscpm": "./bin/index.js",
