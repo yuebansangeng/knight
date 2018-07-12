@@ -3,7 +3,7 @@ const assert = require('assert')
 const upgradeMsg = require('../lib/upgrade-msg')
 
 // 修改 request 的 hostname mock 到本地测试服务器
-process.env.CMP_SERVER_HOST = 'http://127.0.0.1:3000'
+process.env.CMP_SERVER_HOST = 'http://127.0.0.1:9010'
 
 
 describe('工具类测试', () => {
