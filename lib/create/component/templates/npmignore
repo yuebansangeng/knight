@@ -1,0 +1,26 @@
+
+# base
+node_modules
+package-lock.json
+.prettierrc
+examples
+
+# tests
+test
+coverage
+
+# build tools
+.travis.yml
+.jenkins.yml
+.codeclimate.yml
+
+.vscode
+
+# linters
+.jscsrc
+.jshintrc
+.eslintrc*
+
+# editor settings
+.idea
+.editorconfig

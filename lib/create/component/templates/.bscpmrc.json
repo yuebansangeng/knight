@@ -1,0 +1,8 @@
+{
+  "name": "<%= projectName %>",
+  "team": "Unknown",
+  "category": "",
+  "developers": [],
+  "description": "",
+  "device": ""
+}

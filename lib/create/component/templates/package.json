@@ -1,0 +1,15 @@
+{
+  "name": "<%= moduleName %>",
+  "version": "0.0.1",
+  "description": "",
+  "main": "lib/index.js",
+  "scripts": {
+    "lib": "gulp-lib",
+    "examples": "storybook-lib"
+  },
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "<%= repository %>"
+  }
+}

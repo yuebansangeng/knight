@@ -1,15 +1,20 @@
+
 language: node_js
+
 node_js:
   - node
+
 cache:
   directories:
     - node_modules
+
 install:
   - npm install
-before_script:
+
+script:
   - node_modules/.bin/forever start ./tests/mock-server.js
-script: 
   - npm run cover
+
 after_script:
   - node_modules/.bin/forever stop ./tests/mock-server.js
   - cat coverage/lcov.info | coveralls
