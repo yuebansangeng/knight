@@ -4,7 +4,6 @@ import Generator from 'yeoman-generator'
 import Promise from 'bluebird'
 import request from 'request'
 
-
 export default class extends Generator {
 
   // 统一添加前缀组件模块前缀

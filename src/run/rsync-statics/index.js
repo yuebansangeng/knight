@@ -4,7 +4,6 @@ import { spawn } from 'child_process'
 import Promise from 'bluebird'
 import path from 'path'
 
-
 export default class extends Generator {
 
   async writing () {

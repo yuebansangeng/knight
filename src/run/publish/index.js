@@ -5,7 +5,6 @@ import request from 'request'
 import colors from 'colors'
 import { getContent } from './get-file-content'
 
-
 export default class extends Generator {
 
   writing () {

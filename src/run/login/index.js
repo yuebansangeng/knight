@@ -3,7 +3,6 @@ import path from 'path'
 import Generator from 'yeoman-generator'
 import npmCliLogin from '@beisen/npm-cli-login'
 
-
 export default class extends Generator {
 
   writing () {
