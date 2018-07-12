@@ -1,16 +1,14 @@
 
 const assert = require('assert')
-const upgradeMsg = require('../src/upgrade-msg')
+const upgradeMsg = require('../lib/upgrade-msg')
 
-const request = (url, callback) => {
-  callback(null, {}, '{"version": "0.8.0"}')
-}
+// 修改 request 的 hostname mock 到本地测试服务器
+process.env.CMP_SERVER_HOST = 'http://127.0.0.1:3000'
 
-describe('upgrade-msg', () => {
-  describe('upgrade-msg-passed', () => {
-    it('输出正确的版本号', async () => {
-      let version = await upgradeMsg(request)
-      assert.equal(version, '0.8.0')
-    })
+
+describe('工具类测试', () => {
+  it('输出Bscpm最新版本号', async () => {
+    let version = await upgradeMsg()
+    assert.equal(version, '0.8.0')
   })
 })

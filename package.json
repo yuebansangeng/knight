@@ -10,7 +10,8 @@
   "scripts": {
     "prepublish": "gulp",
     "test": "mocha ./tests/index.js",
-    "cover": "istanbul cover --report lcov _mocha -- -R spec ./tests/*.js"
+    "cover": "istanbul cover --report lcov _mocha -- -R spec ./tests/*.js",
+    "mock": "node ./tests/mock-server.js"
   },
   "bin": {
     "bscpm": "./bin/index.js",
@@ -66,9 +67,11 @@
     "babel-preset-stage-0": "^6.24.1",
     "coveralls": "^3.0.2",
     "del": "^3.0.0",
+    "forever": "^0.15.3",
     "gulp": "^3.9.1",
     "gulp-babel": "^7.0.1",
     "istanbul": "^0.4.5",
+    "json-server": "^0.14.0",
     "mocha": "^5.2.0"
   }
 }
