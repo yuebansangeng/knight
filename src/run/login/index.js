@@ -2,9 +2,7 @@
 import path from 'path'
 import Generator from 'yeoman-generator'
 import npmCliLogin from '@beisen/npm-cli-login'
-import dotenv from 'dotenv'
 
-dotenv.config({ 'path': path.join(__dirname, '..', '..', '.env') })
 
 export default class extends Generator {
 

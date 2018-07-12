@@ -3,9 +3,7 @@ import Generator from 'yeoman-generator'
 import { spawn } from 'child_process'
 import Promise from 'bluebird'
 import path from 'path'
-import dotenv from 'dotenv'
 
-dotenv.config({ 'path': path.join(__dirname, '..', '..', '..', '.env') })
 
 export default class extends Generator {
 

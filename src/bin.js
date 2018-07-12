@@ -1,8 +1,12 @@
 
+import path from 'path'
 import program from 'commander'
 import yeomanEnv from 'yeoman-environment'
 import upgradeMsg from '../lib/upgrade-msg'
 import pckJson from '../package.json'
+import dotenv from 'dotenv'
+
+dotenv.config({ 'path': path.join(__dirname, '..', '.env') })
 
 const env = yeomanEnv.createEnv()
   .register(require.resolve('../lib/create'), 'create')

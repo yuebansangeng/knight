@@ -4,9 +4,7 @@ import Generator from 'yeoman-generator'
 import request from 'request'
 import colors from 'colors'
 import { getContent } from './get-file-content'
-import dotent from 'dotenv'
 
-dotent.config({ 'path': path.join(__dirname, '..', '..', '.env') })
 
 export default class extends Generator {
 
