@@ -25,3 +25,14 @@ gulp.task('default', function () {
   gulp.src([ 'src/create/component/templates/*' ])
     .pipe(gulp.dest('lib/create/component/templates/'))
 })
+
+gulp.task('watch', function () {
+  gulp.watch([
+    'src/*.js',
+    'src/run/**/*.js',
+    'src/create/index.js',
+    'src/create/component/index.js',
+    'src/create/component/templates/*'
+  ],
+  [ 'default'])
+})
