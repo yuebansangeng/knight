@@ -12,7 +12,7 @@ install:
   - npm install
 
 script:
-  - node_modules/.bin/forever start ./tests/mock-server.js
+  - node_modules/.bin/forever start ./tests/mock-server.js --minUptime 1000 --spinSleepTime 10000
   - npm run cover
 
 after_script:
