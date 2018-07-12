@@ -17,3 +17,5 @@ server.use((req, res, next) => {
 server.listen(9010, () => {
   console.log('JSON Server is running')
 })
+
+module.exports = server
