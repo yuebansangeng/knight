@@ -1,21 +1,21 @@
 
-const jsonServer = require('json-server')
-const server = jsonServer.create()
-const middlewares = jsonServer.defaults()
+var http = require('http')
+var express = require('express')
+var path = require('path')
+var app = express()
 
-server.use(middlewares)
 
-server.get('/users/get-bscpm-last-version', (req, res) => {
+app.get('/users/get-bscpm-last-version', (req, res) => {
   res.json({ 'version': '0.8.0' })
 })
 
-server.use(jsonServer.bodyParser)
-server.use((req, res, next) => {
+
+app.use((req, res, next) => {
   next()
 })
 
-server.listen(9010, () => {
-  console.log('JSON Server is running')
-})
+app.set('port', 9010)
+var server = http.createServer(app)
+server.listen(9010)
 
-module.exports = server
+module.exports = app
