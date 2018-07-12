@@ -1,13 +1,13 @@
 #! /usr/bin/env node
 
-const { parse, resolver } = require('react-docgen')
-const fs = require('fs')
-const path = require('path')
-const Handlebars = require('handlebars')
+import { parse, resolver } from 'react-docgen'
+import fs from 'fs'
+import path from 'path'
+import Handlebars from 'handlebars'
 
 const template = Handlebars.compile(`${fs.readFileSync(path.join(__dirname, 'template.handlebars'))}`)
 
-module.exports = function (content) {
+export default (content) => {
 
   let components = parse(content, resolver.findAllExportedComponentDefinitions)
 

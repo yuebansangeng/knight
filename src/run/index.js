@@ -1,9 +1,9 @@
 
-var Generator = require('yeoman-generator')
+import Generator from 'yeoman-generator'
 
-module.exports = class extends Generator {
+export default class extends Generator {
 
-  constructor(args, opts) {
+  constructor (args, opts) {
     super(args, opts)
     this.argument('category', { 'type': String, 'required': true })
   }

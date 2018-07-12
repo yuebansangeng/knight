@@ -1,10 +1,12 @@
 
-const path = require('path')
-const Generator = require('yeoman-generator')
-const npmCliLogin = require('@beisen/npm-cli-login')
-require('dotenv').config({ 'path': path.join(__dirname, '..', '..', '.env') })
+import path from 'path'
+import Generator from 'yeoman-generator'
+import npmCliLogin from '@beisen/npm-cli-login'
+import dotenv from 'dotenv'
 
-module.exports = class extends Generator {
+dotenv.config({ 'path': path.join(__dirname, '..', '..', '.env') })
+
+export default class extends Generator {
 
   writing () {
     // 环境中获取提前配置好的 npm 账号

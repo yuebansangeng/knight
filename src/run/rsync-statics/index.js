@@ -1,12 +1,13 @@
 
-const Generator = require('yeoman-generator')
-const { spawn } = require('child_process')
-const Promise = require('bluebird')
-const path = require('path')
-require('dotenv').config({ 'path': path.join(__dirname, '..', '..', '..', '.env') })
+import Generator from 'yeoman-generator'
+import { spawn } from 'child_process'
+import Promise from 'bluebird'
+import path from 'path'
+import dotenv from 'dotenv'
 
+dotenv.config({ 'path': path.join(__dirname, '..', '..', '..', '.env') })
 
-module.exports = class extends Generator {
+export default class extends Generator {
 
   async writing () {
     await new Promise((resolve, reject) => {

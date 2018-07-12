@@ -1,8 +1,8 @@
 
-const program = require('commander')
-const yeomanEnv = require('yeoman-environment')
-const upgradeMsg = require('../lib/upgrade-msg')
-const pckJson = require('../package.json')
+import program from 'commander'
+import yeomanEnv from 'yeoman-environment'
+import upgradeMsg from '../lib/upgrade-msg'
+import pckJson from '../package.json'
 
 const env = yeomanEnv.createEnv()
   .register(require.resolve('../lib/create'), 'create')

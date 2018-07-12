@@ -1,9 +1,9 @@
 
-const Generator = require('yeoman-generator')
-const gen = require('./gen')
-const fs = require('fs')
+import Generator from 'yeoman-generator'
+import gen from './gen'
+import fs from 'fs'
 
-module.exports = class extends Generator {
+export default class extends Generator {
 
   // 统一添加前缀组件模块前缀
   writing () {

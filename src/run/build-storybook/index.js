@@ -1,9 +1,9 @@
 
-const Generator = require('yeoman-generator')
-const Promise = require('bluebird')
-const { spawn } = require('child_process')
+import Generator from 'yeoman-generator'
+import Promise from 'bluebird'
+import { spawn } from 'child_process'
 
-module.exports = class extends Generator {
+export default class extends Generator {
 
   // 统一添加前缀组件模块前缀
   async writing () {

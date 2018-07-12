@@ -8,9 +8,9 @@ import dotenv from 'dotenv'
 
 dotenv.config({ 'path': path.join(__dirname, '..', '.env') })
 
-
 // 检测是否有新的版本，建议升级
 export default (reqst) => {
+
   return new Promise((resolve, reject) => {
 
     const { CMP_SERVER_HOST } = process.env

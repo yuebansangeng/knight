@@ -1,7 +1,7 @@
 
-const fs = require('fs')
+import  fs from 'fs'
 
-module.exports = {
+export default {
 
   getContent (filepath, utf8 = true) {
     if (!fs.existsSync(filepath)) {

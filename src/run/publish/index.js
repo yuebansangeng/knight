@@ -1,12 +1,14 @@
 
-const path = require('path')
-const Generator = require('yeoman-generator')
-const request = require('request')
-const colors = require('colors')
-const { getContent } = require('./get-file-content')
-require('dotenv').config({ 'path': path.join(__dirname, '..', '..', '.env') })
+import path from 'path'
+import Generator from 'yeoman-generator'
+import request from 'request'
+import colors from 'colors'
+import { getContent } from './get-file-content'
+import dotent from 'dotenv'
 
-module.exports = class extends Generator {
+dotent.config({ 'path': path.join(__dirname, '..', '..', '.env') })
+
+export default class extends Generator {
 
   writing () {
     const { contextRoot } = this.options

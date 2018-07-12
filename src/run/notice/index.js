@@ -1,11 +1,13 @@
 
-const path = require('path')
-const Generator = require('yeoman-generator')
-const Promise = require('bluebird')
-const request = require('request')
-require('dotenv').config({ 'path': path.join(__dirname, '..', '..', '.env') })
+import path from 'path'
+import Generator from 'yeoman-generator'
+import Promise from 'bluebird'
+import request from 'request'
+import dotenv from 'dotenv'
 
-module.exports = class extends Generator {
+dotenv.config({ 'path': path.join(__dirname, '..', '..', '.env') })
+
+export default class extends Generator {
 
   // 统一添加前缀组件模块前缀
   async writing () {
