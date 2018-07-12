@@ -1,6 +1,6 @@
 
-const { spawn } = require('child_process')
-const path = require('path')
+import { spawn } from 'child_process'
+import path from 'path'
 
 // cpath 组件调用命令传入的路径
 let cpath = process.cwd()

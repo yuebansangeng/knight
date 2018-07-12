@@ -1,12 +1,12 @@
 
 const program = require('commander')
 const yeomanEnv = require('yeoman-environment')
-const upgradeMsg = require('../src/upgrade-msg')
+const upgradeMsg = require('../lib/upgrade-msg')
 const pckJson = require('../package.json')
 
 const env = yeomanEnv.createEnv()
-  .register(require.resolve('../src/create'), 'create')
-  .register(require.resolve('../src/run'), 'run')
+  .register(require.resolve('../lib/create'), 'create')
+  .register(require.resolve('../lib/run'), 'run')
 
 program
   .version(pckJson.version, '-v, --version')

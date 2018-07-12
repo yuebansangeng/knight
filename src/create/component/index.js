@@ -1,9 +1,9 @@
 
-const Generator = require('yeoman-generator')
-const request = require('request')
-const { spawnSync, exec } = require('child_process')
+import Generator from 'yeoman-generator'
+import request from 'request'
+import { spawnSync, exec } from 'child_process'
 
-module.exports = class extends Generator {
+export default class extends Generator {
 
   prompting () {
     let { username } = this.options

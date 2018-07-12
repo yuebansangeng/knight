@@ -1,14 +1,16 @@
 
-const path = require('path')
-const Promise = require('bluebird')
-const request = require('request')
-const pckJson = require('../package.json')
-require('colors')
-require('dotenv').config({ 'path': path.join(__dirname, '..', '.env') })
+import path from 'path'
+import Promise from 'bluebird'
+import request from 'request'
+import pckJson from '../package.json'
+import 'colors'
+import dotenv from 'dotenv'
+
+dotenv.config({ 'path': path.join(__dirname, '..', '.env') })
 
 
 // 检测是否有新的版本，建议升级
-module.exports = (reqst) => {
+export default (reqst) => {
   return new Promise((resolve, reject) => {
 
     const { CMP_SERVER_HOST } = process.env

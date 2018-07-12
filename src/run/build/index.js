@@ -1,12 +1,12 @@
 
-const Generator = require('yeoman-generator')
-const { spawn } = require('child_process')
-const path = require('path')
-const fs = require('fs')
-const ejs = require('ejs')
-const getDemos = require('./get-demos')
+import Generator from 'yeoman-generator'
+import { spawn } from 'child_process'
+import path from 'path'
+import fs from 'fs'
+import ejs from 'ejs'
+import getDemos from './get-demos'
 
-module.exports = class extends Generator {
+export default class extends Generator {
   async writing () {
 
     // 创建 .build 文件夹

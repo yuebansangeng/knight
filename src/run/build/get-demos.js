@@ -1,10 +1,9 @@
 
-const path = require('path')
-const fs = require('fs')
-const { lstatSync, readdirSync } = require('fs')
+import path from 'path'
+import fs from 'fs'
+import { lstatSync, readdirSync } from 'fs'
 
-
-module.exports = (source) => {
+export default (source) => {
   return readdirSync(source)
     .map(name => path.join(source, name))
     .filter(source => lstatSync(source).isDirectory())
