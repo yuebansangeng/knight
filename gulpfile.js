@@ -24,7 +24,7 @@ gulp.task('default', function () {
     .pipe(babel())
     .pipe(gulp.dest('lib/create'))
 
-   gulp.src([ 'src/create/component/index.js' ])
+  gulp.src([ 'src/create/component/index.js' ])
     .pipe(babel())
     .pipe(gulp.dest('lib/create/component'))
 
