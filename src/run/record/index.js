@@ -9,8 +9,8 @@ export default class extends Generator {
   // 统一添加前缀组件模块前缀
   async writing () {
     const { CMP_SERVER_HOST } = process.env
-    let { name } = require(`${this.contextRoot}/.bscpmrc.json`)
-    let { 'name': module, version } = require(`${this.contextRoot}/package.json`)
+    let { name } = this.options.bscpmrc
+    let { 'name': module, version } = this.options.package
     let { cinumber = '', jobname = 'build' } = this.options
 
     if (!name || !name.match(/^[A-Za-z\-\d]+?$/)) {

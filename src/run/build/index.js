@@ -6,6 +6,9 @@ import fs from 'fs'
 import ejs from 'ejs'
 import getDemos from './get-demos'
 
+// 与一部分功能耦合，需要依赖组件项目中安装了某些模块才可以使用
+// gulp
+
 export default class extends Generator {
   async writing () {
 

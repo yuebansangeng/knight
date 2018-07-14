@@ -1,4 +1,4 @@
-#! /usr/bin/env node
+// 代码摘自第三方库
 
 import { parse, resolver } from 'react-docgen'
 import fs from 'fs'

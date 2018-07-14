@@ -3,12 +3,16 @@ import Generator from 'yeoman-generator'
 import Promise from 'bluebird'
 import { spawn } from 'child_process'
 
+// 与一部分功能耦合，需要依赖组件项目中安装了某些模块才可以使用
+// storybook-lib
+// @sotyrbook/react
+
 export default class extends Generator {
 
   // 统一添加前缀组件模块前缀
   async writing () {
-    let { name } = require(`${this.contextRoot}/.bscpmrc.json`)
-    let { 'name': module, version } = require(`${this.contextRoot}/package.json`)
+    let { name } = this.options.bscpmrc
+    let { 'name': module, version } = this.options.package
 
     console.log(`${name}/${version} 编译中...`)
 

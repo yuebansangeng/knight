@@ -14,7 +14,7 @@ export default class extends Generator {
     console.log(`bscpm ${'Starting'.yellow} package compress`)
 
     // 获取当前组件包信息
-    let packinfo = require(`${contextRoot}/package.json`)
+    let packinfo = this.options.package
     let examples = require(`${contextRoot}/.build/.examples.json`)
 
     // 组装接口上传需要的文件
