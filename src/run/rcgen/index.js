@@ -2,6 +2,8 @@
 import Generator from 'yeoman-generator'
 import fs from 'fs'
 
+// 当组件中没有 bscpmrc 文件时，自动生成
+
 export default class extends Generator {
 
   // 统一添加前缀组件模块前缀

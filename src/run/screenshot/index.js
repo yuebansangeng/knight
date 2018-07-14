@@ -1,8 +1,6 @@
 
 import path from 'path'
 import Generator from 'yeoman-generator'
-import Promise from 'bluebird'
-import request from 'request'
 
 export default class extends Generator {
 

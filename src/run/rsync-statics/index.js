@@ -4,6 +4,9 @@ import { spawn } from 'child_process'
 import Promise from 'bluebird'
 import path from 'path'
 
+// 应公司内部运维要求，静态资源统一机器发布
+// 生成完静态资源文件后，上传到指定服务器后，需要调用该任务，发布资源文件到 stnew03
+
 export default class extends Generator {
 
   async writing () {
