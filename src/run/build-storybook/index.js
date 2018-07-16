@@ -19,11 +19,13 @@ export default class extends Generator {
     // 生成 stories.js 配置文件
     await new Promise((resolve, reject) => {
       // buildonly: 只生成配置文件
-      let bo_cp = spawn('node', [ `${this.contextRoot}/node_modules/@beisen/storybook-lib/bin/index.js`, '--buildonly' ])
-
+      let bo_cp = spawn('node', [
+          'node_modules/.bin/make-stories'
+        ],
+        { cwd: this.contextRoot }
+      )
       bo_cp.stdout.on('data', data => console.log(`${data}`))
       bo_cp.stderr.on('data', data => console.log(`${data}`))
-
       bo_cp.on('close', () => {
         resolve(true)
       })
@@ -34,8 +36,8 @@ export default class extends Generator {
       let resmsg = []
       let build_cp = spawn('node',
         [
-          'node_modules/@storybook/react/bin/build.js',
-          '-c', `./node_modules/@beisen/storybook-lib/lib`,
+          'node_modules/.bin/build-storybook',
+          '-c', `./node_modules/@beisen/storybook-lib/lib/.storybook/`,
           '-o', `./storybook-static/${name}/${version}`
         ], {
           'cwd': this.contextRoot
