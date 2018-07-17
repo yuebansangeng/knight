@@ -1,7 +1,8 @@
 
 import Generator from 'yeoman-generator'
 import request from 'request'
-import { spawnSync, exec } from 'child_process'
+import { spawnSync } from 'child_process'
+import gitclone from './git-clone'
 
 export default class extends Generator {
 
@@ -46,6 +47,7 @@ export default class extends Generator {
     }
 
     let { projectName, username } = this.promptes
+
     request(`http://cmp.beisen.io/users/create-project?project=${projectName}&username=${username}`, (err, resp, body) => {
       if (err) {
         throw new Error(`${'Error'.red} gitlab上已有该项目|项目创建失败`)
@@ -56,16 +58,14 @@ export default class extends Generator {
       // 如果接口中返回非200，异常，则提示错误
       if (code !== 200) throw new Error(message)
 
-      exec(`git clone git@gitlab.beisencorp.com:${data.group}/${projectName}.git`, (error, stdout, stderr) => {
-        if (error) {
-          throw new Error(`clone error: ${error}`)
-        }
-
-        console.log(`${'Warning:'.green}${projectName}项目clone成功,先执行cd ${projectName}跳至该项目再运行`)
-
-        this._copyTemplateFiles()
-        this._installPkg()
-      })
+      // 执行clone项目
+      gitclone(5, data.group, projectName)
+        .then(statue => {
+          if (statue) {
+            this._copyTemplateFiles()
+            this._installPkg()
+          }
+        })
     })
   }
 

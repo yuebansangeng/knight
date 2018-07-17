@@ -24,7 +24,10 @@ gulp.task('default', function () {
     .pipe(babel())
     .pipe(gulp.dest('lib/create'))
 
-  gulp.src([ 'src/create/component/index.js' ])
+  gulp.src([
+    'src/create/component/index.js',
+    'src/create/component/git-clone.js'
+  ])
     .pipe(babel())
     .pipe(gulp.dest('lib/create/component'))
 
@@ -43,6 +46,7 @@ gulp.task('watch', function () {
     'src/run/**/*.js',
     'src/create/index.js',
     'src/create/component/index.js',
+    'src/create/component/git-clone.js',
     'src/create/component/templates/*',
     'src/create/component/templates/.babelrc',
     'src/create/component/templates/.bscpmrc.json'
