@@ -88,7 +88,7 @@ export default class extends Generator {
       [ 'npmignore', '.npmignore' ],
       [ 'package.json' ],
       [ 'README.md' ],
-      // [ '.bscpmrc.json' ]
+      [ '.bscpmrc.json' ]
     ])
   }
 
