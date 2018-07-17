@@ -2,7 +2,8 @@
 import Generator from 'yeoman-generator'
 import fs from 'fs'
 
-// 当组件中没有 bscpmrc 文件时，自动生成
+// 当组件中没有 bscpmrc 文件时，自动生成，以及自动补全
+// 主要在Jenkins构建时，使用
 
 export default class extends Generator {
 
@@ -11,23 +12,21 @@ export default class extends Generator {
     const bscpmrc = this.options.bscpmrc
     const packInfo = this.options.package
 
-    // 自动配置字段生成
-    if (!bscpmrc.description) {
-      bscpmrc.description = packInfo.description
+    // 使用 commonJs 规范提取组件维护者信息
+    const developers = (packInfo.maintainers || []).map(developer => developer.name)
+
+    // 从 package 中提取的配置信息
+    const extractInfo = {
+      'name': packInfo.name,
+      'description': packInfo.description,
+      'developers': developers,
+      'team': 'Unknown',
+      'category': '',
+      'device': ''
     }
 
-    if (!bscpmrc.name) {
-      bscpmrc.name = packInfo.name
-    }
+    const rconf = Object.assign({}, extractInfo, bscpmrc)
 
-    if (!bscpmrc.libversion) {
-      let libversion = 15
-      if (packInfo.dependencies.react.match(/16/g)) {
-        libversion = 16  
-      }
-      bscpmrc.libversion = libversion
-    }
-
-    fs.writeFileSync(`${this.contextRoot}/bscpmrc.json`, JSON.stringify(bscpmrc, null, 2))
+    fs.writeFileSync(`${this.contextRoot}/bscpmrc.json`, JSON.stringify(rconf, null, 2))
   }
 }

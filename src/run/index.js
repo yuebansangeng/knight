@@ -1,5 +1,6 @@
 
 import Generator from 'yeoman-generator'
+import fs from 'fs'
 
 export default class extends Generator {
 
@@ -16,7 +17,13 @@ export default class extends Generator {
 
     // 大部分功能中都需要用到 bscomrc 和 package 中的配置文件
     // 在这里统一提出，减少代码量、维护成本
-    const bscpmrc = require(`${this.contextRoot}/.bscpmrc.json`)
+    const bscpmrc = {}
+    const rcExists = fs.existsSync(`${this.contextRoot}/.bscpmrc.json`)
+    if (rcExists) {
+      bscpmrc = require(`${this.contextRoot}/.bscpmrc.json`)
+    }
+
+    // package 中的配置文件
     const packinfo = require(`${this.contextRoot}/package.json`)
 
     this.composeWith(
