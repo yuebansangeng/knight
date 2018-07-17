@@ -1,4 +1,5 @@
 
+import fs from 'fs'
 import Generator from 'yeoman-generator'
 import request from 'request'
 import { spawnSync } from 'child_process'
@@ -40,13 +41,22 @@ export default class extends Generator {
   }
 
   writing () {
-    if (!this.promptes.isSyncGitlab) {
+    let { projectName, username, isSyncGitlab } = this.promptes
+
+    if (!isSyncGitlab) {
+
+      // 创建目录
+      if (!fs.existsSync(projectName)){
+        fs.mkdirSync(projectName);
+      } else {
+        return console.log(`fatal: destination path '${projectName}' already exists and is not an empty directory.\n`)
+      }
+
+      // 创建、安装
       this._copyTemplateFiles()
       this._installPkg()
       return
     }
-
-    let { projectName, username } = this.promptes
 
     request(`http://cmp.beisen.io/users/create-project?project=${projectName}&username=${username}`, (err, resp, body) => {
       if (err) {
@@ -87,10 +97,10 @@ export default class extends Generator {
   }
 
   _installPkg () {
-    if (this.promptes.isSyncGitlab) {
+    // if (this.promptes.isSyncGitlab) {
       // 跳转至当前组件项目路径下
-      process.chdir(`${this.promptes.projectName}`)
-    }
+    process.chdir(`${this.promptes.projectName}`)
+    // }
     
     this.npmInstall([ 'react@15.6.2', 'react-dom@15.6.2' ])
     this.npmInstall(
@@ -112,9 +122,9 @@ export default class extends Generator {
       if (!destFilePath) throw new Error('destFilePath is none')
 
       // 改变路径为项目目录下
-      if (this.promptes.isSyncGitlab) {
-        destFilePath = `${this.promptes.projectName}/${destFilePath}`
-      }
+      // if (this.promptes.isSyncGitlab) {
+      destFilePath = `${this.promptes.projectName}/${destFilePath}`
+      // }
       this.fs.copyTpl(
         this.templatePath(tplFilePath),
         this.destinationPath(`${this.options.contextRoot}/${destFilePath}`),
