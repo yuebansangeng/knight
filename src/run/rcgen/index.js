@@ -26,7 +26,11 @@ export default class extends Generator {
     }
 
     const rconf = Object.assign({}, extractInfo, bscpmrc)
+    const rtconf = JSON.stringify(rconf, null, 2)
 
-    fs.writeFileSync(`${this.contextRoot}/bscpmrc.json`, JSON.stringify(rconf, null, 2))
+    fs.writeFileSync(`${this.contextRoot}/.bscpmrc.json`, rtconf)
+
+    console.log('rc文件生成完毕:')
+    console.log(rtconf)
   }
 }
