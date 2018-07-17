@@ -18,7 +18,7 @@ export default class extends Generator {
       {
         'type': 'input',
         'name': 'moduleName',
-        'message': '组件名字 ( 请使用使用小写英文、数字、中划线 )：'
+        'message': '组件名字 ( 可使用小写英文、数字、中划线 )：'
       }, {
         'type': 'confirm',
         'name': 'isSyncGitlab',
@@ -29,7 +29,7 @@ export default class extends Generator {
       // 名称只允许英文、数字、中划线
       let { moduleName } = promptes
       if (!moduleName || !moduleName.match(/^[a-z\-\d]+?$/)) {
-        throw new Error(`组件名称格式不正确：${moduleName}, 请使用使用小写英文、数字、中划线`)
+        throw new Error(`组件名称格式不正确：${moduleName}, 只能包含小写英文、数字、中划线`)
       }
       this.promptes = promptes
       this.promptes.projectName = promptes.moduleName
@@ -60,12 +60,6 @@ export default class extends Generator {
         if (error) {
           throw new Error(`clone error: ${error}`)
         }
-
-        // 获取Gitlab项目仓库url，添加到 package.json 文件中
-        // const { rstdout } = spawnSync('git', [ 'config', '--get', 'remote.origin.url' ])
-        // let repository = `${rstdout}`.replace(/^\s+|\s+$/, '')
-        // console.log(repository)
-        // this.promptes.repository = repository
 
         console.log(`${'Warning:'.green}${projectName}项目clone成功,先执行cd ${projectName}跳至该项目再运行`)
 

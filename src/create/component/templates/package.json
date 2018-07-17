@@ -5,11 +5,19 @@
   "main": "lib/index.js",
   "scripts": {
     "lib": "gulp-lib",
-    "examples": "storybook-lib"
+    "examples": "storybook-lib --port 9001"
   },
   "license": "ISC",
   "repository": {
     "type": "git",
     "url": "<%= repository %>"
+  },
+  "dependencies": {
+    "react": "~15.6.2",
+    "react-dom": "~15.6.2"
+  },
+  "devDependencies": {
+    "@beisen/gulp-lib": "^0.0.3",
+    "@beisen/storybook-lib": "^0.1.86"
   }
 }
