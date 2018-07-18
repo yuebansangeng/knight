@@ -10,6 +10,7 @@
   "scripts": {
     "prepublish": "gulp",
     "test": "mocha ./tests/index.js",
+    "watch": "gulp watch",
     "cover": "istanbul cover --report lcov _mocha -- -R spec ./tests/*.js",
     "mock": "node ./tests/mock-server.js"
   },
