@@ -1,6 +1,6 @@
 {
   "name": "@beisen/bscpm",
-  "version": "0.8.28",
+  "version": "0.8.3",
   "description": "cli：标准组件创建",
   "main": "src/upgrade-msg.js",
   "repository": {
@@ -41,6 +41,7 @@
     "!win32"
   ],
   "dependencies": {
+    "@beisen/get-examples": "^0.0.3",
     "@beisen/npm-cli-login": "0.0.1",
     "bluebird": "^3.5.1",
     "colors": "^1.2.1",

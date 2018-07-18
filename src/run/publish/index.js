@@ -5,6 +5,7 @@ import Generator from 'yeoman-generator'
 import request from 'request'
 import colors from 'colors'
 import { getContent } from './get-file-content'
+import getExamples from '@beisen/get-examples'
 
 export default class extends Generator {
 
@@ -15,17 +16,9 @@ export default class extends Generator {
     console.log(`bscpm ${'Starting'.yellow} package compress`)
 
     // 获取当前组件包信息
-    let packinfo = this.options.package
-    // let examples = require(`${contextRoot}/.build/.examples.json`)
-
+    const packinfo = this.options.package
     // 获取组件目录中定义的示例
-    const epath = path.join(contextRoot, 'examples')
-    const examples = readdirSync(epath)
-      .map(name => path.join(epath, name))
-      .filter(source => lstatSync(epath).isDirectory())
-      .map(name => {
-        return { 'name': name.split('\/')[name.split('\/').length - 1] }
-      })
+    const examples = getExamples(contextRoot)
 
     // 组装接口上传需要的文件
     let formData = {
@@ -53,6 +46,7 @@ export default class extends Generator {
     (err, resp, body) => {
       if (err || !/^2/.test(resp.statusCode)) {
         console.log(`bscpm ${'Error'.red} publishing`)
+        console.log(body)
         throw new Error(err)
       }
 
