@@ -22,14 +22,16 @@ const gitclone = async (num, group, project, messages) => {
     })
   })
 
+  console.log(messages.join(''))
+
   if (code !== 0){
-    if (messages.join('').match(/fatal: Could not read from remote repository/g)) {
+    // if (messages.join('').match(/fatal: Could not read from remote repository/g)) {
       num--
       setTimeout(() => gitclone(num, group, project, messages), 500)
-    } else {
-      console.log(messages.join(''))
-      return false
-    }
+    // } else {
+      // console.log(messages.join(''))
+      // return false
+    // }
   } else {
     return true
   }
