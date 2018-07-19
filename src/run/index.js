@@ -14,13 +14,14 @@ export default class extends Generator {
   }
 
   _private_resolve (path) {
+    const { RC_FILENAME } = process.env
 
     // 大部分功能中都需要用到 bscomrc 和 package 中的配置文件
     // 在这里统一提出，减少代码量、维护成本
-    let bscpmrc = {}
-    const rcExists = fs.existsSync(`${this.contextRoot}/.bscpmrc.json`)
+    let rc = {}
+    const rcExists = fs.existsSync(`${this.contextRoot}/${RC_FILENAME}`)
     if (rcExists) {
-      bscpmrc = require(`${this.contextRoot}/.bscpmrc.json`)
+      rc = require(`${this.contextRoot}/${RC_FILENAME}`)
     }
 
     // package 中的配置文件
@@ -32,7 +33,7 @@ export default class extends Generator {
         {},
         this.options,
         {
-          bscpmrc,
+          rc,
           // package 在nodejs环境中是关键词
           'package': packinfo,
           // composeWith 调用的模块中

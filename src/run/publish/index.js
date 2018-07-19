@@ -11,9 +11,9 @@ export default class extends Generator {
 
   writing () {
     const { contextRoot } = this.options
-    const { CMP_SERVER_HOST } = process.env
+    const { CMP_SERVER_HOST, RC_FILENAME } = process.env
 
-    console.log(`bscpm ${'Starting'.yellow} package compress`)
+    console.log(`${'Starting'.yellow} package compress`)
 
     // 获取当前组件包信息
     const packinfo = this.options.package
@@ -24,7 +24,7 @@ export default class extends Generator {
     let formData = {
       'name': packinfo.name,
       'version': packinfo.version,
-      'rc': getContent(`${contextRoot}/.bscpmrc.json`),
+      'rc': getContent(`${contextRoot}/${RC_FILENAME}`),
       'package': getContent(`${contextRoot}/package.json`),
       'examples': JSON.stringify(examples), // getContent(`${contextRoot}/.build/.examples.json`),
       'readme': getContent(`${contextRoot}/README.md`)
@@ -37,7 +37,7 @@ export default class extends Generator {
     })
 
     // 开始发布组件到共享中心
-    console.log(`bscpm ${'Starting'.yellow} publishing`)
+    console.log(`${'Starting'.yellow} publishing`)
 
     request.post({
       'url': `${CMP_SERVER_HOST}/users/publish`,
@@ -45,7 +45,7 @@ export default class extends Generator {
     },
     (err, resp, body) => {
       if (err || !/^2/.test(resp.statusCode)) {
-        console.log(`bscpm ${'Error'.red} publishing`)
+        console.log(`${'Error'.red} publishing`)
         console.log(body)
         throw new Error(err)
       }
@@ -54,9 +54,9 @@ export default class extends Generator {
       let { code, message, data } = JSON.parse(body)
 
       if (code === 200) {
-        console.log(`bscpm ${'Finished'.green} publishing`)
+        console.log(`${'Finished'.green} publishing`)
       } else {
-        console.log(`bscpm ${'Error'.red} publishing`)
+        console.log(`${'Error'.red} publishing`)
         throw new Error(message)
       }
     })

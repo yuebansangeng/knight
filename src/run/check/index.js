@@ -8,18 +8,18 @@ export default class extends Generator {
 
   // 统一添加前缀组件模块前缀
   async writing () {
-    const { CMP_SERVER_HOST } = process.env
-    const { name, team, category } = this.options.bscpmrc
+    const { CMP_SERVER_HOST, RC_FILENAME } = process.env
+    const { name, team, category } = this.options.rc
     const { 'name': module } = this.options.package
 
     if (!name) {
-      throw new Error('请在 .bscpmrc 文件中，配置 name 字段')
+      throw new Error(`请在 ${RC_FILENAME} 文件中，配置 name 字段`)
     }
     if (!name.match(/^[A-Za-z\-\d]+?$/)) {
-      throw new Error('.bscpmrc 文件中，name 字段只能包含有是字母、数字、中划线')
+      throw new Error(`${RC_FILENAME} 文件中，name 字段只能包含有是字母、数字、中划线`)
     }
     if (!team) {
-      throw new Error('请在 .bscpmrc 文件中，配置 team 字段（team 字段将会用来组件唯一性验证，以及搜索功能）')
+      throw new Error(`请在 ${RC_FILENAME} 文件中，配置 team 字段（team 字段将会用来组件唯一性验证，以及搜索功能）`)
     }
     if (!category) {
       console.log('组件未配置 category，将为组件自动匹配一个最相近类型')

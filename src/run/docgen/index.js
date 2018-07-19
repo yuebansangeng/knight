@@ -16,7 +16,7 @@ export default class extends Generator {
       fs.writeFileSync(`${this.contextRoot}/README.md`, docmd)
       console.log('文档自动生成完毕')
     } else {
-      console.log('组件已提供了文档，不自动生成，如有更新相自动生成新的文档，请在本地调用 "bscpm run docgen -f" 命令')
+      console.log(`组件已提供了文档，不自动生成，如有更新相自动生成新的文档，请在本地调用 "run docgen -f" 命令`)
     }
   }
 }

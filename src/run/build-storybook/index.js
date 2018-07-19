@@ -11,7 +11,7 @@ export default class extends Generator {
 
   // 统一添加前缀组件模块前缀
   async writing () {
-    let { name } = this.options.bscpmrc
+    let { name } = this.options.rc
     let { 'name': module, version } = this.options.package
 
     console.log(`${name}/${version} 编译中...`)

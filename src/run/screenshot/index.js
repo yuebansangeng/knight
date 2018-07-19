@@ -7,7 +7,7 @@ export default class extends Generator {
   // 统一添加前缀组件模块前缀
   async writing () {
     const { CMP_SERVER_HOST } = process.env
-    let { name } = this.options.bscpmrc
+    let { name } = this.options.rc
     let { 'name': module, version } = this.options.package
 
     function print (chilprocess) {
