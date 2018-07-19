@@ -74,6 +74,8 @@ export default class extends Generator {
           if (statue) {
             this._copyTemplateFiles()
             this._installPkg()
+          } else {
+            console.log('clone项目出现异常，请重试或手动操作')
           }
         })
     })
