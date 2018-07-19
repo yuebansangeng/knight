@@ -1,6 +1,10 @@
 
 import { spawn } from 'child_process'
 
+const timeout = (ms) => {
+  return new Promise(resolve => setTimeout(resolve, ms))
+}
+
 // Gitlab 刚创建的完毕的项目可能会出现找不到的情况
 // 避免该情况，当出现找不到的异常时，重复获取5次尝试
 const gitclone = async (num, group, project, messages) => {
@@ -22,16 +26,15 @@ const gitclone = async (num, group, project, messages) => {
     })
   })
 
-  console.log(messages.join(''))
-
   if (code !== 0){
-    // if (messages.join('').match(/fatal: Could not read from remote repository/g)) {
+    if (messages.join('').match(/Could not read from remote repository/g)) {
       num--
-      setTimeout(() => gitclone(num, group, project, messages), 500)
-    // } else {
-      // console.log(messages.join(''))
-      // return false
-    // }
+      await timeout(500)
+      gitclone(num, group, project, messages)
+    } else {
+      console.log(messages.join(''))
+      return false
+    }
   } else {
     return true
   }
