@@ -41,6 +41,7 @@ export default class extends Generator {
   }
 
   writing () {
+    const { CMP_SERVER_HOST } = process.env
     let { projectName, username, isSyncGitlab } = this.promptes
 
     if (!isSyncGitlab) {
@@ -58,7 +59,7 @@ export default class extends Generator {
       return
     }
 
-    request(`http://cmp.beisen.io/users/create-project?project=${projectName}&username=${username}`, (err, resp, body) => {
+    request(`${CMP_SERVER_HOST}/users/create-project?project=${projectName}&username=${username}`, (err, resp, body) => {
       if (err) {
         throw new Error(`${'Error'.red} gitlab上已有该项目|项目创建失败`)
       }
