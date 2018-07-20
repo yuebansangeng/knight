@@ -2,6 +2,7 @@
 import Generator from 'yeoman-generator'
 import fs from 'fs'
 import Hjson from 'hjson'
+import genrc from './genrc'
 
 export default class extends Generator {
 
@@ -19,9 +20,8 @@ export default class extends Generator {
 
     // 大部分功能中都需要用到 bscomrc 和 package 中的配置文件
     // 在这里统一提出，减少代码量、维护成本
-    let rc = {}
-    const rcExists = fs.existsSync(`${this.contextRoot}/${RC_FILENAME}`)
-    if (rcExists) {
+    let rc = genrc()
+    if (fs.existsSync(`${this.contextRoot}/${RC_FILENAME}`)) {
       rc = Hjson.parse(fs.readFileSync(`${this.contextRoot}/${RC_FILENAME}`, 'utf-8'))
     }
 
