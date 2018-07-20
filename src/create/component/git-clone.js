@@ -1,8 +1,6 @@
 
 import { spawn } from 'child_process'
 
-const { GITLAB_HOST } = process.env
-
 const timeout = (ms) => {
   return new Promise(resolve => setTimeout(resolve, ms))
 }
@@ -10,6 +8,8 @@ const timeout = (ms) => {
 // Gitlab 刚创建的完毕的项目可能会出现找不到的情况
 // 避免该情况，当出现找不到的异常时，重复获取5次尝试
 const gitclone = (num, group, project, messages) => {
+  const { GITLAB_HOST } = process.env
+
   return new Promise(async (resolve, reject) => {
     if (num === -1) {
       console.log(messages.join('')) 
