@@ -1,6 +1,7 @@
 
 import Generator from 'yeoman-generator'
 import fs from 'fs'
+import Hjson from 'hjson'
 
 export default class extends Generator {
 
@@ -21,7 +22,7 @@ export default class extends Generator {
     let rc = {}
     const rcExists = fs.existsSync(`${this.contextRoot}/${RC_FILENAME}`)
     if (rcExists) {
-      rc = require(`${this.contextRoot}/${RC_FILENAME}`)
+      rc = Hjson.parse(fs.readFileSync(`${this.contextRoot}/${RC_FILENAME}`, 'utf-8'))
     }
 
     // package 中的配置文件

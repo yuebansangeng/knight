@@ -88,6 +88,7 @@ export default class extends Generator {
   * 函数名前面添加下滑线，告知Yeoman不自定执行改函数
   */
   _copyTemplateFiles () {
+    const { RC_FILENAME } = process.env
     this._private_copies([
       [ 'gitignore', '.gitignore' ], // npm publish，会忽略 .gitignore 文件
       [ 'index.js', 'src/index.js' ],
@@ -95,7 +96,7 @@ export default class extends Generator {
       [ 'npmignore', '.npmignore' ],
       [ 'package.json' ],
       [ 'README.md' ],
-      [ '.bscpmrc.json' ]
+      [ RC_FILENAME ]
     ])
   }
 

@@ -12,7 +12,7 @@ export default () => {
 
     const { CMP_SERVER_HOST } = process.env
 
-    request(`${CMP_SERVER_HOST}/users/get-bscpm-last-version`, (err, resp, body) => {
+    request(`${CMP_SERVER_HOST}/users/get-cli-last-version`, (err, resp, body) => {
       if (err) {
         console.log(`${'Error'.red} err`)
         return reject(false)
@@ -20,7 +20,7 @@ export default () => {
 
       const { version } = JSON.parse(body)
       if (pckJson.version !== version) {
-        console.log(`@beisen/bscpm 已有新的版本${version}, 请及时更新`.magenta)
+        console.log(`已有新的版本${version}, 请及时更新`.magenta)
       }
       resolve(version)
     })
