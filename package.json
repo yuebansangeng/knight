@@ -1,6 +1,6 @@
 {
   "name": "@beisen/bscpm",
-  "version": "0.8.43",
+  "version": "0.8.44",
   "description": "cli：标准组件创建",
   "main": "src/upgrade-msg.js",
   "repository": {
@@ -50,6 +50,7 @@
     "dotenv": "^5.0.1",
     "ejs": "^2.6.1",
     "handlebars": "^4.0.11",
+    "hjson": "^3.1.1",
     "jsonlint": "^1.6.3",
     "react-docgen": "^2.20.1",
     "request": "^2.85.0",

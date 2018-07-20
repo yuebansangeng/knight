@@ -13,8 +13,6 @@ export default class extends Generator {
     const { contextRoot } = this.options
     const { CMP_SERVER_HOST, RC_FILENAME } = process.env
 
-    console.log(`${'Starting'.yellow} package compress`)
-
     // 获取当前组件包信息
     const packinfo = this.options.package
     // 获取组件目录中定义的示例
