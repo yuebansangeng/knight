@@ -6,12 +6,13 @@ import request from 'request'
 import colors from 'colors'
 import { getContent } from './get-file-content'
 import getExamples from '@beisen/get-examples'
+import reactRC from '@beisen/read-rc'
 
 export default class extends Generator {
 
   writing () {
     const { contextRoot } = this.options
-    const { CMP_SERVER_HOST, RC_FILENAME } = process.env
+    const { CMP_SERVER_HOST } = process.env
 
     // 获取当前组件包信息
     const packinfo = this.options.package
@@ -22,9 +23,9 @@ export default class extends Generator {
     let formData = {
       'name': packinfo.name,
       'version': packinfo.version,
-      'rc': getContent(`${contextRoot}/${RC_FILENAME}`),
+      'rc': JSON.stringify(reactRC()),
       'package': getContent(`${contextRoot}/package.json`),
-      'examples': JSON.stringify(examples), // getContent(`${contextRoot}/.build/.examples.json`),
+      'examples': JSON.stringify(examples),
       'readme': getContent(`${contextRoot}/README.md`)
     }
 

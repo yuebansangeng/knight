@@ -1,6 +1,6 @@
 {
   "name": "@beisen/bscpm",
-  "version": "0.8.46",
+  "version": "0.8.48",
   "description": "cli：标准组件创建",
   "main": "src/upgrade-msg.js",
   "repository": {
@@ -44,6 +44,7 @@
   "dependencies": {
     "@beisen/get-examples": "^0.0.3",
     "@beisen/npm-cli-login": "0.0.1",
+    "@beisen/read-rc": "0.0.2",
     "bluebird": "^3.5.1",
     "colors": "^1.2.1",
     "commander": "^2.15.1",
@@ -54,7 +55,7 @@
     "jsonlint": "^1.6.3",
     "react-docgen": "^2.20.1",
     "request": "^2.85.0",
-    "yeoman-environment": "^2.0.5",
+    "yeoman-environment": "^2.3.1",
     "yeoman-generator": "^2.0.3"
   },
   "devDependencies": {

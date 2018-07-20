@@ -4,6 +4,7 @@ import Generator from 'yeoman-generator'
 import request from 'request'
 import { spawnSync } from 'child_process'
 import gitclone from './git-clone'
+import { RCFileName } from '@beisen/read-rc'
 
 export default class extends Generator {
 
@@ -88,7 +89,6 @@ export default class extends Generator {
   * 函数名前面添加下滑线，告知Yeoman不自定执行改函数
   */
   _copyTemplateFiles () {
-    const { RC_FILENAME } = process.env
     this._private_copies([
       [ 'gitignore', '.gitignore' ], // npm publish，会忽略 .gitignore 文件
       [ 'index.js', 'src/index.js' ],
@@ -96,7 +96,7 @@ export default class extends Generator {
       [ 'npmignore', '.npmignore' ],
       [ 'package.json' ],
       [ 'README.md' ],
-      [ RC_FILENAME ]
+      [ RCFileName ]
     ])
   }
 
