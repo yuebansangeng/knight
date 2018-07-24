@@ -60,15 +60,17 @@ export default class extends Generator {
       return
     }
 
-    request(`${CMP_SERVER_HOST}/users/create-project?project=${projectName}&username=${username}`, (err, resp, body) => {
+    request(`${CMP_SERVER_HOST}/users/create-project?project=${projectName}`, (err, resp, body) => {
       if (err) {
         throw new Error(`${'Error'.red} gitlab上已有该项目|项目创建失败`)
       }
-
       const { code, message, data = {} } = JSON.parse(body)
 
       // 如果接口中返回非200，异常，则提示错误
-      if (code !== 200) throw new Error(message)
+      if (code !== 200) {
+        let msg = `${message}, 可能是username缺失，如果没有配置 git user.name，可使用 --username 添加Gitlab用户名`
+        throw new Error(msg)
+      }
 
       // 执行clone项目
       gitclone(5, data.group, projectName)

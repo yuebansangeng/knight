@@ -36,7 +36,7 @@ gulp.task('default', function () {
 
   gulp.src([
     'src/create/component/templates/.babelrc',
-    'src/create/component/templates/.bscpmrc.json', ])
+    'src/create/component/templates/.bscpmrc', ])
     .pipe(gulp.dest('lib/create/component/templates/'))
 })
 
@@ -49,7 +49,7 @@ gulp.task('watch', function () {
     'src/create/component/git-clone.js',
     'src/create/component/templates/*',
     'src/create/component/templates/.babelrc',
-    'src/create/component/templates/.bscpmrc.json'
+    'src/create/component/templates/.bscpmrc'
   ],
   [ 'default' ])
 })
