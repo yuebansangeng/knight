@@ -60,7 +60,7 @@ export default class extends Generator {
       return
     }
 
-    request(`${CMP_SERVER_HOST}/users/create-project?project=${projectName}`, (err, resp, body) => {
+    request(`${CMP_SERVER_HOST}/users/create-project?project=${projectName}&username=${username}`, (err, resp, body) => {
       if (err) {
         throw new Error(`${'Error'.red} gitlab上已有该项目|项目创建失败`)
       }
