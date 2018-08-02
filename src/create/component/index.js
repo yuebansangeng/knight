@@ -49,9 +49,13 @@ export default class extends Generator {
 
       // 创建目录
       if (!fs.existsSync(projectName)){
-        fs.mkdirSync(projectName);
+        fs.mkdirSync(projectName)
       } else {
-        return console.log(`fatal: destination path '${projectName}' already exists and is not an empty directory.\n`)
+        // 文件夹中有文件，提示错误
+        let files = fs.readdirSync(projectName).filter(filename => filename !== '.git')
+        if (files.length) {
+          return console.log(`fatal: destination path '${projectName}' already exists and is not an empty directory.\n`) 
+        }
       }
 
       // 创建、安装

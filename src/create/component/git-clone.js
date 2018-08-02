@@ -22,7 +22,6 @@ const gitclone = (num, group, project, messages) => {
 
     // close项目
     let code = await new Promise((resolve, reject) => {
-      console.log(`git@${GITLAB_HOST}:${group}/${project}.git`)
       let cp_g = spawn('git', [ 'clone', `git@${GITLAB_HOST}:${group}/${project}.git` ])
       cp_g.stdout.on('data', m => messages.push(`${m}`))
       cp_g.stderr.on('data', m => messages.push(`${m}`))
