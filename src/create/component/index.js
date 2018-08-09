@@ -63,6 +63,7 @@ export default class extends Generator {
       }
       this.promptes = promptes
       this.promptes.projectName = moduleName
+      this.promptes.username = username
       this.promptes.developers = developers
       this.promptes.description = description
       this.promptes.category = category
