@@ -1,8 +1,8 @@
 {
   "name": "<%= projectName %>",
-  "team": "Unknown",
-  "category": "",
-  "developers": [],
-  "description": "",
-  "device": ""
+  "team": "<%= team%>",
+  "category": "<%= category %>",
+  "developers": "<%= developers %>",
+  "description": "<%= description %>",
+  "device": "<%= device %>"
 }
