@@ -16,27 +16,58 @@ export default class extends Generator {
       const { stdout } = spawnSync('git', [ 'config', 'user.name' ])
       username = `${stdout}`.replace(/^\s+|\s+$/, '')
     }
-
     return this.prompt([
       {
         'type': 'input',
         'name': 'moduleName',
         'message': '组件名字 ( 可使用小写英文、数字、中划线 )：'
-      }, {
+      }, 
+      {
         'type': 'confirm',
         'name': 'isSyncGitlab',
         'message': '是否在gitlab上创建该项目',
         'default': true
+      },
+      {
+        'type': 'input',
+        'name': 'developers',
+        'message': '开发者名称：',
+        'default': username
+      },
+      {
+        'type': 'input',
+        'name': 'description',
+        'message': '项目描述：'
+      },
+      {
+        'type': 'input',
+        'name': 'category',
+        'message': '组件分类信息：'
+      },
+      {
+        'type': 'input',
+        'name': 'team',
+        'message': '项目组：'
+      },
+      {
+        'type': 'list',
+        'name': 'device',
+        'message': '设备名：',
+        'choices': ['pc','mobile']
       }
     ]).then(promptes => {
       // 名称只允许英文、数字、中划线
-      let { moduleName } = promptes
+      let { moduleName,developers,description,category,team,device} = promptes
       if (!moduleName || !moduleName.match(/^[a-z\-\d]+?$/)) {
         throw new Error(`组件名称格式不正确：${moduleName}, 只能包含小写英文、数字、中划线`)
       }
       this.promptes = promptes
-      this.promptes.projectName = promptes.moduleName
-      this.promptes.username = username
+      this.promptes.projectName = moduleName
+      this.promptes.developers = developers
+      this.promptes.description = description
+      this.promptes.category = category
+      this.promptes.team = team
+      this.promptes.device = device
       this.promptes.repository = ''
     })
   }
@@ -44,9 +75,7 @@ export default class extends Generator {
   writing () {
     const { CMP_SERVER_HOST } = process.env
     let { projectName, username, isSyncGitlab } = this.promptes
-
     if (!isSyncGitlab) {
-
       // 创建目录
       if (!fs.existsSync(projectName)){
         fs.mkdirSync(projectName)
@@ -57,7 +86,6 @@ export default class extends Generator {
           return console.log(`fatal: destination path '${projectName}' already exists and is not an empty directory.\n`) 
         }
       }
-
       // 创建、安装
       this._copyTemplateFiles()
       this._installPkg()
