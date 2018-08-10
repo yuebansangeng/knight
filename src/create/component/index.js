@@ -30,6 +30,12 @@ export default class extends Generator {
         },
         {
           'type': 'input',
+          'name': 'team',
+          'message': '项目所在分组：',
+          'default': 'ux-share-platform'
+        },
+        {
+          'type': 'input',
           'name': 'developers',
           'message': '开发者名称：',
           'default': username
@@ -48,11 +54,6 @@ export default class extends Generator {
           'type': 'input',
           'name': 'category',
           'message': '组件分类：'
-        },
-        {
-          'type': 'input',
-          'name': 'team',
-          'message': '项目组：'
         },
         {
           'type': 'list',
