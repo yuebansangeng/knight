@@ -26,7 +26,7 @@ export default class extends Generator {
           if (!value.match(/^[a-z\-\d]+?$/)) {
             return '组件名称格式不正确, 只能包含小写英文、数字、中划线'
           }
-          return true
+          return true;
         }
       },
       {
@@ -49,7 +49,10 @@ export default class extends Generator {
       {
         'type': 'input',
         'name': 'group',
-        'message': '组件分组：'
+        'message': '组件分组：',
+        'when': function(answers) { // 当isSyncGitlab为true的时候才会提问当前问题
+          return answers.isSyncGitlab
+        }
       },
       {
         'type': 'input',
@@ -65,7 +68,7 @@ export default class extends Generator {
         'type': 'list',
         'name': 'device',
         'message': '设备名：',
-        'choices': ['pc', 'mobile']
+        'choices': ['pc','mobile']
       }
     ]).then(promptes => {
       let { moduleName, developers, description, group, category, team, device } = promptes
