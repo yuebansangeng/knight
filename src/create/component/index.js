@@ -48,7 +48,10 @@ export default class extends Generator {
         {
           'type': 'input',
           'name': 'group',
-          'message': '组件分组：'
+          'message': '组件分组：',
+          'when': function(answers) { // 当isSyncGitlab为true的时候才会提问当前问题
+            return answers.isSyncGitlab
+          }
         },
         {
           'type': 'input',
