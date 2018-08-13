@@ -16,6 +16,7 @@ export default class extends Generator {
       const { stdout } = spawnSync('git', [ 'config', 'user.name' ])
       username = `${stdout}`.replace(/^\s+|\s+$/, '')
     }
+
     return this.prompt([
         {
           'type': 'input',

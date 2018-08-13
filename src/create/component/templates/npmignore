@@ -8,6 +8,11 @@ package-lock.json
 test
 coverage
 
+./recordings
+examples
+.bscpmrc
+.bscpmrc.json
+
 # build tools
 .travis.yml
 .jenkins.yml
