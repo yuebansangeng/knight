@@ -20,7 +20,13 @@ export default class extends Generator {
         {
           'type': 'input',
           'name': 'moduleName',
-          'message': '组件名字 ( 可使用小写英文、数字、中划线 )：'
+          'message': '组件名字 ( 可使用小写英文、数字、中划线 )：',
+          'validate': function (value) { 
+            if(!value.match(/^[a-z\-\d]+?$/)){
+              return '组件名称格式不正确, 只能包含小写英文、数字、中划线'
+            }
+            return true
+          }
         },
         {
           'type': 'confirm',
@@ -62,9 +68,9 @@ export default class extends Generator {
         }
       ]).then(promptes=>{
           let { moduleName, developers, description, group, category, team, device } = promptes
-          if (!moduleName || !moduleName.match(/^[a-z\-\d]+?$/)) {
-            throw new Error(`组件名称格式不正确：${moduleName}, 只能包含小写英文、数字、中划线`)
-          }
+          // if (!moduleName || !moduleName.match(/^[a-z\-\d]+?$/)) {
+          //   throw new Error(`组件名称格式不正确：${moduleName}, 只能包含小写英文、数字、中划线`)
+          // }
           this.promptes = promptes
           this.promptes.projectName = moduleName
           this.promptes.username = username
