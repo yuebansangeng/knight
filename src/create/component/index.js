@@ -16,68 +16,64 @@ export default class extends Generator {
       const { stdout } = spawnSync('git', [ 'config', 'user.name' ])
       username = `${stdout}`.replace(/^\s+|\s+$/, '')
     }
+
     return this.prompt([
-        {
-          'type': 'input',
-          'name': 'moduleName',
-          'message': '组件名字 ( 可使用小写英文、数字、中划线 )：'
-        },
-        {
-          'type': 'confirm',
-          'name': 'isSyncGitlab',
-          'message': '是否在gitlab上创建该项目',
-          'default': true
-        },
-        {
-          'type': 'input',
-          'name': 'team',
-          'message': '项目所在分组：',
-          'default': 'ux-share-platform'
-        },
-        {
-          'type': 'input',
-          'name': 'developers',
-          'message': '开发者名称：',
-          'default': username
-        },
-        {
-          'type': 'input',
-          'name': 'description',
-          'message': '项目描述：'
-        },
-        {
-          'type': 'input',
-          'name': 'group',
-          'message': '组件分组：'
-        },
-        {
-          'type': 'input',
-          'name': 'category',
-          'message': '组件分类：'
-        },
-        {
-          'type': 'list',
-          'name': 'device',
-          'message': '设备名：',
-          'choices': ['pc','mobile']
-        }
-      ]).then(promptes=>{
-          let { moduleName, developers, description, group, category, team, device } = promptes
-          if (!moduleName || !moduleName.match(/^[a-z\-\d]+?$/)) {
-            throw new Error(`组件名称格式不正确：${moduleName}, 只能包含小写英文、数字、中划线`)
-          }
-          this.promptes = promptes
-          this.promptes.projectName = moduleName
-          this.promptes.username = username
-          this.promptes.group = group
-          this.promptes.developers = developers
-          this.promptes.description = description
-          this.promptes.category = category
-          this.promptes.team = team
-          this.promptes.device = device
-          this.promptes.repository = ''
-        })
+      {
+        'type': 'input',
+        'name': 'moduleName',
+        'message': '组件名字 ( 可使用小写英文、数字、中划线 )：'
+      }, {
+        'type': 'confirm',
+        'name': 'isSyncGitlab',
+        'message': '是否在gitlab上创建该项目',
+        'default': true
+      }, {
+        'type': 'input',
+        'name': 'team',
+        'message': '项目所在分组：',
+        'default': 'ux-share-platform'
+      }, {
+        'type': 'input',
+        'name': 'developers',
+        'message': '开发者名称：',
+        'default': username
+      }, {
+        'type': 'input',
+        'name': 'description',
+        'message': '项目描述：'
+      }, {
+        'type': 'input',
+        'name': 'group',
+        'message': '组件分组：'
+      }, {
+        'type': 'input',
+        'name': 'category',
+        'message': '组件分类：'
+      }, {
+        'type': 'list',
+        'name': 'device',
+        'message': '设备名：',
+        'choices': ['pc','mobile']
       }
+    ]).then(promptes=>{
+      let { moduleName, developers, description, group, category, team, device } = promptes
+
+      if (!moduleName || !moduleName.match(/^[a-z\-\d]+?$/)) {
+        throw new Error(`组件名称格式不正确：${moduleName}, 只能包含小写英文、数字、中划线`)
+      }
+
+      this.promptes = promptes
+      this.promptes.projectName = moduleName
+      this.promptes.username = username
+      this.promptes.group = group
+      this.promptes.developers = developers
+      this.promptes.description = description
+      this.promptes.category = category
+      this.promptes.team = team
+      this.promptes.device = device
+      this.promptes.repository = ''
+    })
+  }
 
   writing () {
     const { CMP_SERVER_HOST } = process.env
