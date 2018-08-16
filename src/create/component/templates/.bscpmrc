@@ -2,7 +2,7 @@
   "name": "<%= projectName %>",
   "team": "<%= team%>",
   "category": "<%= category %>",
-  "developers": "<%= developers %>",
+  "developers": [ "<%= developer %>" ],
   "description": "<%= description %>",
   "device": "<%= device %>"
 }

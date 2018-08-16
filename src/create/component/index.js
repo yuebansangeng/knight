@@ -37,7 +37,7 @@ export default class extends Generator {
       },
       {
         'type': 'input',
-        'name': 'developers',
+        'name': 'developer',
         'message': '开发者名称：',
         'default': username
       },
@@ -72,15 +72,12 @@ export default class extends Generator {
         'choices': ['pc','mobile']
       }
     ]).then(promptes => {
-      let { moduleName, developers, description, group, category, team, device } = promptes
-      // if (!moduleName || !moduleName.match(/^[a-z\-\d]+?$/)) {
-      //   throw new Error(`组件名称格式不正确：${moduleName}, 只能包含小写英文、数字、中划线`)
-      // }
+      let { moduleName, developer, description, group, category, team, device } = promptes
       this.promptes = promptes
       this.promptes.projectName = moduleName
-      this.promptes.username = username
+      this.promptes.username = developer
       this.promptes.group = group
-      this.promptes.developers = developers
+      this.promptes.developer = developer
       this.promptes.description = description
       this.promptes.category = category
       this.promptes.team = team
