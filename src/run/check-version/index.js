@@ -1,14 +1,17 @@
 
 import Generator from 'yeoman-generator'
-import gen from './gen'
-import fs from 'fs'
+import { execSync } from 'child_process'
 
 export default class extends Generator {
 
   // 统一添加前缀组件模块前缀
   writing () {
-    const { version } = this.options.package
+    const { name, version } = this.options.package
 
-    // 如果 version 已经存在了，就 throw Error
+    var stdout = execSync(`npm view ${name} versions`)
+    
+    if (`${stdout}`.match(new RegExp(`'${version}'`, 'ig'))) {
+      throw new Error("version已存在")
+    }
   }
 }
