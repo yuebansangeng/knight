@@ -89,6 +89,7 @@ export default class extends Generator {
   writing() {
     const { CMP_SERVER_HOST } = process.env
     let { projectName, username, isSyncGitlab, group } = this.promptes
+
     if (!isSyncGitlab) {
       // 创建目录
       if (!fs.existsSync(projectName)) {
@@ -149,10 +150,8 @@ export default class extends Generator {
   }
 
   _installPkg() {
-    // if (this.promptes.isSyncGitlab) {
     // 跳转至当前组件项目路径下
     process.chdir(`${this.promptes.projectName}`)
-    // }
 
     this.npmInstall(['react@15.6.2', 'react-dom@15.6.2'])
     this.npmInstall(
