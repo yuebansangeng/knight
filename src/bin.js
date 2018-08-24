@@ -33,13 +33,11 @@ program
   .option('-t, --to [to]', '邮件发送地址 [build-after-notice]')
   .option('-s, --status [status]', 'Jenkins构建任务状态 [build-after-notice]')
   .option('-j, --jobname [jobname]', 'Jenkins构建任务名 [record]')
-  .option('-p, --packages [packages]', '包路径')
-  .option('-t, --target [target]', '目标路径')
   .description('组件构建相关的命令：build, build-after-notice, build-storybook, check, docgen, login, publish, rcgen, record, rsync-statics')
   .action((cmd, opts) => {
     // 不可以直接把opts传入run函数的第二个参数，会报错
-    let { force, cinumber, jobname, to, status, packages, target } = opts
-    env.run(`run ${cmd}`, { force, cinumber, jobname, to, status, packages, target })
+    let { force, cinumber, jobname, to, status } = opts
+    env.run(`run ${cmd}`, { force, cinumber, jobname, to, status })
   })
 
 program.parse(process.argv)
