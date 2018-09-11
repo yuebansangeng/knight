@@ -35,12 +35,12 @@ export default class extends Generator {
         'message': '是否在gitlab上创建该项目',
         'default': true
       },
-      {
-        'type': 'input',
-        'name': 'developers',
-        'message': '开发者名称：',
-        'default': username
-      },
+      // {
+      //   'type': 'input',
+      //   'name': 'developers',
+      //   'message': '开发者名称：',
+      //   'default': username
+      // },
       {
         'type': 'input',
         'name': 'description',
@@ -72,7 +72,8 @@ export default class extends Generator {
         'choices': ['pc','mobile']
       }
     ]).then(promptes => {
-      let { moduleName, developers, description, group, category, team, device } = promptes
+      //let { moduleName, developers, description, group, category, team, device } = promptes
+      let { moduleName, description, group, category, team, device } = promptes
       // if (!moduleName || !moduleName.match(/^[a-z\-\d]+?$/)) {
       //   throw new Error(`组件名称格式不正确：${moduleName}, 只能包含小写英文、数字、中划线`)
       // }
@@ -80,7 +81,7 @@ export default class extends Generator {
       this.promptes.projectName = moduleName
       this.promptes.username = username
       this.promptes.group = group
-      this.promptes.developers = developers
+      //this.promptes.developers = developers
       this.promptes.description = description
       this.promptes.category = category
       this.promptes.team = team
@@ -151,13 +152,15 @@ export default class extends Generator {
       ])
   }
   _writePackage(){
-    let packinfo = fs.readFileSync(this.templatePath(`package.json`),'utf-8');
-    let stdout = execSync(`git remote get-url --push origin`)
-    let stdout_str = `${stdout}`
-    let packJson =  JSON.parse(packinfo)
-    packJson.repository = {type: "git",url: stdout_str.replace('\n','')}
+    let packJson = JSON.parse(fs.readFileSync(this.templatePath(`package.json`),'utf-8'));
+
+    let stdout = execSync(`git remote get-url --push origin`,{cwd: `${this.promptes.projectName}`})
+    
+    let stdout_str = `${stdout}`.replace('\n','')
+    packJson.repository = {type: "git",url: stdout_str}
+
     fs.writeFileSync(this.templatePath(`package.json`), JSON.stringify(packJson,null,2),'utf-8');
-    console.log('-----------package读取成功--------')
+    console.log('-----------package.json写入成功--------')
   }
 
   _installPkg() {

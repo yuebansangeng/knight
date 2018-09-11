@@ -10,7 +10,7 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "git@gitlab.beisencorp.com:ux-share-platform/ux-endtest.git"
   },
   "dependencies": {
     "react": "~15.6.2",
