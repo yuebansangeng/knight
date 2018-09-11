@@ -1,10 +1,10 @@
-
 import fs from 'fs'
 import Generator from 'yeoman-generator'
 import request from 'request'
 import { spawnSync } from 'child_process'
 import gitclone from './git-clone'
 import { RCFileName } from '@beisen/read-rc'
+import { execSync } from 'child_process'
 
 export default class extends Generator {
 
@@ -85,13 +85,12 @@ export default class extends Generator {
       this.promptes.category = category
       this.promptes.team = team
       this.promptes.device = device
-      this.promptes.repository = ''
     })
   }
 
   writing() {
     const { CMP_SERVER_HOST } = process.env
-    let { projectName, username, isSyncGitlab, group } = this.promptes
+    let { projectName, username, isSyncGitlab, group} = this.promptes
     if (!isSyncGitlab) {
       // 创建目录
       if (!fs.existsSync(projectName)) {
@@ -120,18 +119,19 @@ export default class extends Generator {
         let msg = `${message}, 可能是username缺失，如果没有配置 git user.name，可使用 --username 添加Gitlab用户名`
         throw new Error(msg)
       }
-
       // 执行clone项目
-      gitclone(5, data.group, projectName)
+     gitclone(5, data.group, projectName)
         .then(statue => {
           if (statue) {
+            this._writePackage()
             this._copyTemplateFiles()
             this._installPkg()
           } else {
             console.log('clone项目出现异常，请重试或手动操作')
           }
         })
-    })
+      }
+    )
   }
 
   /*
@@ -139,16 +139,25 @@ export default class extends Generator {
   * 28原则：百分之20%的代码解决80%的功能
   * 函数名前面添加下滑线，告知Yeoman不自定执行改函数
   */
-  _copyTemplateFiles() {
-    this._private_copies([
-      ['gitignore', '.gitignore'], // npm publish，会忽略 .gitignore 文件
-      ['index.js', 'src/index.js'],
-      ['example.js', 'examples/default/index.js'],
-      ['npmignore', '.npmignore'],
-      ['package.json'],
-      ['README.md'],
-      [RCFileName]
-    ])
+   async _copyTemplateFiles() {
+       this._private_copies([
+        ['gitignore', '.gitignore'], // npm publish，会忽略 .gitignore 文件
+        ['index.js', 'src/index.js'],
+        ['example.js', 'examples/default/index.js'],
+        ['npmignore', '.npmignore'],
+        ['package.json','package.json'],
+        ['README.md'],
+        [RCFileName]
+      ])
+  }
+  _writePackage(){
+    let packinfo = fs.readFileSync(this.templatePath(`package.json`),'utf-8');
+    let stdout = execSync(`git remote get-url --push origin`)
+    let stdout_str = `${stdout}`
+    let packJson =  JSON.parse(packinfo)
+    packJson.repository = {type: "git",url: stdout_str.replace('\n','')}
+    fs.writeFileSync(this.templatePath(`package.json`), JSON.stringify(packJson,null,2),'utf-8');
+    console.log('-----------package读取成功--------')
   }
 
   _installPkg() {
@@ -156,7 +165,6 @@ export default class extends Generator {
     // 跳转至当前组件项目路径下
     process.chdir(`${this.promptes.projectName}`)
     // }
-
     this.npmInstall(['react@15.6.2', 'react-dom@15.6.2'])
     this.npmInstall(
       [
@@ -168,23 +176,23 @@ export default class extends Generator {
     )
   }
 
-  _private_copies(copyJobs = []) {
-    copyJobs.forEach(([tplFilePath, destFilePath, tplData = {}]) => {
-      if (!destFilePath) {
-        destFilePath = tplFilePath
-      }
-      if (!tplFilePath) throw new Error('tplFilePath is none')
-      if (!destFilePath) throw new Error('destFilePath is none')
-
-      // 改变路径为项目目录下
-      // if (this.promptes.isSyncGitlab) {
-      destFilePath = `${this.promptes.projectName}/${destFilePath}`
-      // }
-      this.fs.copyTpl(
-        this.templatePath(tplFilePath),
-        this.destinationPath(`${this.options.contextRoot}/${destFilePath}`),
-        this.promptes
-      )
+   _private_copies(copyJobs = []) {
+      copyJobs.forEach(([tplFilePath, destFilePath, tplData = {}]) => {
+        if (!destFilePath) {
+          destFilePath = tplFilePath
+        }
+        if (!tplFilePath) throw new Error('tplFilePath is none')
+        if (!destFilePath) throw new Error('destFilePath is none')
+  
+        // 改变路径为项目目录下
+        // if (this.promptes.isSyncGitlab) {
+        destFilePath = `${this.promptes.projectName}/${destFilePath}`
+        // }
+         this.fs.copyTpl(
+          this.templatePath(tplFilePath),
+          this.destinationPath(`${this.options.contextRoot}/${destFilePath}`),
+          this.promptes
+        )
     })
   }
 }
