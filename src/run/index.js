@@ -2,8 +2,7 @@
 import Generator from 'yeoman-generator'
 import fs from 'fs'
 import Hjson from 'hjson'
-import genrc from './genrc'
-import reactRC from '@beisen/read-rc'
+import reactrc from '@beisen/read-rc'
 
 export default class extends Generator {
 
@@ -19,10 +18,10 @@ export default class extends Generator {
   _private_resolve (path) {
     // 大部分功能中都需要用到 bscomrc 和 package 中的配置文件
     // 在这里统一提出，减少代码量、维护成本
-    let rc = Object.assign({}, genrc(), reactRC())
+    let rc = reactrc()
 
     // package 中的配置文件
-    const packinfo = require(`${this.contextRoot}/package.json`)
+    const packinfo = fs.existsSync(`${this.contextRoot}/package.json`) ? require(`${this.contextRoot}/package.json`) : {}
 
     this.composeWith(
       require.resolve(path),

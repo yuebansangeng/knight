@@ -1,5 +1,4 @@
 {
-  "name": "<%= projectName %>",
   "team": "<%= team%>",
   "category": "<%= category %>",
   "developers": [],

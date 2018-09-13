@@ -69,7 +69,7 @@ export default class extends Generator {
       let { moduleName, description, group, category, team, device } = promptes
       this.promptes = promptes
       this.promptes.projectName = moduleName
-      this.promptes.username = username
+      this.promptes.username = developer
       this.promptes.group = group
       this.promptes.description = description
       this.promptes.category = category
@@ -150,7 +150,6 @@ export default class extends Generator {
   }
 
   _installPkg() {
-    // if (this.promptes.isSyncGitlab) {
     // 跳转至当前组件项目路径下
     process.chdir(`${this.promptes.projectName}`)
     // }

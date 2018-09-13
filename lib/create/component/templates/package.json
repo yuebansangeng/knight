@@ -12,12 +12,14 @@
     "type": "git",
     "url": "<%= repository %>"
   },
-  "dependencies": {
+  "peerDependencies": {
     "react": "~15.6.2",
     "react-dom": "~15.6.2"
   },
   "devDependencies": {
     "@beisen/gulp-lib": "latest",
-    "@beisen/storybook-lib": "latest"
+    "@beisen/storybook-lib": "latest",
+    "react": "~15.6.2",
+    "react-dom": "~15.6.2"
   }
 }
