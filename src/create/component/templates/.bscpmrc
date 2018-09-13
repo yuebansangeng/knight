@@ -1,7 +1,7 @@
 {
   "team": "<%= team%>",
   "category": "<%= category %>",
-  "developers": [ "<%= developer %>" ],
+  "developers": [],
   "description": "<%= description %>",
   "device": "<%= device %>"
 }

@@ -1,10 +1,10 @@
-
 import fs from 'fs'
 import Generator from 'yeoman-generator'
 import request from 'request'
 import { spawnSync } from 'child_process'
 import gitclone from './git-clone'
 import { RCFileName } from '@beisen/read-rc'
+import { execSync } from 'child_process'
 
 export default class extends Generator {
 
@@ -37,12 +37,6 @@ export default class extends Generator {
       },
       {
         'type': 'input',
-        'name': 'developer',
-        'message': '开发者名称：',
-        'default': username
-      },
-      {
-        'type': 'input',
         'name': 'description',
         'message': '项目描述：'
       },
@@ -72,12 +66,11 @@ export default class extends Generator {
         'choices': ['pc','mobile']
       }
     ]).then(promptes => {
-      let { moduleName, developer, description, group, category, team, device } = promptes
+      let { moduleName, description, group, category, team, device } = promptes
       this.promptes = promptes
       this.promptes.projectName = moduleName
       this.promptes.username = developer
       this.promptes.group = group
-      this.promptes.developer = developer
       this.promptes.description = description
       this.promptes.category = category
       this.promptes.team = team
@@ -88,7 +81,7 @@ export default class extends Generator {
 
   writing() {
     const { CMP_SERVER_HOST } = process.env
-    let { projectName, username, isSyncGitlab, group } = this.promptes
+    let { projectName, username, isSyncGitlab, group} = this.promptes
 
     if (!isSyncGitlab) {
       // 创建目录
@@ -123,13 +116,20 @@ export default class extends Generator {
       gitclone(5, data.group, projectName)
         .then(statue => {
           if (statue) {
+
+            // 获取项目地址
+            let repository = execSync(`git remote get-url --push origin`, { 'cwd':`${this.options.contextRoot}/${this.promptes.projectName}`})
+            this.promptes.repository = `${repository}`.replace('\n','')
+
+            // 生成模版
             this._copyTemplateFiles()
             this._installPkg()
           } else {
             console.log('clone项目出现异常，请重试或手动操作')
           }
         })
-    })
+      }
+    )
   }
 
   /*
@@ -137,22 +137,22 @@ export default class extends Generator {
   * 28原则：百分之20%的代码解决80%的功能
   * 函数名前面添加下滑线，告知Yeoman不自定执行改函数
   */
-  _copyTemplateFiles() {
-    this._private_copies([
-      ['gitignore', '.gitignore'], // npm publish，会忽略 .gitignore 文件
-      ['index.js', 'src/index.js'],
-      ['example.js', 'examples/default/index.js'],
-      ['npmignore', '.npmignore'],
-      ['package.json'],
-      ['README.md'],
-      [RCFileName]
-    ])
+   async _copyTemplateFiles() {
+       this._private_copies([
+        ['gitignore', '.gitignore'], // npm publish，会忽略 .gitignore 文件
+        ['index.js', 'src/index.js'],
+        ['package.json','package.json'],
+        ['example.js', 'examples/default/index.js'],
+        ['npmignore', '.npmignore'],
+        ['README.md'],
+        [RCFileName]
+      ])
   }
 
   _installPkg() {
     // 跳转至当前组件项目路径下
     process.chdir(`${this.promptes.projectName}`)
-
+    // }
     this.npmInstall(['react@15.6.2', 'react-dom@15.6.2'])
     this.npmInstall(
       [
@@ -164,23 +164,23 @@ export default class extends Generator {
     )
   }
 
-  _private_copies(copyJobs = []) {
-    copyJobs.forEach(([tplFilePath, destFilePath, tplData = {}]) => {
-      if (!destFilePath) {
-        destFilePath = tplFilePath
-      }
-      if (!tplFilePath) throw new Error('tplFilePath is none')
-      if (!destFilePath) throw new Error('destFilePath is none')
-
-      // 改变路径为项目目录下
-      // if (this.promptes.isSyncGitlab) {
-      destFilePath = `${this.promptes.projectName}/${destFilePath}`
-      // }
-      this.fs.copyTpl(
-        this.templatePath(tplFilePath),
-        this.destinationPath(`${this.options.contextRoot}/${destFilePath}`),
-        this.promptes
-      )
+   _private_copies(copyJobs = []) {
+      copyJobs.forEach(([ tplFilePath, destFilePath ]) => {
+        if (!destFilePath) {
+          destFilePath = tplFilePath
+        }
+        if (!tplFilePath) throw new Error('tplFilePath is none')
+        if (!destFilePath) throw new Error('destFilePath is none')
+  
+        // 改变路径为项目目录下
+        // if (this.promptes.isSyncGitlab) {
+        destFilePath = `${this.promptes.projectName}/${destFilePath}`
+        // }
+         this.fs.copyTpl(
+          this.templatePath(tplFilePath),
+          this.destinationPath(`${this.options.contextRoot}/${destFilePath}`),
+          this.promptes
+        )
     })
   }
 }
