@@ -69,7 +69,8 @@ export default class extends Generator {
       let { moduleName, description, group, category, team, device } = promptes
       this.promptes = promptes
       this.promptes.projectName = moduleName
-      this.promptes.username = developer
+      //通过git获取
+      this.promptes.username = username
       this.promptes.group = group
       this.promptes.description = description
       this.promptes.category = category
