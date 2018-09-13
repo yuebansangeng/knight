@@ -35,12 +35,6 @@ export default class extends Generator {
         'message': '是否在gitlab上创建该项目',
         'default': true
       },
-      // {
-      //   'type': 'input',
-      //   'name': 'developers',
-      //   'message': '开发者名称：',
-      //   'default': username
-      // },
       {
         'type': 'input',
         'name': 'description',
@@ -72,26 +66,23 @@ export default class extends Generator {
         'choices': ['pc','mobile']
       }
     ]).then(promptes => {
-      //let { moduleName, developers, description, group, category, team, device } = promptes
       let { moduleName, description, group, category, team, device } = promptes
-      // if (!moduleName || !moduleName.match(/^[a-z\-\d]+?$/)) {
-      //   throw new Error(`组件名称格式不正确：${moduleName}, 只能包含小写英文、数字、中划线`)
-      // }
       this.promptes = promptes
       this.promptes.projectName = moduleName
       this.promptes.username = username
       this.promptes.group = group
-      //this.promptes.developers = developers
       this.promptes.description = description
       this.promptes.category = category
       this.promptes.team = team
       this.promptes.device = device
+      this.promptes.repository = ''
     })
   }
 
   writing() {
     const { CMP_SERVER_HOST } = process.env
     let { projectName, username, isSyncGitlab, group} = this.promptes
+
     if (!isSyncGitlab) {
       // 创建目录
       if (!fs.existsSync(projectName)) {
@@ -120,11 +111,17 @@ export default class extends Generator {
         let msg = `${message}, 可能是username缺失，如果没有配置 git user.name，可使用 --username 添加Gitlab用户名`
         throw new Error(msg)
       }
+
       // 执行clone项目
-     gitclone(5, data.group, projectName)
+      gitclone(5, data.group, projectName)
         .then(statue => {
           if (statue) {
-            this._writePackage()
+
+            // 获取项目地址
+            let repository = execSync(`git remote get-url --push origin`, { 'cwd':`${this.options.contextRoot}/${this.promptes.projectName}`})
+            this.promptes.repository = `${repository}`.replace('\n','')
+
+            // 生成模版
             this._copyTemplateFiles()
             this._installPkg()
           } else {
@@ -144,23 +141,12 @@ export default class extends Generator {
        this._private_copies([
         ['gitignore', '.gitignore'], // npm publish，会忽略 .gitignore 文件
         ['index.js', 'src/index.js'],
+        ['package.json','package.json'],
         ['example.js', 'examples/default/index.js'],
         ['npmignore', '.npmignore'],
-        ['package.json','package.json'],
         ['README.md'],
         [RCFileName]
       ])
-  }
-  _writePackage(){
-    let packJson = JSON.parse(fs.readFileSync(this.templatePath(`package.json`),'utf-8'));
-
-    let stdout = execSync(`git remote get-url --push origin`,{cwd: `${this.promptes.projectName}`})
-    
-    let stdout_str = `${stdout}`.replace('\n','')
-    packJson.repository = {type: "git",url: stdout_str}
-
-    fs.writeFileSync(this.templatePath(`package.json`), JSON.stringify(packJson,null,2),'utf-8');
-    console.log('-----------package.json写入成功--------')
   }
 
   _installPkg() {
@@ -180,7 +166,7 @@ export default class extends Generator {
   }
 
    _private_copies(copyJobs = []) {
-      copyJobs.forEach(([tplFilePath, destFilePath, tplData = {}]) => {
+      copyJobs.forEach(([ tplFilePath, destFilePath ]) => {
         if (!destFilePath) {
           destFilePath = tplFilePath
         }
