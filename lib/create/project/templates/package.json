@@ -1,0 +1,28 @@
+
+{
+    "name": "<%= projectName%>",
+    "version": "1.0.8",
+    "description": "<%= description%>",
+    "main": "lib/index.js",
+    "scripts": {
+      "examples": "sbl storybook start --independent",
+      "build": "sbl storybook build --independent --only-updated",
+      "sblp": "sbl publish --independent"
+    },
+    "private": true,
+    "license": "ISC",
+    "repository": {
+      "type": "git",
+      "url": "<%= repository %>"
+    },
+    "peerDependencies": {
+      "react": "~15.6.2",
+      "react-dom": "~15.6.2"
+    },
+    "devDependencies": {
+      "@beisen/storybook-lib": "^0.4.36",
+      "react": "^15.6.2",
+      "react-dom": "^15.6.2"
+    }
+  }
+  

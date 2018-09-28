@@ -9,7 +9,8 @@ export default class extends Generator {
   }
 
   composing () {
-    this._private_resolve(`./${this.options.category}/index.js`)
+    if(this.options.category == 'undefined') this._private_resolve('./component/index.js')
+    else this._private_resolve(`./${this.options.category}/index.js`)
   }
 
   _private_resolve (path) {

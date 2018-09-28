@@ -16,14 +16,15 @@ program
   .version(pckJson.version, '-v, --version')
 
 program
-  .command('create')
+  .command('create [cmd]')
   .option('-u, --username [username]', 'Gitlab账号名，创建项目时添加最高权限的用户，默认是当前机器上的 git user.name')
   .description('脚手架工具生成解决方案')
-  .action(async (opts) => {
+  .action(async (cmd,opts) => {
     await upgradeMsg()
     let { username } = opts
     // 当前create命令还只支持组件项目，之后会逐步增加其他解决方案
-    env.run('create component', { username })
+    //env.run('create component', { username })
+    env.run(`create ${cmd}`, { username })
   })
 
 program
